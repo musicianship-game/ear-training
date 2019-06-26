@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb2d;
+    private Animator animator;
     private float speed;
     private float horizontal;
     private float vertical;
@@ -13,7 +14,8 @@ public class PlayerController : MonoBehaviour {
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        speed = 10f;
+        animator = GetComponent<Animator>();
+        speed = 5f;
     }
 	
 	void Update()
@@ -32,6 +34,14 @@ public class PlayerController : MonoBehaviour {
             horizontal = Input.GetAxis("Horizontal");
             vertical = Input.GetAxis("Vertical");
             translation = new Vector2(horizontal, vertical) * speed;
+            if (translation.magnitude > 0f)
+            {
+                animator.SetBool("Walking", true);
+            }
+            else
+            {
+                animator.SetBool("Walking", false);
+            }
         }        
         rb2d.MovePosition(rb2d.position + translation * Time.fixedDeltaTime);
     }
