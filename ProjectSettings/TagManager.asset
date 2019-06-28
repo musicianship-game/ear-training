@@ -47,7 +47,7 @@ TagManager:
   - name: Floor
     uniqueID: 3838964359
     locked: 0
-  - name: JumpingZone
+  - name: JumpZone
     uniqueID: 3087504593
     locked: 0
   - name: Obstacle
