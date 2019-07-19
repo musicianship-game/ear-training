@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - JumpZone
   - GoalZone
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -62,4 +63,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3123287055
+    locked: 0
+  - name: Enemy
+    uniqueID: 3727833225
     locked: 0

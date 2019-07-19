@@ -10,17 +10,23 @@ public class PlayerController : MonoBehaviour {
     private float vertical;
     private bool jumping;
     private bool falling;
+    private bool isAtGoalZone;
 
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
         spriteanimator = transform.Find("PlayerSprite").gameObject.GetComponent<Animator>();
         speed = 5f;
+        isAtGoalZone = false;
     }
 	
 	void Update()
     {
         Vector2 translation;
+        if (isAtGoalZone)
+        {
+            Debug.Log("At Goal Zone");
+        }
         if (jumping)
         {
             translation = new Vector2(0f, 1f) * speed * 2f;
@@ -62,7 +68,11 @@ public class PlayerController : MonoBehaviour {
                 jumping = false;
                 falling = true;
             }                       
-        }        
+        }
+        else if (collision.gameObject.tag == "GoalZone")
+        {
+            isAtGoalZone = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -75,6 +85,10 @@ public class PlayerController : MonoBehaviour {
                 jumping = false;
                 falling = false;
             }
+        }
+        else if (collision.gameObject.tag == "GoalZone")
+        {
+            isAtGoalZone = false;
         }
     }
 }
