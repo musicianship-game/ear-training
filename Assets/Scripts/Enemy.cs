@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     public GameObject projectile_used = null;
     public PlayerController player;
 
-
+    private int projectile_damage = 1;
     private float next_time = 0.0f;
 
     // Use this for initialization
@@ -36,8 +36,10 @@ public class Enemy : MonoBehaviour
         Vector2 my_pos = new Vector2(transform.position.x, transform.position.y);
         Vector2 direction = target_pos - my_pos;
         direction.Normalize();
-        Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
-        GameObject projectile = (GameObject)Instantiate(projectile_used, my_pos, rotation);
-        projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
+        Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f);
+        GameObject the_projectile = (GameObject)Instantiate(projectile_used, my_pos, rotation);
+        the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
+        the_projectile.GetComponent<Projectile>().damage = projectile_damage;
     }
+
 }

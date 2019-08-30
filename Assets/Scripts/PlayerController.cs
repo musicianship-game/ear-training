@@ -58,9 +58,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {        
-        if(collision.gameObject.tag == "JumpZone")
-        {            
+    {
+        if (collision.gameObject.tag == "JumpZone")
+        {
             if (vertical > 0f)
             {
                 Debug.Log("Jumping!");
@@ -72,14 +72,19 @@ public class PlayerController : MonoBehaviour {
                 Debug.Log("Falling!");
                 jumping = false;
                 falling = true;
-            }                       
+            }
         }
         else if (collision.gameObject.tag == "GoalZone")
         {
             isAtGoalZone = true;
         }
+        if (collision.gameObject.tag == "enemy_projectile")
+        {
+            Projectile that = collision.gameObject.GetComponent<Projectile>();
+            HealthChange(-that.damage);
+            that.explode();
+        }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "JumpZone")
