@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb2d;
@@ -10,11 +11,15 @@ public class PlayerController : MonoBehaviour {
     private float vertical;
     private bool jumping;
     private bool falling;
+    private int health_max = 12;
+    private int health;
+    public Slider health_slider;
 
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
         spriteanimator = transform.Find("PlayerSprite").gameObject.GetComponent<Animator>();
+        health = health_max;
         speed = 5f;
     }
 	
@@ -76,5 +81,17 @@ public class PlayerController : MonoBehaviour {
                 falling = false;
             }
         }
+    }
+
+    private void HealthChange(int diff)
+    {
+        int new_health = health + diff;
+        if (new_health < 0) {
+            new_health = 0;
+        } else if (new_health > health_max) {
+            new_health = health_max;
+        }
+        health = new_health;
+        health_slider.value = health;
     }
 }
