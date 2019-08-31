@@ -9,6 +9,7 @@ TagManager:
   - JumpZone
   - GoalZone
   - Enemy
+  - enemy_projectile
   layers:
   - Default
   - TransparentFX
@@ -63,6 +64,12 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3123287055
+    locked: 0
+  - name: instruments
+    uniqueID: 3614426653
+    locked: 0
+  - name: projectiles
+    uniqueID: 2286347875
     locked: 0
   - name: Enemy
     uniqueID: 3727833225
