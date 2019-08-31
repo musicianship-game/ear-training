@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
     private int health;
     public Slider health_slider;
     private bool isAtGoalZone;
+    private ChuckSubInstance chuck;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour {
         health = health_max;
         speed = 5f;
         isAtGoalZone = false;
+        chuck = GetComponent<ChuckSubInstance>();
     }
 
     void Update()

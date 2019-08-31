@@ -13,11 +13,14 @@ public class Enemy : MonoBehaviour
 
     private int projectile_damage = 1;
     private float next_time = 0.0f;
+    private ChuckSubInstance chuck;
+    private string freq;
 
     // Use this for initialization
     void Start()
     {
-
+        chuck = GetComponent<ChuckSubInstance>();
+        freq = "444.4";
     }
 
     // Update is called once per frame
@@ -40,6 +43,20 @@ public class Enemy : MonoBehaviour
         GameObject the_projectile = (GameObject)Instantiate(projectile_used, my_pos, rotation);
         the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
         the_projectile.GetComponent<Projectile>().damage = projectile_damage;
+        chuck.RunCode(@"
+        <<<1000>>>;
+        Bowed bow => dac;
+        Math.random2f(0.3, 0.5) => bow.bowPressure;
+        Math.random2f(0.1, 0.8) => bow.bowPosition;
+        Math.random2f(4, 8) => bow.vibratoFreq;
+        Math.random2f(0.01, 0.1) => bow.vibratoGain;
+        Math.random2f(0.6, 0.8) => bow.volume;
+        444.4 => bow.freq;
+        .8 => bow.noteOn;
+        0.7::second => now;
+        0.0 => bow.noteOff;
+        0.5::second => now;
+        ");
     }
 
 }

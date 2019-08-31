@@ -930,6 +930,6 @@ public class Chuck
 
     public static AudioMixerGroup FindAudioMixerGroup( string name )
     {
-        return chuckMixer.FindMatchingGroups( name )[0];
+        return chuckMixer.FindMatchingGroups(name)[0];
     }
 }
