@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
         Math.random2f(4, 8) => bow.vibratoFreq;
         Math.random2f(0.01, 0.1) => bow.vibratoGain;
         Math.random2f(0.6, 0.8) => bow.volume;
-        444.4 => bow.freq;
+        " + freq + @" => bow.freq;
         .8 => bow.noteOn;
         0.7::second => now;
         0.0 => bow.noteOff;
