@@ -9,6 +9,8 @@ For the generation of these scales, an equal-tempered scale is assumed
 and a reference frequency of A4 == 440.0Hz.
 """
 
+import os
+
 if __name__ == '__main__':
     a4 = 440.0
     major_scale_semitones_to_a4 = [-9, -7, -5, -4, -2, 0, 2]
@@ -48,8 +50,8 @@ if __name__ == '__main__':
         [1, 1, 0, 1, 1, 0, 0],
         # d minor
         [0, 0, 0, 0, 0, 0, -1],
-        # d# minor
-        [1, 1, 1, 1, 1, 1, 0],
+        # eb minor
+        [-1, -1, -1, 0, -1, -1, -1],
         # e minor
         [0, 0, 0, 1, 0, 0, 0],
         # f minor
@@ -58,12 +60,12 @@ if __name__ == '__main__':
         [1, 0, 0, 1, 1, 0, 0],
         # g minor
         [0, 0, -1, 0, 0, 0, -1],
-        # g# minor
-        [1, 1, 0, 1, 1, 1, 0],
+        # ab minor
+        [-1, -1, -1, -1, -1, -1, -1],
         # a minor
         [0, 0, 0, 0, 0, 0, 0],
-        # a# minor
-        [1, 1, 1, 1, 1, 1, 1],
+        # bb minor
+        [0, -1, -1, 0, -1, -1, -1],
         # b minor
         [1, 0, 0, 1, 0, 0, 0],
     ]
@@ -75,24 +77,24 @@ if __name__ == '__main__':
             'scale_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
             'note_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
         },
-        # 'German': {
-        #     'notes': ['C', 'D', 'E', 'F', 'G', 'A', 'H'],
-        #     'modes': ['Dur', 'Moll'],
-        #     'scale_alterations': ['', 'es', 'is', 'eses', 'isis'],
-        #     'note_alterations': ['', '♯', '𝄪', '𝄫', '♭'],
-        # },
+        'German': {
+            'notes': ['C', 'D', 'E', 'F', 'G', 'A', 'H'],
+            'modes': ['Dur', 'Moll'],
+            'scale_alterations': ['', 'es', 'is', 'eses', 'isis'],
+            'note_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
+        },
         'Spanish': {
             'notes': ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Si'],
             'modes': ['Mayor', 'Menor'],
             'scale_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
             'note_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
         },
-        # 'French': {
-        #     'notes': ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Ti'],
-        #     'modes': ['Majeur', 'Mineur'],
-        #     'scale_alterations': ['', '♯', '𝄪', '𝄫', '♭'],
-        #     'note_alterations': ['', '♯', '𝄪', '𝄫', '♭'],
-        # }
+        'French': {
+            'notes': ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Ti'],
+            'modes': ['Majeur', 'Mineur'],
+            'scale_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
+            'note_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
+        }
     }
 
     scales = [
@@ -116,22 +118,28 @@ if __name__ == '__main__':
                 scale_semitones_to_a4 = [s + chromatic_increase for s in base_semitones_to_a4]
                 note_alterations = scale_alterations[scale_id]
                 note_indexes = [n % 7 for n in range(note, note + 7)]
-                print(scale_name)
-                for alt in [0, 1, 2, -1, -2]:
-                    for idx, note_idx in enumerate(note_indexes):
-                        note_name = d['notes'][note_idx]
-                        note_alteration = note_alterations[note_idx] + alt
-                        note_alteration_name = d['note_alterations'][note_alteration]
-                        note_name = '{}{}'.format(note_name, note_alteration_name)
-                        print('{}, '.format(note_name), end='')
-                    print()
-                    for idx, note_idx in enumerate(note_indexes):
-                        note_semitones_to_a4 = scale_semitones_to_a4[idx] + alt
-                        freq = a4 * 2.0 ** (note_semitones_to_a4 / 12.0)
-                        print('{:.2f}Hz, '.format(freq), end='')
-                    print()
-                chromatic_increase += 1
+                scale_dir = os.path.join('Scales', notation, scale_name)
+                if not os.path.exists(scale_dir):
+                    os.makedirs(scale_dir)
+                csv_filepath = os.path.join(scale_dir, 'values.csv')
+                with open(csv_filepath, 'w') as csv:
+                    print(scale_name)
+                    for alt in [0, 1, 2, -1, -2]:
+                        for idx, note_idx in enumerate(note_indexes):
+                            note_name = d['notes'][note_idx]
+                            note_alteration = note_alterations[note_idx] + alt
+                            note_alteration_name = d['note_alterations'][note_alteration]
+                            note_name = '{}{}'.format(note_name, note_alteration_name)
+                            # print('{}, '.format(note_name), end='')
+                            csv.write('{}, '.format(note_name))
+                        # print()
+                        csv.write('\n')
+                        for idx, note_idx in enumerate(note_indexes):
+                            note_semitones_to_a4 = scale_semitones_to_a4[idx] + alt
+                            freq = a4 * 2.0 ** (note_semitones_to_a4 / 12.0)
+                            # print('{:.2f}Hz, '.format(freq), end='')
+                            csv.write('{:.2f}Hz, '.format(freq))
+                        # print()
+                        csv.write('\n')
+                    chromatic_increase += 1
             print()
-
-
-
