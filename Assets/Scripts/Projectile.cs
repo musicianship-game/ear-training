@@ -5,10 +5,12 @@ using UnityEngine;
 public class Projectile : MonoBehaviour {
 
     public int damage;
+    public GameObject explosion_anim;
 
-    public void explode()
+    public void Explode()
     {
-        Destroy(this);
+        Instantiate(explosion_anim , transform.position , Quaternion.identity);
+        Destroy(gameObject);
     }
 
 }

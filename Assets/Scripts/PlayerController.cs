@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour {
         speed = 5f;
         isAtGoalZone = false;
     }
-	
-	void Update()
+
+    void Update()
     {
         Vector2 translation;
         if (isAtGoalZone)
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour {
             {
                 spriteanimator.SetBool("Walking", false);
             }
-        }        
+        }
         rb2d.MovePosition(rb2d.position + translation * Time.fixedDeltaTime);
     }
 
@@ -81,10 +81,10 @@ public class PlayerController : MonoBehaviour {
         if (collision.gameObject.tag == "enemy_projectile")
         {
             Projectile that = collision.gameObject.GetComponent<Projectile>();
-            HealthChange(-that.damage);
-            that.explode();
+            ImHit(that);
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "JumpZone")
@@ -112,5 +112,11 @@ public class PlayerController : MonoBehaviour {
         }
         health = new_health;
         health_slider.value = health;
+    }
+
+    public void ImHit(Projectile that)
+    {
+        HealthChange(-that.damage);
+        that.Explode();
     }
 }
