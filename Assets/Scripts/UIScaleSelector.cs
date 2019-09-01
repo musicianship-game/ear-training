@@ -8,21 +8,21 @@ using System.IO;
 public class UIScaleSelector : MonoBehaviour {
 	private Text notationText;
 	private Dropdown notationDropdown;
-	// private Text scaleText;
 	private Dropdown scaleDropdown;
 	private Button acceptButton;
 	private Button cancelButton;
 	private string notationsDir;
+	private string csvFilename;
 
 	private DirectoryInfo[] notationDirInfos;
 	private DirectoryInfo[] scaleDirInfos;
 
 	private void Awake() {
 		notationsDir = @"Assets/Scales";
+		csvFilename = @"values.csv";
 		notationText = transform.Find("NotationsText").GetComponent<Text>();
 		notationDropdown = transform.Find("NotationsDropdown").GetComponent<Dropdown>();
 		notationDropdown.ClearOptions();
-		// scaleText = transform.Find("ScalesText").GetComponent<Text>();
 		scaleDropdown = transform.Find("ScalesDropdown").GetComponent<Dropdown>();
 		scaleDropdown.interactable = false;
 		scaleDropdown.ClearOptions();
@@ -87,7 +87,7 @@ public class UIScaleSelector : MonoBehaviour {
 		List<string> NoteNames = new List<string>();
 		List<string> Frequencies = new List<string>();
 		string scaleDir = scaleDirInfos[scaleDropdown.value - 1].FullName;
-		string csvPath = Path.Combine(scaleDir, @"values.csv");
+		string csvPath = Path.Combine(scaleDir, csvFilename);
 		using(StreamReader reader = new StreamReader(csvPath))
     	{
 			int lineType = 0;
