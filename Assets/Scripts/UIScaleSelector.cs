@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using System.IO;
 
 public class UIScaleSelector : MonoBehaviour {
-	private Text notationText;
 	private Dropdown notationDropdown;
 	private Dropdown scaleDropdown;
 	private Button acceptButton;
@@ -20,7 +19,6 @@ public class UIScaleSelector : MonoBehaviour {
 	private void Awake() {
 		notationsDir = @"Assets/Scales";
 		csvFilename = @"values.csv";
-		notationText = transform.Find("NotationsText").GetComponent<Text>();
 		notationDropdown = transform.Find("NotationsDropdown").GetComponent<Dropdown>();
 		notationDropdown.ClearOptions();
 		scaleDropdown = transform.Find("ScalesDropdown").GetComponent<Dropdown>();
@@ -85,7 +83,9 @@ public class UIScaleSelector : MonoBehaviour {
 	public void AcceptChanges() {
 		// Read the CSV
 		List<string> NoteNames = new List<string>();
-		List<string> Frequencies = new List<string>();
+		List<float> Frequencies = new List<float>();
+		int scaleDegrees = 0;
+		int alterations = 0;
 		string scaleDir = scaleDirInfos[scaleDropdown.value - 1].FullName;
 		string csvPath = Path.Combine(scaleDir, csvFilename);
 		using(StreamReader reader = new StreamReader(csvPath))
@@ -95,26 +95,29 @@ public class UIScaleSelector : MonoBehaviour {
 			{
 				var line = reader.ReadLine();
 				var values = line.Split(',');
+				if (scaleDegrees == 0) scaleDegrees = values.Length;
+				bool isFrequency = lineType % 2 == 0 ? false : true;
+				// if (isFrequency) Frequencies.Clear();
+				// NoteNames.Clear();
 				foreach (string value in values)
 				{
-					bool isFrequency = lineType % 2 == 0 ? false : true;
 					if (isFrequency) {
-						Frequencies.Add(value);
+						float freq = float.Parse(value);
+						Frequencies.Add(freq);
 					}
 					else{
 						NoteNames.Add(value);
 					}
 				}
+				if (isFrequency) alterations++;
+				lineType++;
 			}
     	}
-		foreach (string note in NoteNames)
-		{
-			Debug.Log(note);
-		}
-		foreach (string frequency in Frequencies)
-		{
-			Debug.Log(frequency);
-		}
+		Scale.NoteNames = NoteNames;
+		Scale.Frequencies = Frequencies;
+		Scale.ScaleDegrees = scaleDegrees;
+		Scale.Alterations = alterations;
+		gameObject.SetActive(false);
 	}
 
 	public void CancelChanges() {
