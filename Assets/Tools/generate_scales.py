@@ -124,22 +124,24 @@ if __name__ == '__main__':
                 csv_filepath = os.path.join(scale_dir, 'values.csv')
                 with open(csv_filepath, 'w') as csv:
                     print(scale_name)
-                    for alt in [0, 1, 2, -1, -2]:
+                    for alt in [0, 1, 2, -2, -1]:
                         for idx, note_idx in enumerate(note_indexes):
                             note_name = d['notes'][note_idx]
                             note_alteration = note_alterations[note_idx] + alt
                             note_alteration_name = d['note_alterations'][note_alteration]
                             note_name = '{}{}'.format(note_name, note_alteration_name)
                             # print('{}, '.format(note_name), end='')
-                            csv.write('{}, '.format(note_name))
-                        # print()
-                        csv.write('\n')
+                            if idx < len(note_indexes) - 1:
+                                csv.write('{}, '.format(note_name))
+                            else:
+                                csv.write('{}\n'.format(note_name))
                         for idx, note_idx in enumerate(note_indexes):
                             note_semitones_to_a4 = scale_semitones_to_a4[idx] + alt
                             freq = a4 * 2.0 ** (note_semitones_to_a4 / 12.0)
                             # print('{:.2f}Hz, '.format(freq), end='')
-                            csv.write('{:.2f}Hz, '.format(freq))
-                        # print()
-                        csv.write('\n')
+                            if idx < len(note_indexes) - 1:
+                                csv.write('{:.2f}, '.format(freq))
+                            else:
+                                csv.write('{:.2f}\n'.format(freq))
                     chromatic_increase += 1
             print()
