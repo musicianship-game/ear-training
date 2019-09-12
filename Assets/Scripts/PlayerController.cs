@@ -121,4 +121,9 @@ public class PlayerController : MonoBehaviour {
         HealthChange(-that.damage);
         that.Explode();
     }
+
+    public void sing(string note_name, float note_freq)
+    {
+        Debug.Log(note_name + ", " + note_freq);
+    }
 }
