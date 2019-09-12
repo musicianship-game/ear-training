@@ -24,7 +24,7 @@ public class UIController : MonoBehaviour {
 
     void Play()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 
     void Quit()

@@ -14,13 +14,32 @@ public class Enemy : MonoBehaviour
     private int projectile_damage = 1;
     private float next_time = 0.0f;
     private ChuckSubInstance chuck;
-    private string freq;
+
+    // Note stuff
+    private int scale_degree;
+    private int alteration;
+    private string note_name;
+    private float note_freq;
 
     // Use this for initialization
     void Start()
     {
         chuck = GetComponent<ChuckSubInstance>();
-        freq = "444.4";
+        scale_degree = GetScaleDegree();
+        alteration = GetAlteration();
+        note_name = Scale.GetNoteName(scale_degree, alteration);
+        note_freq = Scale.GetNoteFrequency(scale_degree, alteration);
+        Debug.Log(scale_degree + " " + alteration + " " + note_name + " " + note_freq);
+    }
+
+    int GetScaleDegree()
+    {
+        return Random.Range(0, Scale.ScaleDegrees - 1);
+    }
+
+    int GetAlteration()
+    {
+        return Random.Range(0, Scale.Alterations - 1);
     }
 
     // Update is called once per frame
@@ -51,7 +70,7 @@ public class Enemy : MonoBehaviour
         Math.random2f(4, 8) => bow.vibratoFreq;
         Math.random2f(0.01, 0.1) => bow.vibratoGain;
         Math.random2f(0.6, 0.8) => bow.volume;
-        " + freq + @" => bow.freq;
+        " + note_freq + @" => bow.freq;
         .8 => bow.noteOn;
         0.7::second => now;
         0.0 => bow.noteOff;
