@@ -140,6 +140,7 @@ public class PlayerController : MonoBehaviour {
             chuck.RunCode(@"
                 VoicForm voc => ADSR adsr => JCRev r => dac;
                 adsr.set( 100::ms, 8::ms, .5, 100::ms );
+                1.0 => voc.pitchSweepRate;
                 " + note_freq + @" => voc.freq;
                 0.95 => voc.gain;
                 .9 => r.gain;
