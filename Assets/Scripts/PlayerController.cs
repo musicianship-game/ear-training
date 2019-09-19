@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour {
             Debug.Log(note_name + ", " + note_freq);
             chuck.RunCode(@"
                 VoicForm voc => ADSR adsr => JCRev r => dac;
-                adsr.set( 100::ms, 8::ms, .5, 100::ms );
+                adsr.set( 100::ms, 10::ms, .5, 100::ms );
                 1.0 => voc.pitchSweepRate;
                 " + note_freq + @" => voc.freq;
                 0.95 => voc.gain;
@@ -152,9 +152,9 @@ public class PlayerController : MonoBehaviour {
                 adsr.keyOn();
                 " + 0.15f * sing_time + @"::second => now;
                 ""aaa"" => voc.phoneme;
-                " + 0.55f * sing_time + @"::second => now;
+                " + 0.75f * sing_time + @"::second => now;
                 adsr.keyOff();
-                " + 0.3f * sing_time + @"::second => now;
+                " + 0.1f * sing_time + @"::second => now;
             ");
         }
         else
