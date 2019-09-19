@@ -125,5 +125,23 @@ public class PlayerController : MonoBehaviour {
     public void sing(string note_name, float note_freq)
     {
         Debug.Log(note_name + ", " + note_freq);
+        chuck.RunCode(@"
+            VoicForm voc => ADSR adsr => JCRev r => dac;
+            adsr.set( 100::ms, 8::ms, .5, 100::ms );
+            " + note_freq + @" => voc.freq;
+            0.95 => voc.gain;
+            .9 => r.gain;
+            .01 => r.mix;
+            0.3 => voc.loudness;
+            0.05 => voc.vibratoGain;
+            ""lll"" => voc.phoneme;
+            0.7 => voc.speak;
+            adsr.keyOn();
+            150::ms => now;
+            ""aaa"" => voc.phoneme;
+            550::ms => now;
+            adsr.keyOff();
+            300::ms => now;
+        ");
     }
 }

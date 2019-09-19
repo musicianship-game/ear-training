@@ -63,13 +63,12 @@ public class Enemy : MonoBehaviour
         the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
         the_projectile.GetComponent<Projectile>().damage = projectile_damage;
         chuck.RunCode(@"
-        <<<1000>>>;
         Bowed bow => dac;
-        Math.random2f(0.3, 0.5) => bow.bowPressure;
-        Math.random2f(0.1, 0.8) => bow.bowPosition;
-        Math.random2f(4, 8) => bow.vibratoFreq;
-        Math.random2f(0.01, 0.1) => bow.vibratoGain;
-        Math.random2f(0.6, 0.8) => bow.volume;
+        Math.random2f(0.3, 0.4) => bow.bowPressure;
+        Math.random2f(0.1, 0.3) => bow.bowPosition;
+        Math.random2f(5, 6) => bow.vibratoFreq;
+        Math.random2f(0.01, 0.03) => bow.vibratoGain;
+        Math.random2f(0.7, 0.8) => bow.volume;
         " + note_freq + @" => bow.freq;
         .8 => bow.noteOn;
         0.7::second => now;
