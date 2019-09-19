@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour {
     public Slider health_slider;
     private bool isAtGoalZone;
     private ChuckSubInstance chuck;
+    private bool singing = false;
+    private float sing_start;
+    private float sing_time = 1.0f;
 
     private void Awake()
     {
@@ -29,6 +32,11 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
+        if (singing && Time.time > sing_start + sing_time)
+        {
+            singing = false;
+            Debug.Log("done singing");
+        }
         Vector2 translation;
         if (isAtGoalZone)
         {
@@ -122,26 +130,35 @@ public class PlayerController : MonoBehaviour {
         that.Explode();
     }
 
-    public void sing(string note_name, float note_freq)
+    public void Sing(string note_name, float note_freq)
     {
-        Debug.Log(note_name + ", " + note_freq);
-        chuck.RunCode(@"
-            VoicForm voc => ADSR adsr => JCRev r => dac;
-            adsr.set( 100::ms, 8::ms, .5, 100::ms );
-            " + note_freq + @" => voc.freq;
-            0.95 => voc.gain;
-            .9 => r.gain;
-            .01 => r.mix;
-            0.3 => voc.loudness;
-            0.05 => voc.vibratoGain;
-            ""lll"" => voc.phoneme;
-            0.7 => voc.speak;
-            adsr.keyOn();
-            150::ms => now;
-            ""aaa"" => voc.phoneme;
-            550::ms => now;
-            adsr.keyOff();
-            300::ms => now;
-        ");
+        if (!singing)
+        {
+            singing = true;
+            sing_start = Time.time;
+            Debug.Log(note_name + ", " + note_freq);
+            chuck.RunCode(@"
+                VoicForm voc => ADSR adsr => JCRev r => dac;
+                adsr.set( 100::ms, 8::ms, .5, 100::ms );
+                " + note_freq + @" => voc.freq;
+                0.95 => voc.gain;
+                .9 => r.gain;
+                .01 => r.mix;
+                0.3 => voc.loudness;
+                0.05 => voc.vibratoGain;
+                ""lll"" => voc.phoneme;
+                0.7 => voc.speak;
+                adsr.keyOn();
+                " + 0.15f * sing_time + @"::second => now;
+                ""aaa"" => voc.phoneme;
+                " + 0.55f * sing_time + @"::second => now;
+                adsr.keyOff();
+                " + 0.3f * sing_time + @"::second => now;
+            ");
+        }
+        else
+        {
+            Debug.Log("already singing...");
+        }
     }
 }
