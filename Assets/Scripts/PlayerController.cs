@@ -141,6 +141,7 @@ public class PlayerController : MonoBehaviour {
                 VoicForm voc => ADSR adsr => JCRev r => dac;
                 adsr.set( 100::ms, 10::ms, .5, 100::ms );
                 1.0 => voc.pitchSweepRate;
+                111.0 => voc.freq;
                 " + note_freq + @" => voc.freq;
                 0.95 => voc.gain;
                 .9 => r.gain;
