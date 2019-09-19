@@ -55,8 +55,9 @@ public class UserScaleDegreeInput : MonoBehaviour {
 			scaleDegree = n - 1;
 			string noteName = Scale.GetNoteName(scaleDegree, alteration);
 			float freq = Scale.GetNoteFrequency(scaleDegree, alteration);
-			Debug.Log(noteName + " (" + freq + "Hz)");
-			playerController.Sing(noteName, freq);
+			string freqString = freq.ToString("F2");
+			Debug.Log(noteName + " (" + freqString + "Hz)");
+			playerController.Sing(noteName, freqString);
 		}
 	}
 }
