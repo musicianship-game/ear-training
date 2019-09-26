@@ -4,4 +4,4 @@ This project is an Open Source Game-Based Ear Training (experimental) Software f
 
 This is a collaborative project between Yuval Adler and Néstor Nápoles López and has been funded by the Centre for Interdisciplinary Research in Music Media and Technology (CIRMMT) as a CIRMMT Student Project.
 
-It's first official release is expected to be around May 2020.
+Its first official release is expected to be around May 2020.
