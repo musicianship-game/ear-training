@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
     public Slider health_slider;
     public GameObject mouth_LA = null;
     public float projectile_speed = 2.0f;
-    public GameObject projectile_used = null;
+    public PlayerProjectile projectile_used = null;
     private GameObject mouth = null;
     private bool isAtGoalZone;
     private ChuckSubInstance chuck;
@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour {
         Vector2 direction = traget_pos - my_pos;
         direction.Normalize();
         Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f);
-        GameObject the_projectile = (GameObject)Instantiate(projectile_used, my_pos, rotation);
+        PlayerProjectile the_projectile = (PlayerProjectile)Instantiate(projectile_used, my_pos, rotation);
         the_projectile.Target(target);
         the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
     }
