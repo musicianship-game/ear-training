@@ -892,7 +892,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4545009070599408, guid: e3add4aadb6f110469dfdfa56399a4a3, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8195094281504695446, guid: e3add4aadb6f110469dfdfa56399a4a3,
         type: 2}
@@ -6500,7 +6500,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1173546341
 GameObject:
@@ -6708,15 +6708,29 @@ Prefab:
       propertyPath: chuckMainInstance
       value: 
       objectReference: {fileID: 1015509561}
-    - target: {fileID: 114701820632771578, guid: 79a248a8683d65849824135c477e6abc,
-        type: 2}
-      propertyPath: mouth_LA
-      value: 
-      objectReference: {fileID: 1560247007296434, guid: abd17838796264ef6926ae6f676f3379,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79a248a8683d65849824135c477e6abc, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1450414899 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1242311520231824, guid: fedc69104feba463aa9b08bc69b40e2c,
+    type: 2}
+  m_PrefabInternal: {fileID: 715296413}
+--- !u!58 &1450414900
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1450414899}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.09
 --- !u!114 &1489242718 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114701820632771578, guid: 79a248a8683d65849824135c477e6abc,
