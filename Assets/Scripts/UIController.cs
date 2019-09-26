@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 using System.IO;
 
-
-
 public class UIController : MonoBehaviour {
     public Button playButton;
     public Button quitButton;

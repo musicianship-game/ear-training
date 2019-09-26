@@ -137,26 +137,7 @@ public class PlayerController : MonoBehaviour {
             singing = true;
             sing_start = Time.time;
             Debug.Log(note_name + ", " + note_freq);
-            chuck.RunCode(@"
-                VoicForm voc => ADSR adsr => JCRev r => dac;
-                adsr.set( 100::ms, 10::ms, .5, 100::ms );
-                1.0 => voc.pitchSweepRate;
-                111.0 => voc.freq;
-                " + note_freq + @" => voc.freq;
-                0.95 => voc.gain;
-                .9 => r.gain;
-                .01 => r.mix;
-                0.3 => voc.loudness;
-                0.05 => voc.vibratoGain;
-                ""lll"" => voc.phoneme;
-                0.7 => voc.speak;
-                adsr.keyOn();
-                " + 0.15f * sing_time + @"::second => now;
-                ""aaa"" => voc.phoneme;
-                " + 0.75f * sing_time + @"::second => now;
-                adsr.keyOff();
-                " + 0.1f * sing_time + @"::second => now;
-            ");
+            chuck.RunCode(ChuckSynths.Voice(note_freq, sing_time));
         }
         else
         {
