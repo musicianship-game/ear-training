@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour {
     private int health_max = 12;
     private int health;
     public Slider health_slider;
+    public GameObject mouth_LA = null;
+    private GameObject mouth = null;
     private bool isAtGoalZone;
     private ChuckSubInstance chuck;
     private bool singing = false;
@@ -35,6 +37,8 @@ public class PlayerController : MonoBehaviour {
         if (singing && Time.time > sing_start + sing_time)
         {
             singing = false;
+            Destroy(mouth);
+            mouth = null;
             Debug.Log("done singing");
         }
         Vector2 translation;
@@ -137,6 +141,7 @@ public class PlayerController : MonoBehaviour {
             singing = true;
             sing_start = Time.time;
             Debug.Log(note_name + ", " + note_freq);
+            mouth = (GameObject)Instantiate(mouth_LA, transform);
             chuck.RunCode(ChuckSynths.Voice(note_freq, sing_time));
         }
         else
