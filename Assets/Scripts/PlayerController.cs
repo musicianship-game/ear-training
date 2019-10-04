@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     private int health;
     public Slider health_slider;
     public GameObject mouth_LA = null;
-    public GameObject shootingPractice = null;
+    public EnemySpawnerController spawner = null;
     public float projectile_speed = 3.5f;
     public PlayerProjectile projectile_used = null;
     private GameObject mouth = null;
@@ -141,10 +141,14 @@ public class PlayerController : MonoBehaviour {
     {
         if (!singing)
         {
-            ShootTowards(shootingPractice);
             singing = true;
             sing_start = Time.time;
             Debug.Log(note_name + ", " + note_freq);
+            List<Enemy> enemies = spawner.Resonate(note_freq);
+            foreach(Enemy enemy in enemies)
+            {
+                ShootTowards(enemy.gameObject);
+            }
             mouth = (GameObject)Instantiate(mouth_LA, transform);
             chuck.RunCode(ChuckSynths.Voice(note_freq, sing_time));
         }
@@ -156,9 +160,7 @@ public class PlayerController : MonoBehaviour {
 
     public void ShootTowards(GameObject target)
     {
-        Vector2 my_pos = new Vector2(transform.position.x, transform.position.y);
-        Quaternion rotation = Quaternion.Euler(0, 0, 180);
-        PlayerProjectile the_projectile = (PlayerProjectile)Instantiate(projectile_used, my_pos, rotation);
+        PlayerProjectile the_projectile = (PlayerProjectile)Instantiate(projectile_used, transform);
         the_projectile.Target(target);
         the_projectile.speed = projectile_speed;
     }
