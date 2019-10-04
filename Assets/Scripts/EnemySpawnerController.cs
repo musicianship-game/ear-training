@@ -20,13 +20,13 @@ public class EnemySpawnerController : MonoBehaviour {
 	public List<Enemy> Resonate(int scaleDegree, int alteration)
 	{
 		List<Enemy> hits = new List<Enemy>();
-		noteName = Scale.GetNoteName(scaleDegree, alteration);
-        noteFreq = Scale.GetNoteFrequency(scaleDegree, alteration);
+		string noteName = Scale.GetNoteName(scaleDegree, alteration);
+        float noteFreq = Scale.GetNoteFrequency(scaleDegree, alteration);
 		foreach (Transform child in transform)
 		{
 			Enemy enemy = child.GetComponent<Enemy>();
 			float enemyFrequency = enemy.GetNoteFrequency();
-			if (Mathf.Abs(noteFreq - enemyFrequency < 100))
+			if (Mathf.Abs(noteFreq - enemyFrequency) < 100f)
 			{
 				hits.Add(enemy);
 			}
