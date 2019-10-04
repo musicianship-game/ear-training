@@ -17,16 +17,14 @@ public class EnemySpawnerController : MonoBehaviour {
 		GetComponent<ChuckSubInstance>().RunCode(code);
 	}
 
-	public List<Enemy> Resonate(int scaleDegree, int alteration)
+	public List<Enemy> Resonate(float frequency)
 	{
 		List<Enemy> hits = new List<Enemy>();
-		string noteName = Scale.GetNoteName(scaleDegree, alteration);
-        float noteFreq = Scale.GetNoteFrequency(scaleDegree, alteration);
 		foreach (Transform child in transform)
 		{
 			Enemy enemy = child.GetComponent<Enemy>();
 			float enemyFrequency = enemy.GetNoteFrequency();
-			if (Mathf.Abs(noteFreq - enemyFrequency) < 100f)
+			if (Mathf.Abs(frequency - enemyFrequency) < 100f)
 			{
 				hits.Add(enemy);
 			}
