@@ -62,9 +62,6 @@ TagManager:
   - name: PlayerShadow
     uniqueID: 88815157
     locked: 0
-  - name: Player
-    uniqueID: 3123287055
-    locked: 0
   - name: instruments
     uniqueID: 3614426653
     locked: 0
@@ -73,6 +70,9 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 3727833225
+    locked: 0
+  - name: Player
+    uniqueID: 3123287055
     locked: 0
   - name: UI
     uniqueID: 510880309
