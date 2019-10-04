@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawnerController : MonoBehaviour {
 	public GameObject enemyPrefab;
 	public PlayerController playerRef;
-	private float centsTolerance;
+	public float centsTolerance;
 
 	void Start ()
 	{
