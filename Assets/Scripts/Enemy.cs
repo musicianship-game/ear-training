@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
 
     private int projectile_damage = 1;
     private float next_time = 0.0f;
-    private ChuckSubInstance chuck;
+    private EnemySpawnerController parent;
 
     // Note stuff
     private int scale_degree;
@@ -24,12 +24,22 @@ public class Enemy : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        chuck = GetComponent<ChuckSubInstance>();
+        parent = transform.parent.gameObject.GetComponent<EnemySpawnerController>();
         scale_degree = GetScaleDegree();
         alteration = GetAlteration();
         note_name = Scale.GetNoteName(scale_degree, alteration);
         note_freq = Scale.GetNoteFrequency(scale_degree, alteration);
         Debug.Log(scale_degree + " " + alteration + " " + note_name + " " + note_freq);
+    }
+
+    public string GetNoteName()
+    {
+        return note_name;
+    }
+
+    public float GetNoteFrequency()
+    {
+        return note_freq;
     }
 
     int GetScaleDegree()
@@ -62,7 +72,7 @@ public class Enemy : MonoBehaviour
         GameObject the_projectile = (GameObject)Instantiate(projectile_used, my_pos, rotation);
         the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
         the_projectile.GetComponent<Projectile>().damage = projectile_damage;
-        chuck.RunCode(ChuckSynths.Violin(note_freq));
+        parent.RunChuckCode(ChuckSynths.Violin(note_freq));
     }
 
 }
