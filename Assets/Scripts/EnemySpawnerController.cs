@@ -11,7 +11,6 @@ public class EnemySpawnerController : MonoBehaviour {
 	{
 		GameObject child = Instantiate(enemyPrefab, transform);
 		child.GetComponent<Enemy>().player = playerRef;
-		centsTolerance = 20f;
 	}
 
 	public void RunChuckCode(string code)
