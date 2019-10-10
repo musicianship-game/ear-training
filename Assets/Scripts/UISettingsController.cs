@@ -16,11 +16,15 @@ public class UISettingsController : MonoBehaviour {
 		cancelButton = transform.Find("CancelButton").GetComponent<Button>();
 		acceptButton.onClick.AddListener(AcceptChanges);
 		cancelButton.onClick.AddListener(CancelChanges);
+		gameDifficultySlider.value = Settings.GameDifficulty;
+		musicalDifficultySlider.value = Settings.MusicalDifficulty;
 	}
 
 	private void AcceptChanges() {
 		float gameDifficulty = gameDifficultySlider.value;
-		float musicalDifficulty = gameDifficultySlider.value;
+		float musicalDifficulty = musicalDifficultySlider.value;
+		Debug.Log(gameDifficulty);
+		Debug.Log(musicalDifficulty);
 		Settings.GameDifficulty = gameDifficulty;
 		Settings.MusicalDifficulty = musicalDifficulty;
 		gameObject.SetActive(false);
