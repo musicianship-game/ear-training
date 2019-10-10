@@ -38,46 +38,31 @@ public class UIScaleSelector : MonoBehaviour {
         notationDirInfos = root.GetDirectories();
         List<string> notationNames = new List<string>();
 		notationNames.Add("None");
-		foreach (DirectoryInfo dir in notationDirInfos)
-        {
-			notationNames.Add(dir.Name);
-        }
+		foreach (DirectoryInfo dir in notationDirInfos) notationNames.Add(dir.Name);
 		notationDropdown.ClearOptions();
 		notationDropdown.AddOptions(notationNames);
 	}
 
 	public void NotationChanged(int value) {
 		scaleDropdown.ClearOptions();
-		if (value == 0)
+		bool notationSelected = (value != 0);
+		acceptButton.interactable = false;
+		scaleDropdown.interactable = notationSelected;
+		if (notationSelected)
 		{
-			scaleDropdown.interactable = false;
-			acceptButton.interactable = false;
-		}
-		else
-		{
-			scaleDropdown.interactable = true;
 			DirectoryInfo notationRoot = notationDirInfos[value - 1];
 			scaleDirInfos = notationRoot.GetDirectories();
 			List<string> scaleNames = new List<string>();
 			scaleNames.Add("None");
-			foreach (DirectoryInfo dir in scaleDirInfos)
-        	{
-				scaleNames.Add(dir.Name);
-        	}
+			foreach (DirectoryInfo dir in scaleDirInfos) scaleNames.Add(dir.Name);
 			scaleDropdown.AddOptions(scaleNames);
 			scaleDropdown.value = 0;
 		}
 	}
 
 	public void ScaleChanged(int value) {
-		if (value == 0)
-		{
-			acceptButton.interactable = false;
-		}
-		else
-		{
-			acceptButton.interactable = true;
-		}
+		bool scaleSelected = value != 0;
+        acceptButton.interactable = scaleSelected;
 	}
 
 	public void AcceptChanges() {

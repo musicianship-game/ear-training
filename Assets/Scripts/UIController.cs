@@ -8,14 +8,17 @@ using System.IO;
 
 public class UIController : MonoBehaviour {
     public Button playButton;
-    public Button quitButton;
+    public Button scaleSelectorButton;
     public Button settingsButton;
-    public UIScaleSelector settingsPanel;
+    public Button quitButton;
+    public UIScaleSelector scaleSelectorPanel;
+    public UISettingsController settingsPanel;
 
     void Start()
     {
         //Calls the TaskOnClick/TaskWithParameters/ButtonClicked method when you click the Button
         playButton.onClick.AddListener(Play);
+        scaleSelectorButton.onClick.AddListener(ScaleSelection);
         quitButton.onClick.AddListener(Quit);
         settingsButton.onClick.AddListener(LoadSettings);
     }
@@ -30,9 +33,15 @@ public class UIController : MonoBehaviour {
         Application.Quit();
     }
 
+    void ScaleSelection()
+    {
+        scaleSelectorPanel.gameObject.SetActive(true);
+        scaleSelectorPanel.Activate();
+    }
+
     void LoadSettings()
     {
         settingsPanel.gameObject.SetActive(true);
-        settingsPanel.Activate();
+        // settingsPanel.Activate();
     }
 }
