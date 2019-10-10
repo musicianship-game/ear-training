@@ -1,16 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UISettingsController : MonoBehaviour {
+	private Slider gameDifficultySlider;
+	private Slider musicalDifficultySlider;
+	private Button acceptButton;
+	private Button cancelButton;
 
-	// Use this for initialization
-	void Start () {
-		
+	private void Awake() {
+		gameDifficultySlider = transform.Find("GameDifficultySlider").GetComponent<Slider>();
+		musicalDifficultySlider = transform.Find("MusicalDifficultySlider").GetComponent<Slider>();
+		acceptButton = transform.Find("AcceptButton").GetComponent<Button>();
+		cancelButton = transform.Find("CancelButton").GetComponent<Button>();
+		acceptButton.onClick.AddListener(AcceptChanges);
+		cancelButton.onClick.AddListener(CancelChanges);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	private void AcceptChanges() {
+		float gameDifficulty = gameDifficultySlider.value;
+		float musicalDifficulty = gameDifficultySlider.value;
+		Settings.GameDifficulty = gameDifficulty;
+		Settings.MusicalDifficulty = musicalDifficulty;
+		gameObject.SetActive(false);
+	}
+
+	private void CancelChanges() {
+		gameObject.SetActive(false);
 	}
 }
