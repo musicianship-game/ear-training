@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     public GameObject projectile_used = null;
     public PlayerController player;
 
+    public int hit_points = 3;
+
     private int projectile_damage = 1;
     private float next_time = 0.0f;
     private EnemySpawnerController parent;
@@ -73,6 +75,25 @@ public class Enemy : MonoBehaviour
         the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
         the_projectile.GetComponent<Projectile>().damage = projectile_damage;
         parent.RunChuckCode(ChuckSynths.Violin(note_freq));
+    }
+
+    public void GetHit()
+    {
+        if (hit_points > 1)
+        {
+            hit_points -= 1;
+        }
+        else
+        {
+            hit_points = 0;
+            dying = true;
+            DeathAnim();
+        }
+    }
+
+    private void DeathAnim()
+    {
+        Destroy(gameObject);
     }
 
 }

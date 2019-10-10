@@ -36,6 +36,7 @@ public class PlayerProjectile : MonoBehaviour {
         if (collision.gameObject == target)
         {
             PlayerCloud.score += 1;
+            target.GetComponent<Enemy>().GetHit();
             Explode();
         }
     }
