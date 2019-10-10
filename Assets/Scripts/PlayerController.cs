@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb2d;
@@ -11,9 +12,9 @@ public class PlayerController : MonoBehaviour {
     private float vertical;
     private bool jumping;
     private bool falling;
-    private int health_max = 12;
-    private int health;
     public Slider health_slider;
+    public TextMeshProUGUI attack_symbol;
+    public TextMeshProUGUI score_counter;
     public GameObject mouth_LA = null;
     public EnemySpawnerController spawner = null;
     public float projectile_speed = 3.5f;
@@ -29,7 +30,8 @@ public class PlayerController : MonoBehaviour {
     {
         rb2d = GetComponent<Rigidbody2D>();
         spriteanimator = transform.Find("PlayerSprite").gameObject.GetComponent<Animator>();
-        health = health_max;
+        health_slider.maxValue = PlayerCloud.life_max;
+        health_slider.value = PlayerCloud.life;
         speed = 5f;
         isAtGoalZone = false;
         chuck = GetComponent<ChuckSubInstance>();
@@ -72,6 +74,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
         rb2d.MovePosition(rb2d.position + translation * Time.fixedDeltaTime);
+        score_counter.SetText(PlayerCloud.score.ToString());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -121,15 +124,17 @@ public class PlayerController : MonoBehaviour {
 
     private void HealthChange(int diff)
     {
-        int new_health = health + diff;
+        int new_health = PlayerCloud.life + diff;
         if (new_health < 0) {
             new_health = 0;
-        } else if (new_health > health_max) {
-            new_health = health_max;
+        } else if (new_health > PlayerCloud.life_max) {
+            new_health = PlayerCloud.life_max;
         }
-        health = new_health;
-        health_slider.value = health;
+        PlayerCloud.life = new_health;
+        health_slider.value = PlayerCloud.life;
     }
+
+
 
     public void ImHit(Projectile that)
     {
@@ -144,6 +149,7 @@ public class PlayerController : MonoBehaviour {
             singing = true;
             sing_start = Time.time;
             Debug.Log(note_name + ", " + note_freq);
+            attack_symbol.SetText(note_name);
             List<Enemy> enemies = spawner.Resonate(note_freq);
             foreach(Enemy enemy in enemies)
             {
