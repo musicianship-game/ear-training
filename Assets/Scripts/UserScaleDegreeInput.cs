@@ -36,19 +36,19 @@ public class UserScaleDegreeInput : MonoBehaviour {
 		alteration = (alterationUp - alterationDown) * alterationMultiplier;
 
 		// Handle any spelling of notes from the user
-		if (Input.GetButtonDown("ScaleDegree1")) SpellScaleDegre(1);
-		if (Input.GetButtonDown("ScaleDegree2")) SpellScaleDegre(2);
-		if (Input.GetButtonDown("ScaleDegree3")) SpellScaleDegre(3);
-		if (Input.GetButtonDown("ScaleDegree4")) SpellScaleDegre(4);
-		if (Input.GetButtonDown("ScaleDegree5")) SpellScaleDegre(5);
-		if (Input.GetButtonDown("ScaleDegree6")) SpellScaleDegre(6);
-		if (Input.GetButtonDown("ScaleDegree7")) SpellScaleDegre(7);
-		if (Input.GetButtonDown("ScaleDegree8")) SpellScaleDegre(8);
-		if (Input.GetButtonDown("ScaleDegree9")) SpellScaleDegre(9);
-		if (Input.GetButtonDown("ScaleDegree10")) SpellScaleDegre(10);
+		if (Input.GetButtonDown("ScaleDegree1")) SpellScaleDegree(1);
+		if (Input.GetButtonDown("ScaleDegree2")) SpellScaleDegree(2);
+		if (Input.GetButtonDown("ScaleDegree3")) SpellScaleDegree(3);
+		if (Input.GetButtonDown("ScaleDegree4")) SpellScaleDegree(4);
+		if (Input.GetButtonDown("ScaleDegree5")) SpellScaleDegree(5);
+		if (Input.GetButtonDown("ScaleDegree6")) SpellScaleDegree(6);
+		if (Input.GetButtonDown("ScaleDegree7")) SpellScaleDegree(7);
+		if (Input.GetButtonDown("ScaleDegree8")) SpellScaleDegree(8);
+		if (Input.GetButtonDown("ScaleDegree9")) SpellScaleDegree(9);
+		if (Input.GetButtonDown("ScaleDegree10")) SpellScaleDegree(10);
     }
 
-	private void SpellScaleDegre(int n)
+	private void SpellScaleDegree(int n)
 	{
 		if (n >= 1 && n <= Scale.ScaleDegrees)
 		{
