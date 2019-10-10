@@ -28,6 +28,7 @@ public class PlayerProjectile : MonoBehaviour {
     public void Target(GameObject the_target)
     {
         target = the_target;
+        Debug.Log("target acquired: " + target.tag);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -790,6 +790,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1242311520231824, guid: fedc69104feba463aa9b08bc69b40e2c,
     type: 2}
   playerRef: {fileID: 1489242718}
+  centsTolerance: 0
 --- !u!4 &517012709
 Transform:
   m_ObjectHideFlags: 0
@@ -6799,11 +6800,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114701820632771578, guid: 79a248a8683d65849824135c477e6abc,
-        type: 2}
-      propertyPath: health_slider
-      value: 
-      objectReference: {fileID: 423844351}
     - target: {fileID: 114718219645061382, guid: 79a248a8683d65849824135c477e6abc,
         type: 2}
       propertyPath: chuckMainInstance
@@ -6811,25 +6807,19 @@ Prefab:
       objectReference: {fileID: 1015509561}
     - target: {fileID: 114701820632771578, guid: 79a248a8683d65849824135c477e6abc,
         type: 2}
-      propertyPath: projectile_used
+      propertyPath: health_slider
       value: 
-      objectReference: {fileID: 114833172192061680, guid: a37da9c3faa904a64a4a5fcd76d02c19,
-        type: 2}
-    - target: {fileID: 114701820632771578, guid: 79a248a8683d65849824135c477e6abc,
-        type: 2}
-      propertyPath: shootingPractice
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114701820632771578, guid: 79a248a8683d65849824135c477e6abc,
-        type: 2}
-      propertyPath: projectile_speed
-      value: 3.5
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 423844351}
     - target: {fileID: 114701820632771578, guid: 79a248a8683d65849824135c477e6abc,
         type: 2}
       propertyPath: spawner
       value: 
       objectReference: {fileID: 517012708}
+    - target: {fileID: 114701820632771578, guid: 79a248a8683d65849824135c477e6abc,
+        type: 2}
+      propertyPath: target_practice
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79a248a8683d65849824135c477e6abc, type: 2}
   m_IsPrefabAsset: 0

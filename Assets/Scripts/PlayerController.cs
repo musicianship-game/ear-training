@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour {
 
     public void ShootTowards(GameObject target)
     {
-        PlayerProjectile the_projectile = (PlayerProjectile)Instantiate(projectile_used, transform);
+        PlayerProjectile the_projectile = Instantiate(projectile_used, transform.position, Quaternion.identity);
         the_projectile.Target(target);
         the_projectile.speed = projectile_speed;
     }
