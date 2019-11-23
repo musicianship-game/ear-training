@@ -7,7 +7,7 @@ public class Gate : MonoBehaviour
 
     public float death_time = 2.0f;
     private float start_time;
-    public bool dying = false;
+    private bool dying = false;
     private Component[] particleSys;
     private Component[] childSprites;
     private List<SpriteRenderer> allSprites = new List<SpriteRenderer>();
