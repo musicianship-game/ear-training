@@ -9,7 +9,7 @@ public class Gate : MonoBehaviour {
     private bool dying = false;
     private Component[] particleSys;
     private Component[] childSprites;
-    private List<SpriteRenderer> allSprites;
+    private List<SpriteRenderer> allSprites = new List<SpriteRenderer>();
 
     void Start()
     {

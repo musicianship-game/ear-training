@@ -10,13 +10,20 @@ public class PlayerProjectile : MonoBehaviour {
 
     private void Update()
     {
-        Vector2 my_pos = new Vector2(transform.position.x, transform.position.y);
-        Vector2 traget_pos = new Vector2(target.transform.position.x, target.transform.position.y);
-        Vector2 direction = traget_pos - my_pos;
-        direction.Normalize();
-        Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f);
-        transform.rotation = rotation;
-        GetComponent<Rigidbody2D>().velocity = direction * speed;
+        if (target!=null && target.GetComponent<Enemy>().dying)
+        {
+            target = null;
+        }
+        if (target!=null)
+        {
+            Vector2 my_pos = new Vector2(transform.position.x, transform.position.y);
+            Vector2 traget_pos = new Vector2(target.transform.position.x, target.transform.position.y);
+            Vector2 direction = traget_pos - my_pos;
+            direction.Normalize();
+            Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f);
+            transform.rotation = rotation;
+            GetComponent<Rigidbody2D>().velocity = direction * speed;
+        }
     }
 
     public void Explode()

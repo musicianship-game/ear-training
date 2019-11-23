@@ -153,7 +153,10 @@ public class PlayerController : MonoBehaviour {
             List<Enemy> enemies = spawner.Resonate(note_freq);
             foreach(Enemy enemy in enemies)
             {
-                ShootTowards(enemy.gameObject);
+                if (!enemy.dying)
+                {
+                    ShootTowards(enemy.gameObject);
+                }
             }
             mouth = (GameObject)Instantiate(mouth_LA, transform);
             chuck.RunCode(ChuckSynths.Voice(note_freq, sing_time));
@@ -167,6 +170,10 @@ public class PlayerController : MonoBehaviour {
     public void ShootTowards(GameObject target)
     {
         PlayerProjectile the_projectile = Instantiate(projectile_used, transform.position, Quaternion.identity);
+        Vector2 direction = new Vector2(0.0f,1.0f);
+        direction.Normalize();
+        the_projectile.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f);
+        the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
         the_projectile.Target(target);
         the_projectile.speed = projectile_speed;
     }

@@ -5,7 +5,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
+    public float death_time = 2.0f;
+    private float start_time;
     public bool dying = false;
+    private Component[] particleSys;
+    private Component[] childSprites;
+    private List<SpriteRenderer> allSprites = new List<SpriteRenderer>();
     public float wait_in_sec = 5.0f;
     public float projectile_speed = 2.0f;
     public GameObject projectile_used = null;
@@ -32,6 +37,13 @@ public class Enemy : MonoBehaviour
         note_name = Scale.GetNoteName(scale_degree, alteration);
         note_freq = Scale.GetNoteFrequency(scale_degree, alteration);
         Debug.Log(scale_degree + " " + alteration + " " + note_name + " " + note_freq);
+        particleSys = GetComponentsInChildren<ParticleSystem>();
+        childSprites = GetComponentsInChildren<SpriteRenderer>();
+        allSprites.Add(GetComponent<SpriteRenderer>());
+        foreach (SpriteRenderer sprite in childSprites)
+        {
+            allSprites.Add(sprite);
+        }
     }
 
     public string GetNoteName()
@@ -63,6 +75,22 @@ public class Enemy : MonoBehaviour
             fire(target_position);
             next_time = Time.time + wait_in_sec;
         }
+        if (dying)
+        {
+            float x = (death_time - (Time.time - start_time)) / death_time;
+            if (x < 0)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Color newColor = new Color(1, 1, 1, Mathf.SmoothStep(0.0f, 1.0f, x));
+                foreach (SpriteRenderer sprite in allSprites)
+                {
+                    sprite.color = newColor;
+                }
+            }
+        }
     }
 
     void fire(Vector2 target_pos)
@@ -86,14 +114,18 @@ public class Enemy : MonoBehaviour
         else
         {
             hit_points = 0;
-            dying = true;
-            DeathAnim();
+            Die();
         }
     }
 
-    private void DeathAnim()
+    private void Die()
     {
-        Destroy(gameObject);
+        dying = true;
+        start_time = Time.time;
+        foreach (ParticleSystem part in particleSys)
+        {
+            part.Stop();
+        }
     }
 
 }
