@@ -6,14 +6,24 @@ public class EnemySpawnerController : MonoBehaviour {
 	public GameObject enemyPrefab;
 	public PlayerController playerRef;
 	public float centsTolerance;
+    public bool all_enemies_dead;
 
-	void Start ()
+	void Awake ()
 	{
 		GameObject child = Instantiate(enemyPrefab, transform);
 		child.GetComponent<Enemy>().player = playerRef;
+        all_enemies_dead = false;
 	}
 
-	public void RunChuckCode(string code)
+    private void Update()
+    {
+        if (transform.childCount == 0)
+        {
+            all_enemies_dead = true;
+        }
+    }
+
+    public void RunChuckCode(string code)
 	{
 		GetComponent<ChuckSubInstance>().RunCode(code);
 	}

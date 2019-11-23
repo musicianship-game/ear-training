@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gate : MonoBehaviour {
+public class Gate : MonoBehaviour
+{
 
     public float death_time = 2.0f;
     private float start_time;
-    private bool dying = false;
+    public bool dying = false;
     private Component[] particleSys;
     private Component[] childSprites;
     private List<SpriteRenderer> allSprites = new List<SpriteRenderer>();
+    public EnemySpawnerController spawner;
 
+    // Use this for initialization
     void Start()
     {
         particleSys = GetComponentsInChildren<ParticleSystem>();
@@ -22,9 +25,14 @@ public class Gate : MonoBehaviour {
         }
     }
 
+    // Update is called once per frame
     void Update()
     {
-        if (dying) 
+        if (spawner.all_enemies_dead)
+        {
+            Die();
+        }
+        if (dying)
         {
             float x = (death_time - (Time.time - start_time)) / death_time;
             if (x < 0)
@@ -42,7 +50,7 @@ public class Gate : MonoBehaviour {
         }
     }
 
-    public void Die()
+    private void Die()
     {
         dying = true;
         start_time = Time.time;

@@ -152,6 +152,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114281395192610442, guid: 4f6fea341e1904ea6be9f982b8ebfb3a,
+        type: 2}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 517012708}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f6fea341e1904ea6be9f982b8ebfb3a, type: 2}
   m_IsPrefabAsset: 0
@@ -264,6 +269,7 @@ MonoBehaviour:
     type: 2}
   playerRef: {fileID: 1489242718}
   centsTolerance: 20
+  all_enemies_dead: 0
 --- !u!4 &517012709
 Transform:
   m_ObjectHideFlags: 0
