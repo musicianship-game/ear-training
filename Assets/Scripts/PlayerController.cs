@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour {
     private float vertical;
     private bool jumping;
     private bool falling;
+    private Vector2 sung_pos;
+    private Vector2 sung_pos_orig;
+    public float sung_name_dist = 2.0f;
+    public TextMeshProUGUI sung_note_name;
     public Slider health_slider;
     public TextMeshProUGUI attack_symbol;
     public TextMeshProUGUI score_counter;
@@ -45,6 +49,14 @@ public class PlayerController : MonoBehaviour {
             Destroy(mouth);
             mouth = null;
             Debug.Log("done singing");
+            sung_note_name.transform.localPosition = sung_pos_orig;
+        }
+        else if (singing)
+        {
+            float k = ((Time.time - sing_start) / sing_time);
+            Vector2 displace = new Vector2(0, k * sung_name_dist);
+            sung_note_name.transform.position = sung_pos + displace;
+            sung_note_name.alpha = Mathf.Sin(k*Mathf.PI);
         }
         Vector2 translation;
         if (isAtGoalZone)
@@ -148,8 +160,11 @@ public class PlayerController : MonoBehaviour {
         {
             singing = true;
             sing_start = Time.time;
+            sung_pos_orig = sung_note_name.transform.localPosition;
+            sung_pos = sung_note_name.transform.position;
             Debug.Log(note_name + ", " + note_freq);
             attack_symbol.SetText(note_name);
+            sung_note_name.SetText(note_name);
             List<Enemy> enemies = spawner.Resonate(note_freq);
             foreach(Enemy enemy in enemies)
             {
