@@ -40,7 +40,7 @@ public class PlayerProjectile : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == target)
+        if (target != null && collision.gameObject == target)
         {
             PlayerCloud.score += 1;
             target.GetComponent<Enemy>().GetHit();
