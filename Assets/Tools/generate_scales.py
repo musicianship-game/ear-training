@@ -14,7 +14,7 @@ import os
 if __name__ == '__main__':
     a4 = 440.0
     major_scale_semitones_to_a4 = [-9, -7, -5, -4, -2, 0, 2]
-    minor_scale_semitones_to_a4 = [-9, -7, -6, -4, -2, -1, 2]
+    minor_scale_semitones_to_a4 = [-9, -7, -6, -4, -2, -1, 1]
 
     major_scale_alterations = [
         # C Major
