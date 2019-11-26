@@ -11,14 +11,17 @@ public class UIScaleSelector : MonoBehaviour {
 	private Button acceptButton;
 	private Button cancelButton;
 	private string notationsDir;
-	private string csvFilename;
+	private string csvFrequenciesFilename;
+	private string csvDistributionFilename;
 
 	private DirectoryInfo[] notationDirInfos;
 	private DirectoryInfo[] scaleDirInfos;
 
 	private void Awake() {
 		notationsDir = @"Assets/Scales";
-		csvFilename = @"fundamental_frequencies.csv";
+		csvFrequenciesFilename = @"fundamental_frequencies.csv";
+		csvDistributionFilename = @"distribution.csv";
+
 		notationDropdown = transform.Find("NotationsDropdown").GetComponent<Dropdown>();
 		notationDropdown.ClearOptions();
 		scaleDropdown = transform.Find("ScalesDropdown").GetComponent<Dropdown>();
@@ -65,14 +68,20 @@ public class UIScaleSelector : MonoBehaviour {
         acceptButton.interactable = scaleSelected;
 	}
 
+	private void ReadCSV(string csvName)
+	{
+
+	}
+
 	public void AcceptChanges() {
 		// Read the CSV
 		List<string> NoteNames = new List<string>();
 		List<float> Frequencies = new List<float>();
+		List<float> Distribution = new List<float>();
 		int scaleDegrees = 0;
 		int alterations = 0;
 		string scaleDir = scaleDirInfos[scaleDropdown.value - 1].FullName;
-		string csvPath = Path.Combine(scaleDir, csvFilename);
+		string csvPath = Path.Combine(scaleDir, csvFrequenciesFilename);
 		using(StreamReader reader = new StreamReader(csvPath))
     	{
 			int lineType = 0;
