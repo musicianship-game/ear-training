@@ -121,7 +121,7 @@ if __name__ == '__main__':
                 scale_dir = os.path.join('Scales', notation, scale_name)
                 if not os.path.exists(scale_dir):
                     os.makedirs(scale_dir)
-                csv_filepath = os.path.join(scale_dir, 'values.csv')
+                csv_filepath = os.path.join(scale_dir, 'fundamental_frequencies.csv')
                 with open(csv_filepath, 'w') as csv:
                     print(scale_name)
                     for alt in [0, 1, 2, -2, -1]:

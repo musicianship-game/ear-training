@@ -78,7 +78,7 @@ distributions = {
 
         0.201933, 0.009335, 0.107284, 0.124169, 0.0199224, 0.108324,
         0.014314, 0.202699, 0.0653907, 0.0252515, 0.071959, 0.049419
-    ]    
+    ]
 }
 
 
@@ -201,7 +201,7 @@ if __name__ == '__main__':
     ]
 
     for notation, d in notations.items():
-        base_distribution = 'harmonic_minor'
+        base_distribution = 'temperley'
         print(notation)
         for mode_id, mode in enumerate(d['modes']):
             chromatic_increase = 0
@@ -221,7 +221,7 @@ if __name__ == '__main__':
                 scale_dir = os.path.join('Scales', notation, scale_name)
                 if not os.path.exists(scale_dir):
                     os.makedirs(scale_dir)
-                csv_filepath = os.path.join(scale_dir, 'difficulty.csv')
+                csv_filepath = os.path.join(scale_dir, 'distributions.csv')
                 with open(csv_filepath, 'w') as csv:
                     print(scale_name)
                     for alt in [0, 1, 2, -2, -1]:
