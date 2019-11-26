@@ -18,7 +18,7 @@ public class UIScaleSelector : MonoBehaviour {
 
 	private void Awake() {
 		notationsDir = @"Assets/Scales";
-		csvFilename = @"values.csv";
+		csvFilename = @"fundamental_frequencies.csv";
 		notationDropdown = transform.Find("NotationsDropdown").GetComponent<Dropdown>();
 		notationDropdown.ClearOptions();
 		scaleDropdown = transform.Find("ScalesDropdown").GetComponent<Dropdown>();
