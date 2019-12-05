@@ -74,12 +74,6 @@ public class UIScaleSelector : MonoBehaviour {
 		public List<float> values;
 		public int itemsPerLine;
 		public int linePairs;
-		// public ParsedCSV() {
-		// 	names = new List<string>();
-		// 	values = new List<float>();
-		// 	itemsPerLine = 0;
-		// 	linePairs = 0;
-		// }
 	}
 
 	private ParsedCSV ReadCSV(string csvPath)
@@ -130,6 +124,7 @@ public class UIScaleSelector : MonoBehaviour {
 		Scale.ScaleDegrees = frequencyCSV.itemsPerLine;
 		Scale.Alterations = frequencyCSV.linePairs;
 		Scale.Distribution = distributionCSV.values;
+		Scale.NormalizeDistribution();
 		gameObject.SetActive(false);
 	}
 

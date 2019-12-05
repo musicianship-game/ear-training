@@ -49,7 +49,7 @@ public static class Scale {
         Alterations = DEFAULT_ALTERATIONS;
     }
 
-    private static void NormalizeDistribution()
+    public static void NormalizeDistribution()
     {
         float sum = Distribution.Sum();
         for (int i = 0; i < Distribution.Count ; i++)
