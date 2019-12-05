@@ -68,9 +68,49 @@ public class UIScaleSelector : MonoBehaviour {
         acceptButton.interactable = scaleSelected;
 	}
 
-	private void ReadCSV(string csvName)
+	private struct ParsedCSV
 	{
+		public List<string> names;
+		public List<float> values;
+		public int itemsPerLine;
+		public int linePairs;
+		// public ParsedCSV() {
+		// 	names = new List<string>();
+		// 	values = new List<float>();
+		// 	itemsPerLine = 0;
+		// 	linePairs = 0;
+		// }
+	}
 
+	private ParsedCSV ReadCSV(string csvPath)
+	{
+		const int NAMES = 0;
+		const int VALUES = 1;
+		ParsedCSV csv = new ParsedCSV();
+		using(StreamReader reader = new StreamReader(csvPath))
+    	{
+            int lineNumber = 0;
+			while (!reader.EndOfStream)
+			{
+				var line = reader.ReadLine();
+				var tokens = line.Split(',');
+				if (csv.itemsPerLine == 0) csv.itemsPerLine = csv.values.Count;
+				int lineType = lineNumber % 2 == 0 ? NAMES : VALUES;
+				foreach (string token in tokens)
+				{
+					if (lineType == VALUES) {
+						float t = float.Parse(token);
+						csv.values.Add(t);
+					}
+					else {
+						csv.names.Add(token);
+					}
+				}
+				if (lineType == VALUES) csv.linePairs++;
+				lineNumber++;
+			}
+    	}
+		return csv;
 	}
 
 	public void AcceptChanges() {
@@ -81,36 +121,15 @@ public class UIScaleSelector : MonoBehaviour {
 		int scaleDegrees = 0;
 		int alterations = 0;
 		string scaleDir = scaleDirInfos[scaleDropdown.value - 1].FullName;
-		string csvPath = Path.Combine(scaleDir, csvFrequenciesFilename);
-		using(StreamReader reader = new StreamReader(csvPath))
-    	{
-			int lineType = 0;
-			while (!reader.EndOfStream)
-			{
-				var line = reader.ReadLine();
-				var values = line.Split(',');
-				if (scaleDegrees == 0) scaleDegrees = values.Length;
-				bool isFrequency = lineType % 2 == 0 ? false : true;
-				// if (isFrequency) Frequencies.Clear();
-				// NoteNames.Clear();
-				foreach (string value in values)
-				{
-					if (isFrequency) {
-						float freq = float.Parse(value);
-						Frequencies.Add(freq);
-					}
-					else{
-						NoteNames.Add(value);
-					}
-				}
-				if (isFrequency) alterations++;
-				lineType++;
-			}
-    	}
-		Scale.NoteNames = NoteNames;
-		Scale.Frequencies = Frequencies;
-		Scale.ScaleDegrees = scaleDegrees;
-		Scale.Alterations = alterations;
+		string csvFrequenciesPath = Path.Combine(scaleDir, csvFrequenciesFilename);
+		string csvDistributionPath = Path.Combine(scaleDir, csvDistributionFilename);
+		ParsedCSV frequencyCSV = ReadCSV(csvFrequenciesPath);
+		ParsedCSV distributionCSV = ReadCSV(csvDistributionPath);
+		Scale.NoteNames = frequencyCSV.names;
+		Scale.Frequencies = frequencyCSV.values;
+		Scale.ScaleDegrees = frequencyCSV.itemsPerLine;
+		Scale.Alterations = frequencyCSV.linePairs;
+		Scale.Distribution = distributionCSV.values;
 		gameObject.SetActive(false);
 	}
 
