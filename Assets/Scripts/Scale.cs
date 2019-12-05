@@ -59,7 +59,7 @@ public static class Scale {
         }
     }
 
-    public Vector2Int SampleNoteFromDistribution() {
+    public static Vector2Int SampleNoteFromDistribution() {
         Vector2Int degreeAlteration = new Vector2Int(0, 0);
         float rand = Random.value;
         float currentProb = 0;
