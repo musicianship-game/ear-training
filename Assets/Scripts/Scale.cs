@@ -59,6 +59,26 @@ public static class Scale {
         }
     }
 
+    public Vector2Int SampleNoteFromDistribution() {
+        Vector2Int degreeAlteration = new Vector2Int(0, 0);
+        float rand = Random.value;
+        float currentProb = 0;
+        for (int i = 0 ; i < Distribution.Count ; i++)
+        {
+            int scaleDegree = i % ScaleDegrees;
+            int alteration = i / ScaleDegrees;
+            currentProb += Distribution[i];
+            if (rand <= currentProb)
+            {
+                degreeAlteration.x = scaleDegree;
+                degreeAlteration.y = alteration;
+            }
+        }
+        //will happen if the input's probabilities sums to less than 1
+        //throw error here if that's appropriate
+        return degreeAlteration;
+    }
+
     private static int GetNoteIndex(int scaleDegree, int alteration)
     {
         alteration = alteration >= 0 ? alteration : alteration + Alterations;
