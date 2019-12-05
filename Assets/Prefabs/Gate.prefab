@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   death_time: 2
-  dying: 0
+  glow_pulse_time: 5
   spawner: {fileID: 0}
 --- !u!114 &114766252932748842
 MonoBehaviour:
@@ -176,10 +176,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   X_sin_offset: 0.1
-  X_sin_freq: 0.2
+  X_sin_freq: 1.2
   X_floatStrength: 0.1
   Y_sin_offset: 0.3
-  Y_sin_freq: 0.4
+  Y_sin_freq: 1.4
   Y_floatStrength: 0.2
 --- !u!198 &198416876195877148
 ParticleSystem:

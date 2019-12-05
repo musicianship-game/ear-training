@@ -6,8 +6,10 @@ public class Gate : MonoBehaviour
 {
 
     public float death_time = 2.0f;
-    private float start_time;
+    public float glow_pulse_time = 5.0f;
+    private float start_time = 0.0f;
     private bool dying = false;
+    private SpriteRenderer this_renderer;
     private Component[] particleSys;
     private Component[] childSprites;
     private List<SpriteRenderer> allSprites = new List<SpriteRenderer>();
@@ -18,7 +20,8 @@ public class Gate : MonoBehaviour
     {
         particleSys = GetComponentsInChildren<ParticleSystem>();
         childSprites = GetComponentsInChildren<SpriteRenderer>();
-        allSprites.Add(GetComponent<SpriteRenderer>());
+        this_renderer = GetComponent<SpriteRenderer>();
+        allSprites.Add(this_renderer);
         foreach (SpriteRenderer sprite in childSprites)
         {
             allSprites.Add(sprite);
@@ -28,14 +31,14 @@ public class Gate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (spawner.all_enemies_dead)
+        if (!dying && spawner.all_enemies_dead)
         {
             Die();
         }
         if (dying)
         {
-            float x = (death_time - (Time.time - start_time)) / death_time;
-            if (x < 0)
+            float x = (death_time + start_time - Time.time) / death_time;
+            if (x < 0.0f)
             {
                 Destroy(gameObject);
             }
@@ -48,12 +51,17 @@ public class Gate : MonoBehaviour
                 }
             }
         }
+        float y = (Time.time % glow_pulse_time) / glow_pulse_time;
+        y = Mathf.Abs(y - 0.5f)*2.0f;
+        y = Mathf.SmoothStep(0.0f, 1.0f, y);
+        Color glowColor = new Color(1, y, 1, this_renderer.color.a);
+        this_renderer.color = glowColor;
     }
 
     private void Die()
     {
         dying = true;
-        start_time = Time.time;
+        start_time = Time.time + 0.0f;
         foreach (ParticleSystem part in particleSys)
         {
             part.Stop();
