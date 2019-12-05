@@ -54,7 +54,7 @@ public static class Scale {
         float sum = Distribution.Sum();
         for (int i = 0; i < Distribution.Count ; i++)
         {
-            float v = sum / Distribution[i];
+            float v = Distribution[i] / sum;
             Distribution[i] = v;
         }
     }

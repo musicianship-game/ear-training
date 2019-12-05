@@ -13,6 +13,11 @@ public class EnemySpawnerController : MonoBehaviour {
 		GameObject child = Instantiate(enemyPrefab, transform);
 		child.GetComponent<Enemy>().player = playerRef;
         all_enemies_dead = false;
+		Debug.Log("Here is the distribution:");
+		foreach(float value in Scale.Distribution)
+		{
+			Debug.Log(value);
+		}
 	}
 
     private void Update()

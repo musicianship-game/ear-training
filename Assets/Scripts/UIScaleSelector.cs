@@ -68,12 +68,19 @@ public class UIScaleSelector : MonoBehaviour {
         acceptButton.interactable = scaleSelected;
 	}
 
-	private struct ParsedCSV
+	public class ParsedCSV
 	{
 		public List<string> names;
 		public List<float> values;
 		public int itemsPerLine;
 		public int linePairs;
+
+		public ParsedCSV() {
+			names = new List<string>();
+			values = new List<float>();
+			itemsPerLine = 0;
+			linePairs = 0;
+		}
 	}
 
 	private ParsedCSV ReadCSV(string csvPath)
@@ -88,7 +95,7 @@ public class UIScaleSelector : MonoBehaviour {
 			{
 				var line = reader.ReadLine();
 				var tokens = line.Split(',');
-				if (csv.itemsPerLine == 0) csv.itemsPerLine = csv.values.Count;
+				if (csv.itemsPerLine == 0) csv.itemsPerLine = tokens.Length;
 				int lineType = lineNumber % 2 == 0 ? NAMES : VALUES;
 				foreach (string token in tokens)
 				{
@@ -109,11 +116,6 @@ public class UIScaleSelector : MonoBehaviour {
 
 	public void AcceptChanges() {
 		// Read the CSV
-		List<string> NoteNames = new List<string>();
-		List<float> Frequencies = new List<float>();
-		List<float> Distribution = new List<float>();
-		int scaleDegrees = 0;
-		int alterations = 0;
 		string scaleDir = scaleDirInfos[scaleDropdown.value - 1].FullName;
 		string csvFrequenciesPath = Path.Combine(scaleDir, csvFrequenciesFilename);
 		string csvDistributionPath = Path.Combine(scaleDir, csvDistributionFilename);
