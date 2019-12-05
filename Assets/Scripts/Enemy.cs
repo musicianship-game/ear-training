@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
 
     public float death_time = 2.0f;
+    public string instrument_synth_name;
     private float start_time;
     public bool dying = false;
     private Component[] particleSys;
@@ -102,7 +103,19 @@ public class Enemy : MonoBehaviour
         GameObject the_projectile = (GameObject)Instantiate(projectile_used, my_pos, rotation);
         the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
         the_projectile.GetComponent<Projectile>().damage = projectile_damage;
-        parent.RunChuckCode(ChuckSynths.Violin(note_freq));
+        if (instrument_synth_name == "violin")
+        {
+            parent.RunChuckCode(ChuckSynths.Violin(note_freq));
+        }
+        else if (instrument_synth_name == "trumpet")
+        {
+            parent.RunChuckCode(ChuckSynths.Trumpet(note_freq));
+        }
+        else
+        {
+            Debug.Log("Instrument name not recognized. Default synth chosen.");
+            parent.RunChuckCode(ChuckSynths.Violin(note_freq));
+        }
     }
 
     public void GetHit()

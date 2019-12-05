@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class ChuckSynths {
 
-    public static string Voice(float frequency, float duration=1.0f)
+    public static string Voice(float frequency, float duration = 1.0f)
     {
         string snippet = @"
         VoicForm voc => ADSR adsr => JCRev r => dac;
@@ -28,7 +28,7 @@ public static class ChuckSynths {
         return snippet;
     }
 
-    public static string Violin(float frequency, float duration=1.0f)
+    public static string Violin(float frequency, float duration = 1.0f)
     {
         string snippet = @"
         Bowed bow => dac;
@@ -41,6 +41,18 @@ public static class ChuckSynths {
         .8 => bow.noteOn;
         0.7::second => now;
         0.0 => bow.noteOff;
+        0.5::second => now;";
+        return snippet;
+    }
+
+    public static string Trumpet(float frequency, float duration = 1.0f)
+    {
+        string snippet = @"
+        Brass tpt => dac;
+        0.8 => tpt.startBlowing;
+        " + frequency + @" => tpt.freq;
+        0.7::second => now;
+        1.0 => tpt.stopBlowing;
         0.5::second => now;";
         return snippet;
     }

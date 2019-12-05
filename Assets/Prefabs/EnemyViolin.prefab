@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 82944242156731960}
   - component: {fileID: 58500964332858612}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: EnemyViolin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,12 +259,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c387349ef02f41dfaf94054d24b48fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  death_time: 2
+  instrument_synth_name: violin
   dying: 0
   wait_in_sec: 5
   projectile_speed: 2
   projectile_used: {fileID: 1618161610838518, guid: 286dde5a594264afd8381c4be21b8108,
     type: 2}
   player: {fileID: 0}
+  hit_points: 3
 --- !u!114 &114243899758772782
 MonoBehaviour:
   m_ObjectHideFlags: 1
