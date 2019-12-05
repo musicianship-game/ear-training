@@ -7,7 +7,7 @@ public class PlayerTorso : MonoBehaviour {
     private PlayerController parent;
 
 	void Start () {
-        parent = transform.parent.gameObject.GetComponent<PlayerController>();
+        parent = transform.parent.gameObject.transform.parent.GetComponent<PlayerController>();
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)

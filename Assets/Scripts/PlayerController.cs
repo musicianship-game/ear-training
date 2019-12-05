@@ -7,6 +7,7 @@ using TMPro;
 public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb2d;
     private Animator spriteanimator;
+    private GameObject PlayerSpriteHolder;
     private float speed;
     private float horizontal;
     private float vertical;
@@ -33,7 +34,8 @@ public class PlayerController : MonoBehaviour {
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        spriteanimator = transform.Find("PlayerSprite").gameObject.GetComponent<Animator>();
+        PlayerSpriteHolder = transform.Find("PlayerSpriteHolder").gameObject;
+        spriteanimator = PlayerSpriteHolder.transform.Find("PlayerSprite").gameObject.GetComponent<Animator>();
         health_slider.maxValue = PlayerCloud.life_max;
         health_slider.value = PlayerCloud.life;
         speed = 5f;
@@ -79,6 +81,7 @@ public class PlayerController : MonoBehaviour {
             if (translation.magnitude > 0f)
             {
                 spriteanimator.SetBool("Walking", true);
+                PlayerSpriteHolder.transform.localScale = new Vector3(Mathf.Sign(horizontal), 1, 1);
             }
             else
             {
@@ -173,7 +176,7 @@ public class PlayerController : MonoBehaviour {
                     ShootTowards(enemy.gameObject);
                 }
             }
-            mouth = (GameObject)Instantiate(mouth_LA, transform);
+            mouth = (GameObject)Instantiate(mouth_LA, PlayerSpriteHolder.transform);
             chuck.RunCode(ChuckSynths.Voice(note_freq, sing_time));
         }
         else
