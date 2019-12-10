@@ -48,19 +48,17 @@ public static class ChuckSynths {
     public static string Trumpet(float frequency, float duration = 1.0f)
     {
         string snippet = @"
-        Brass brass => JCRev r => dac;
-        .75 => r.gain;
-        .05 => r.mix;
-        Math.random2f( 0.3, 0.5 ) => brass.lip;
-        Math.random2f( 0.35, 0.49 ) => brass.slide;
-        Math.random2f( 3, 5 ) => brass.vibratoFreq;
-        Math.random2f( 0.01, 0.03 ) => brass.vibratoGain;
-        Math.random2f( 0.7, 0.8 ) => brass.volume;
+        Brass brass => LPF lo => JCRev r => Gain g => dac;
+        0.05 => r.mix;
+        0.5 => lo.Q;
+        4.0 => g.gain;
+        " + frequency + @" * 2.0 => lo.freq;
         " + frequency + @" => brass.freq;
-        0.8 => brass.noteOn;
+        0.16 => brass.noteOn;
         " + 0.9f * duration + @"::second => now;
-        0.0 => brass.noteOff;
-        " + 0.1f * duration + @"::second => now;";
+        0.1 => brass.noteOff;
+        " + 0.1f * duration + @"::second => now;
+        3::second => now;";
         return snippet;
     }
 }
