@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         parent = transform.parent.gameObject.GetComponent<EnemySpawnerController>();
+        // Debug.Log("Difficulty: " + Settings.MusicalDifficulty);
+        // Debug.Log(Scale.GetDistributionAsString());
         Vector2Int degreeAlteration = Scale.SampleNoteFromDistribution();
         int scale_degree = degreeAlteration.x;
         int alteration = degreeAlteration.y;

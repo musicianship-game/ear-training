@@ -126,7 +126,7 @@ public class UIScaleSelector : MonoBehaviour {
 		Scale.ScaleDegrees = frequencyCSV.itemsPerLine;
 		Scale.Alterations = frequencyCSV.linePairs;
 		Scale.Distribution = distributionCSV.values;
-		Scale.NormalizeDistribution();
+		Scale.UpdateDistribution(Scale.Distribution);
 		gameObject.SetActive(false);
 	}
 

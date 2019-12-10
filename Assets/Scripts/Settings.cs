@@ -8,6 +8,6 @@ public static class Settings {
 
     static Settings() {
         GameDifficulty = 0.25f;
-        MusicalDifficulty = 0.25f;
+        MusicalDifficulty = 0.10f;
     }
 }
