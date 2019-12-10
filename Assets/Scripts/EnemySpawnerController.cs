@@ -3,15 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawnerController : MonoBehaviour {
-	public GameObject enemyPrefab;
-	public PlayerController playerRef;
+    public GameObject enemyPrefab0;
+    public GameObject enemyPrefab1;
+    public GameObject enemyPrefab2;
+    public GameObject enemyPrefab3;
+    private GameObject[] enemyPrefabs = new GameObject[4];
+    private Vector3[] spawnPoints;
+    public PlayerController playerRef;
 	public float centsTolerance;
     public bool all_enemies_dead;
 
 	void Awake ()
 	{
-		GameObject child = Instantiate(enemyPrefab, transform);
-		child.GetComponent<Enemy>().player = playerRef;
+        // there is an important assumption for the intialization:
+        // at first, all children are spawn point markers
+        // then we delete these, and all children are spawned enemies
+        spawnPoints = new Vector3[transform.childCount];
+        int spawn_i = 0;
+        foreach (Transform spawnPoint in transform)
+        {
+            spawnPoints[spawn_i] = spawnPoint.position;
+            Destroy(spawnPoint.gameObject);
+            spawn_i++;
+        }
+        enemyPrefabs[0] = enemyPrefab0;
+        enemyPrefabs[1] = enemyPrefab1;
+        enemyPrefabs[2] = enemyPrefab2;
+        enemyPrefabs[3] = enemyPrefab3;
+        Instantiate(enemyPrefabs[Random.Range(0,4)],spawnPoints[Random.Range(0, transform.childCount)] , transform.rotation, transform);
+        foreach (Transform kid in transform)
+        {
+            kid.GetComponent<Enemy>().player = playerRef;
+        }
         all_enemies_dead = false;
 	}
 
