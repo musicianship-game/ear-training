@@ -12,6 +12,7 @@ public class EnemySpawnerController : MonoBehaviour {
     public PlayerController playerRef;
 	public float centsTolerance;
     public bool all_enemies_dead;
+    public int number_of_enemies = 2;
 
 	void Awake ()
 	{
@@ -30,7 +31,11 @@ public class EnemySpawnerController : MonoBehaviour {
         enemyPrefabs[1] = enemyPrefab1;
         enemyPrefabs[2] = enemyPrefab2;
         enemyPrefabs[3] = enemyPrefab3;
-        Instantiate(enemyPrefabs[Random.Range(0,4)],spawnPoints[Random.Range(0, transform.childCount)] , transform.rotation, transform);
+        for (int i = 0; i < number_of_enemies; i++)
+        {
+            Instantiate(enemyPrefabs[Random.Range(0, 4)], spawnPoints[Random.Range(0, transform.childCount)], transform.rotation, transform);
+            
+        }
         foreach (Transform kid in transform)
         {
             kid.GetComponent<Enemy>().player = playerRef;
