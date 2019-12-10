@@ -39,21 +39,28 @@ public static class ChuckSynths {
         Math.random2f(0.7, 0.8) => bow.volume;
         " + frequency + @" => bow.freq;
         .8 => bow.noteOn;
-        0.7::second => now;
+        " + 0.9f * duration + @"::second => now;
         0.0 => bow.noteOff;
-        0.5::second => now;";
+        " + 0.1f * duration + @"::second => now;";
         return snippet;
     }
 
     public static string Trumpet(float frequency, float duration = 1.0f)
     {
         string snippet = @"
-        Brass tpt => dac;
-        0.8 => tpt.startBlowing;
-        " + frequency + @" => tpt.freq;
-        0.7::second => now;
-        1.0 => tpt.stopBlowing;
-        0.5::second => now;";
+        Brass brass => JCRev r => dac;
+        .75 => r.gain;
+        .05 => r.mix;
+        Math.random2f( 0.3, 0.5 ) => brass.lip;
+        Math.random2f( 0.35, 0.49 ) => brass.slide;
+        Math.random2f( 3, 5 ) => brass.vibratoFreq;
+        Math.random2f( 0.01, 0.03 ) => brass.vibratoGain;
+        Math.random2f( 0.7, 0.8 ) => brass.volume;
+        " + frequency + @" => brass.freq;
+        0.8 => brass.noteOn;
+        " + 0.9f * duration + @"::second => now;
+        0.0 => brass.noteOff;
+        " + 0.1f * duration + @"::second => now;";
         return snippet;
     }
 }
