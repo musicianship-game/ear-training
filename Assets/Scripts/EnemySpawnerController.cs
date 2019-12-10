@@ -33,7 +33,7 @@ public class EnemySpawnerController : MonoBehaviour {
         enemyPrefabs[3] = enemyPrefab3;
         for (int i = 0; i < number_of_enemies; i++)
         {
-            GameObject newEnemy = Instantiate(enemyPrefabs[Random.Range(0, 4)], spawnPoints[Random.Range(0, transform.childCount)], transform.rotation, transform);
+            GameObject newEnemy = Instantiate(enemyPrefabs[Random.Range(0, 4)], spawnPoints[Random.Range(0, spawn_i)], transform.rotation, transform);
             newEnemy.GetComponent<Enemy>().player = playerRef;
         }
         all_enemies_dead = false;
