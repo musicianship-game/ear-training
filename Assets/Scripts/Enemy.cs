@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour
         {
             parent.RunChuckCode(ChuckSynths.Violin(note_freq));
         }
-        else if (instrument_synth_name == "violin")
+        else if (instrument_synth_name == "trumpet")
         {
             parent.RunChuckCode(ChuckSynths.Trumpet(note_freq));
         }

@@ -266,8 +266,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   X_sin_offset: 0
-  X_sin_freq: 1
-  X_floatStrength: 0.15
+  X_sin_freq: 1.13
+  X_floatStrength: 0.2
   Y_sin_offset: 0
   Y_sin_freq: 1
   Y_floatStrength: 0.15
