@@ -33,8 +33,9 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         parent = transform.parent.gameObject.GetComponent<EnemySpawnerController>();
-        scale_degree = GetScaleDegree();
-        alteration = GetAlteration();
+        Vector2Int degreeAlteration = Scale.SampleNoteFromDistribution();
+        int scale_degree = degreeAlteration.x;
+        int alteration = degreeAlteration.y;
         note_name = Scale.GetNoteName(scale_degree, alteration);
         note_freq = Scale.GetNoteFrequency(scale_degree, alteration);
         Debug.Log(scale_degree + " " + alteration + " " + note_name + " " + note_freq);
@@ -55,16 +56,6 @@ public class Enemy : MonoBehaviour
     public float GetNoteFrequency()
     {
         return note_freq;
-    }
-
-    int GetScaleDegree()
-    {
-        return Random.Range(0, Scale.ScaleDegrees - 1);
-    }
-
-    int GetAlteration()
-    {
-        return Random.Range(0, Scale.Alterations - 1);
     }
 
     // Update is called once per frame
@@ -107,7 +98,7 @@ public class Enemy : MonoBehaviour
         {
             parent.RunChuckCode(ChuckSynths.Violin(note_freq));
         }
-        else if (instrument_synth_name == "trumpet")
+        else if (instrument_synth_name == "violin")
         {
             parent.RunChuckCode(ChuckSynths.Trumpet(note_freq));
         }
