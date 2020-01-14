@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    public float death_time = 1.0f;
+    public float death_time = 1.5f;
     public string instrument_synth_name;
     private float start_time;
     public bool dying = false;
