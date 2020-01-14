@@ -16,8 +16,8 @@ public class FloatBehavior : MonoBehaviour
 
     void Start()
     {
-        X_sin_offset = UnityEngine.Random.Range(0.0f, 1.0f);
-        Y_sin_offset = UnityEngine.Random.Range(0.0f, 1.0f);
+        X_sin_offset = UnityEngine.Random.Range(0.0f, 6.28f);
+        Y_sin_offset = UnityEngine.Random.Range(0.0f, 6.28f);
         this.originalX = this.transform.position.x;
         this.originalY = this.transform.position.y;
     }
