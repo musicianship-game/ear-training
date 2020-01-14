@@ -205,11 +205,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4386817414498296, guid: 4f6fea341e1904ea6be9f982b8ebfb3a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 5.760148
+      value: 4.8
       objectReference: {fileID: 0}
     - target: {fileID: 4386817414498296, guid: 4f6fea341e1904ea6be9f982b8ebfb3a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.311119
+      value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: 4386817414498296, guid: 4f6fea341e1904ea6be9f982b8ebfb3a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -292,6 +292,11 @@ Prefab:
       propertyPath: chuckMainInstance
       value: 
       objectReference: {fileID: 324991594}
+    - target: {fileID: 114137587122859370, guid: 0db0a60a223e68e4cb7cb90c14ccac26,
+        type: 2}
+      propertyPath: number_of_enemies
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0db0a60a223e68e4cb7cb90c14ccac26, type: 2}
   m_IsPrefabAsset: 0

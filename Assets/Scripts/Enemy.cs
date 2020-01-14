@@ -36,8 +36,8 @@ public class Enemy : MonoBehaviour
         // Debug.Log("Difficulty: " + Settings.MusicalDifficulty);
         // Debug.Log(Scale.GetDistributionAsString());
         Vector2Int degreeAlteration = Scale.SampleNoteFromDistribution();
-        int scale_degree = degreeAlteration.x;
-        int alteration = degreeAlteration.y;
+        scale_degree = degreeAlteration.x;
+        alteration = degreeAlteration.y;
         note_name = Scale.GetNoteName(scale_degree, alteration);
         note_freq = Scale.GetNoteFrequency(scale_degree, alteration);
         Debug.Log(scale_degree + " " + alteration + " " + note_name + " " + note_freq);
