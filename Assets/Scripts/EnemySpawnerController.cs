@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawnerController : MonoBehaviour {
-    public GameObject enemyPrefab0;
-    public GameObject enemyPrefab1;
-    public GameObject enemyPrefab2;
-    public GameObject enemyPrefab3;
-    private GameObject[] enemyPrefabs = new GameObject[4];
+
+    public GameObject[] enemyPrefabs = new GameObject[2];
     private Vector3[] spawnPoints;
     public PlayerController playerRef;
 	public float centsTolerance;
@@ -17,8 +14,8 @@ public class EnemySpawnerController : MonoBehaviour {
 	void Awake ()
 	{
         // there is an important assumption for the intialization:
-        // at first, all children are spawn point markers
-        // then we delete these, and all new children are spawned enemies
+        // at first, all children of spawner are spawn point markers
+        // then we delete these, and all new children will be spawned enemies
         spawnPoints = new Vector3[transform.childCount];
         int spawn_i = 0;
         foreach (Transform spawnPoint in transform)
@@ -27,13 +24,13 @@ public class EnemySpawnerController : MonoBehaviour {
             Destroy(spawnPoint.gameObject);
             spawn_i++;
         }
-        enemyPrefabs[0] = enemyPrefab0;
-        enemyPrefabs[1] = enemyPrefab1;
-        enemyPrefabs[2] = enemyPrefab2;
-        enemyPrefabs[3] = enemyPrefab3;
+        List<Vector3> spawnPointsList = new List<Vector3>(spawnPoints);
         for (int i = 0; i < number_of_enemies; i++)
         {
-            GameObject newEnemy = Instantiate(enemyPrefabs[Random.Range(0, 4)], spawnPoints[Random.Range(0, spawn_i)], transform.rotation, transform);
+            int j = Random.Range(0, spawnPointsList.Count);
+            Vector3 uniqueSpawnPoint = spawnPointsList[j];
+            spawnPointsList.RemoveAt(j);
+            GameObject newEnemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], uniqueSpawnPoint, transform.rotation, transform);
             newEnemy.GetComponent<Enemy>().player = playerRef;
         }
         all_enemies_dead = false;
