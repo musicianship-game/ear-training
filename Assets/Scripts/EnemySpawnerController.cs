@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawnerController : MonoBehaviour {
 
     public GameObject[] enemyPrefabs = new GameObject[2];
-    private Vector3[] spawnPoints;
+    private List<Vector3> spawnPoints = new List<Vector3>();
     public PlayerController playerRef;
 	public float centsTolerance;
     public bool all_enemies_dead;
@@ -16,20 +16,16 @@ public class EnemySpawnerController : MonoBehaviour {
         // there is an important assumption for the intialization:
         // at first, all children of spawner are spawn point markers
         // then we delete these, and all new children will be spawned enemies
-        spawnPoints = new Vector3[transform.childCount];
-        int spawn_i = 0;
         foreach (Transform spawnPoint in transform)
         {
-            spawnPoints[spawn_i] = spawnPoint.position;
+            spawnPoints.Add(spawnPoint.position);
             Destroy(spawnPoint.gameObject);
-            spawn_i++;
         }
-        List<Vector3> spawnPointsList = new List<Vector3>(spawnPoints);
         for (int i = 0; i < number_of_enemies; i++)
         {
-            int j = Random.Range(0, spawnPointsList.Count);
-            Vector3 uniqueSpawnPoint = spawnPointsList[j];
-            spawnPointsList.RemoveAt(j);
+            int j = Random.Range(0, spawnPoints.Count);
+            Vector3 uniqueSpawnPoint = spawnPoints[j];
+            spawnPoints.RemoveAt(j);
             GameObject newEnemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], uniqueSpawnPoint, transform.rotation, transform);
             newEnemy.GetComponent<Enemy>().player = playerRef;
         }

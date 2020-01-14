@@ -293,14 +293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32580a5fedd0b3848bd5edc3c7c889cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab0: {fileID: 1242311520231824, guid: fedc69104feba463aa9b08bc69b40e2c,
-    type: 2}
-  enemyPrefab1: {fileID: 1740273316150984, guid: 61254b032cf004f3fad4fdfa7c309447,
-    type: 2}
-  enemyPrefab2: {fileID: 1242311520231824, guid: fedc69104feba463aa9b08bc69b40e2c,
-    type: 2}
-  enemyPrefab3: {fileID: 1740273316150984, guid: 61254b032cf004f3fad4fdfa7c309447,
-    type: 2}
+  enemyPrefabs:
+  - {fileID: 1242311520231824, guid: fedc69104feba463aa9b08bc69b40e2c, type: 2}
+  - {fileID: 1740273316150984, guid: 61254b032cf004f3fad4fdfa7c309447, type: 2}
   playerRef: {fileID: 1489242718}
   centsTolerance: 20
   all_enemies_dead: 0
