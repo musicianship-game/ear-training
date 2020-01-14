@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerController : MonoBehaviour {
@@ -64,6 +65,8 @@ public class PlayerController : MonoBehaviour {
         if (isAtGoalZone)
         {
             Debug.Log("At Goal Zone");
+            int currentScene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(currentScene + 1);
         }
         if (jumping)
         {
