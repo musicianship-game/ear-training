@@ -7,15 +7,17 @@ public class FloatBehavior : MonoBehaviour
     float originalX;
     float originalY;
 
-    public float X_sin_offset = 0;
+    private float X_sin_offset;
     public float X_sin_freq = 0;
     public float X_floatStrength = 1;
-    public float Y_sin_offset = 0;
+    private float Y_sin_offset;
     public float Y_sin_freq = 0;
     public float Y_floatStrength = 1;
 
     void Start()
     {
+        X_sin_offset = UnityEngine.Random.Range(0.0f, 1.0f);
+        Y_sin_offset = UnityEngine.Random.Range(0.0f, 1.0f);
         this.originalX = this.transform.position.x;
         this.originalY = this.transform.position.y;
     }

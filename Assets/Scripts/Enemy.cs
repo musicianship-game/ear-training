@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     public int hit_points = 3;
 
     private int projectile_damage = 1;
-    private float next_time = 0.0f;
+    private float next_time = 0.0f; //also initial offset of firing cycle
     private EnemySpawnerController parent;
 
     // Note stuff
@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour
         {
             allSprites.Add(sprite);
         }
+        next_time = Random.Range(0.0f,wait_in_sec);
     }
 
     public string GetNoteName()
