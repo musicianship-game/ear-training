@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    public float death_time = 2.0f;
+    public float death_time = 1.0f;
     public string instrument_synth_name;
     private float start_time;
     public bool dying = false;
@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     public float projectile_speed = 2.0f;
     public GameObject projectile_used = null;
     public PlayerController player;
+    public ParticleSystem death_explosion;
 
     public int hit_points = 3;
 
@@ -133,6 +134,7 @@ public class Enemy : MonoBehaviour
         {
             part.Stop();
         }
+        Instantiate(death_explosion, transform);
     }
 
 }

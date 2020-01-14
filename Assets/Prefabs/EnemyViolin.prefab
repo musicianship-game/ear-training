@@ -267,6 +267,8 @@ MonoBehaviour:
   projectile_used: {fileID: 1618161610838518, guid: 286dde5a594264afd8381c4be21b8108,
     type: 2}
   player: {fileID: 0}
+  death_explosion: {fileID: 198432991341627448, guid: a53d55ef207454558ae84745e74b3cf5,
+    type: 2}
   hit_points: 3
 --- !u!114 &114243899758772782
 MonoBehaviour:
@@ -279,10 +281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b008ae690c89c43dabe6f17d2b70f8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  X_sin_offset: 5
   X_sin_freq: 1.9
   X_floatStrength: 0.2
-  Y_sin_offset: 1
   Y_sin_freq: 2.3
   Y_floatStrength: 0.18
 --- !u!114 &114317602793039336
@@ -296,10 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b008ae690c89c43dabe6f17d2b70f8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  X_sin_offset: 0
   X_sin_freq: 1
   X_floatStrength: 0.15
-  Y_sin_offset: 0
   Y_sin_freq: 1
   Y_floatStrength: 0.15
 --- !u!114 &114340558272670184
@@ -313,10 +311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b008ae690c89c43dabe6f17d2b70f8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  X_sin_offset: 3
   X_sin_freq: 1.2
   X_floatStrength: 0.1
-  Y_sin_offset: 1.5
   Y_sin_freq: 1.6
   Y_floatStrength: 0.12
 --- !u!198 &198095968127775868
