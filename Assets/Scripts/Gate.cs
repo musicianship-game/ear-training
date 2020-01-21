@@ -56,7 +56,7 @@ public class Gate : MonoBehaviour
         y = Mathf.SmoothStep(0.0f, 1.0f, y);
         Color glowColor = new Color(1, y, 1, this_renderer.color.a);
         this_renderer.color = glowColor;
-        GetComponentInChildren<MatchParentColor>().glow_color = glowColor;
+        GetComponentInChildren<MatchParentColor>().front_renderer.color = glowColor;
     }
 
     private void Die()

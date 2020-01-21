@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class MatchParentColor : MonoBehaviour {
 
-    public Color glow_color;
+    public SpriteRenderer front_renderer;
 
     // Use this for initialization
     void Start () {
-        glow_color = GetComponent<SpriteRenderer>().color;
+        front_renderer = GetComponent<SpriteRenderer>();
     }
 
 	// Update is called once per frame
 	void Update () {
-        GetComponent<SpriteRenderer>().color = glow_color;
+
 	}
 }
