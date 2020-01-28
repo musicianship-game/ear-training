@@ -1300,6 +1300,10 @@ Prefab:
       propertyPath: spawner
       value: 
       objectReference: {fileID: 1952578299}
+    - target: {fileID: 4769634953651504, guid: 79a248a8683d65849824135c477e6abc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -6.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79a248a8683d65849824135c477e6abc, type: 2}
   m_IsPrefabAsset: 0
