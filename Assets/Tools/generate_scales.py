@@ -74,26 +74,26 @@ if __name__ == '__main__':
         'North America': {
             'notes': ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
             'modes': ['Major', 'Minor'],
-            'scale_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
-            'note_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
+            'scale_alterations': ['', '♯', '𝄪', '♯♯♯', '♭♭♭', '𝄫', '♭'],
+            'note_alterations': ['', '♯', '𝄪', '♯♯♯', '♭♭♭', '𝄫', '♭'],
         },
         'German': {
             'notes': ['C', 'D', 'E', 'F', 'G', 'A', 'H'],
             'modes': ['Dur', 'Moll'],
             'scale_alterations': ['', 'es', 'is', 'eses', 'isis'],
-            'note_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
+            'note_alterations': ['', '♯', '𝄪', '♯♯♯', '♭♭♭', '𝄫', '♭'],
         },
         'Spanish': {
             'notes': ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Si'],
             'modes': ['Mayor', 'Menor'],
-            'scale_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
-            'note_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
+            'scale_alterations': ['', '♯', '𝄪', '♯♯♯', '♭♭♭', '𝄫', '♭'],
+            'note_alterations': ['', '♯', '𝄪', '♯♯♯', '♭♭♭', '𝄫', '♭'],
         },
         'French': {
             'notes': ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Ti'],
             'modes': ['Majeur', 'Mineur'],
-            'scale_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
-            'note_alterations': ['', '#', 'x', 'x#', 'bbb', 'bb', 'b'],
+            'scale_alterations': ['', '♯', '𝄪', '♯♯♯', '♭♭♭', '𝄫', '♭'],
+            'note_alterations': ['', '♯', '𝄪', '♯♯♯', '♭♭♭', '𝄫', '♭'],
         }
     }
 
@@ -122,7 +122,7 @@ if __name__ == '__main__':
                 if not os.path.exists(scale_dir):
                     os.makedirs(scale_dir)
                 csv_filepath = os.path.join(scale_dir, 'fundamental_frequencies.csv')
-                with open(csv_filepath, 'w') as csv:
+                with open(csv_filepath, encoding='utf-8', mode='w') as csv:
                     print(scale_name)
                     for alt in [0, 1, 2, -2, -1]:
                         for idx, note_idx in enumerate(note_indexes):
