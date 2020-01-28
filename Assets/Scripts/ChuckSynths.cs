@@ -54,7 +54,7 @@ public static class ChuckSynths {
         4.0 => g.gain;
         " + frequency + @" * 6.0 => lo.freq;
         " + (frequency * (182.647f + (10.3153f * Mathf.Log(frequency))) / 256.0f) + @" => brass.freq;
-        0.034 * Math.exp(0.0023 * " + (frequency * (182.647f + (10.3153f * Mathf.Log(frequency))) / 256.0f) + @") => brass.noteOn;
+        0.037 * Math.exp(0.0023 * " + (frequency * (182.647f + (10.3153f * Mathf.Log(frequency))) / 256.0f) + @") => brass.noteOn;
         " + 0.9f * duration + @"::second => now;
         0.1 => brass.noteOff;
         " + 0.1f * duration + @"::second => now;
