@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     private float speed;
     private float horizontal;
     private float vertical;
+    Vector2 translation;
     private bool jumping;
     private bool falling;
     private Vector2 sung_pos;
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour {
         spriteanimator = PlayerSpriteHolder.transform.Find("PlayerSprite").gameObject.GetComponent<Animator>();
         health_slider.maxValue = PlayerCloud.life_max;
         health_slider.value = PlayerCloud.life;
-        speed = 5f;
+        speed = 3.5f;
         isAtGoalZone = false;
         chuck = GetComponent<ChuckSubInstance>();
     }
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour {
             sung_note_name.transform.position = sung_pos + displace;
             sung_note_name.alpha = Mathf.Sin(k*Mathf.PI);
         }
-        Vector2 translation;
+
         if (isAtGoalZone)
         {
             Debug.Log("At Goal Zone");
@@ -78,8 +79,8 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-            horizontal = Input.GetAxis("Horizontal");
-            vertical = Input.GetAxis("Vertical");
+            horizontal = Input.GetAxisRaw("Horizontal");
+            vertical = Input.GetAxisRaw("Vertical");
             translation = new Vector2(horizontal, vertical) * speed;
             if (translation.magnitude > 0f)
             {
@@ -91,8 +92,12 @@ public class PlayerController : MonoBehaviour {
                 spriteanimator.SetBool("Walking", false);
             }
         }
-        rb2d.MovePosition(rb2d.position + translation * Time.fixedDeltaTime);
         score_counter.SetText(PlayerCloud.score.ToString());
+    }
+
+    void FixedUpdate()
+    {
+        rb2d.MovePosition(rb2d.position + translation * Time.fixedDeltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
