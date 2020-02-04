@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
     private int alteration;
     private string note_name;
     private float note_freq;
+    public float note_dur = 1.0f;
 
     // Use this for initialization
     void Start()
@@ -109,23 +110,12 @@ public class Enemy : MonoBehaviour
         GameObject the_projectile = (GameObject)Instantiate(projectile_used, my_pos, rotation);
         the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
         the_projectile.GetComponent<Projectile>().damage = projectile_damage;
-        if (instrument_synth_name == "violin")
-        {
-            parent.RunChuckCode(ChuckSynths.Violin(note_freq));
-        }
-        else if (instrument_synth_name == "trumpet")
-        {
-            parent.RunChuckCode(ChuckSynths.Trumpet(note_freq));
-        }
-        else
-        {
-            Debug.Log("Instrument name not recognized. Default synth chosen.");
-            parent.RunChuckCode(ChuckSynths.Violin(note_freq));
-        }
+        Play(note_dur);
     }
 
     public void GetHit()
     {
+        Play(note_dur / 1.5f, true);
         if (hit_points > 1)
         {
             hit_points -= 1;
@@ -158,4 +148,27 @@ public class Enemy : MonoBehaviour
         Instantiate(death_explosion, transform);
     }
 
+    private void Play(float dur, bool hit = false)
+    {
+        if (!hit)
+        {
+            if (instrument_synth_name == "violin")
+            {
+                parent.RunChuckCode(ChuckSynths.Violin(note_freq, dur));
+            }
+            else if (instrument_synth_name == "trumpet")
+            {
+                parent.RunChuckCode(ChuckSynths.Trumpet(note_freq, dur));
+            }
+            else
+            {
+                Debug.Log("Instrument name not recognized. Default synth chosen.");
+                parent.RunChuckCode(ChuckSynths.Violin(note_freq, dur));
+            }
+        }
+        else
+        {
+            parent.RunChuckCode(ChuckSynths.BG_Plucked_String(note_freq, dur));
+        }
+    }
 }
