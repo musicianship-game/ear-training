@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public GameObject projectile_used = null;
     public PlayerController player;
     public ParticleSystem death_explosion;
+    private FloatBehavior float_behavior;
 
     public int hit_points = 3;
 
@@ -39,6 +40,7 @@ public class Enemy : MonoBehaviour
         choose_new_pitch = false;
         particleSys = GetComponentsInChildren<ParticleSystem>();
         childSprites = GetComponentsInChildren<SpriteRenderer>();
+        float_behavior = GetComponent<FloatBehavior>();
         allSprites.Add(GetComponent<SpriteRenderer>());
         foreach (SpriteRenderer sprite in childSprites)
         {
@@ -76,6 +78,7 @@ public class Enemy : MonoBehaviour
         {
             Vector2 target_position = player.transform.position;
             if (choose_new_pitch) ChooseNewPitch();
+            choose_new_pitch = false;
             fire(target_position);
             next_time = Time.time + wait_in_sec;
         }
@@ -127,6 +130,7 @@ public class Enemy : MonoBehaviour
         {
             hit_points -= 1;
             choose_new_pitch = true;
+            GetAngrier();
         }
         else
         {
@@ -135,10 +139,18 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void GetAngrier()
+    {
+        // float_behavior.X_sin_freq *= 2.5f;
+        float_behavior.Y_sin_freq += 6f;
+    }
+
     private void Die()
     {
         dying = true;
         start_time = Time.time;
+        float_behavior.X_sin_freq = 1f;
+        float_behavior.Y_sin_freq = 1f;
         foreach (ParticleSystem part in particleSys)
         {
             part.Stop();
