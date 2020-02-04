@@ -61,4 +61,22 @@ public static class ChuckSynths {
         3::second => now;";
         return snippet;
     }
+
+    public static string BG_Plucked_String(float frequency, float duration = 0.25f)
+    {
+        string snippet = @"
+        StifKarp m => NRev r => dac;
+        .25 => r.gain;
+        .02 => r.mix;
+        0.1234 => m.pickupPosition;
+        0.2 => m.sustain;
+        0.2 => m.stretch;
+        " + frequency + @" => m.freq;
+        Math.random2f( .6, .9 ) => m.pluck;
+        " + 0.9f * duration + @"::second => now;
+        0.0 => m.noteOff;
+        " + 0.1f * duration + @"::second => now;
+        3::second => now;";
+        return snippet;
+    }
 }
