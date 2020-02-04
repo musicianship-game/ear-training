@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour {
             horizontal = Input.GetAxisRaw("Horizontal");
             vertical = Input.GetAxisRaw("Vertical");
             translation = new Vector2(horizontal, vertical) * speed;
-            if (translation.magnitude > 0f)
+            if (translation.magnitude > 0f && !singing)
             {
                 spriteanimator.SetBool("Walking", true);
                 PlayerSpriteHolder.transform.localScale = new Vector3(Mathf.Sign(horizontal), 1, 1);
@@ -97,7 +97,10 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        rb2d.MovePosition(rb2d.position + translation * Time.fixedDeltaTime);
+        if (!singing)
+        {
+            rb2d.MovePosition(rb2d.position + translation * Time.fixedDeltaTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
