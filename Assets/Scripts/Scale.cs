@@ -20,10 +20,10 @@ public static class Scale {
         NoteNames = new List<string>()
         {
             "C", "D", "E", "F", "G", "A", "B",
-            "C#", "D#", "E#", "F#", "G#", "A#", "B#",
-            "Cx", "Dx", "Ex", "Fx", "Gx", "Ax", "Bx",
-            "Cbb", "Dbb", "Ebb", "Fbb", "Gbb", "Abb", "Bbb",
-            "Cb", "Db", "Eb", "Fb", "Gb", "Ab", "Bb"
+            "C♯", "D♯", "E♯", "F♯", "G♯", "A♯", "B♯",
+            "C𝄪", "D𝄪", "E𝄪", "F𝄪", "G𝄪", "A𝄪", "B𝄪",
+            "C𝄫", "D𝄫", "E𝄫", "F𝄫", "G𝄫", "A𝄫", "B𝄫",
+            "C♭", "D♭", "E♭", "F♭", "G♭", "A♭", "B♭"
         };
         Frequencies = new List<float>()
         {
