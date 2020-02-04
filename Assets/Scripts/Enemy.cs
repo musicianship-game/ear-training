@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public string instrument_synth_name;
     private float start_time;
     public bool dying = false;
+    private bool choose_new_pitch;
     private Component[] particleSys;
     private Component[] childSprites;
     private List<SpriteRenderer> allSprites = new List<SpriteRenderer>();
@@ -34,14 +35,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         parent = transform.parent.gameObject.GetComponent<EnemySpawnerController>();
-        // Debug.Log("Difficulty: " + Settings.MusicalDifficulty);
-        // Debug.Log(Scale.GetDistributionAsString());
-        Vector2Int degreeAlteration = Scale.SampleNoteFromDistribution();
-        scale_degree = degreeAlteration.x;
-        alteration = degreeAlteration.y;
-        note_name = Scale.GetNoteName(scale_degree, alteration);
-        note_freq = Scale.GetNoteFrequency(scale_degree, alteration);
-        Debug.Log(scale_degree + " " + alteration + " " + note_name + " " + note_freq);
+        ChooseNewPitch();
+        choose_new_pitch = false;
         particleSys = GetComponentsInChildren<ParticleSystem>();
         childSprites = GetComponentsInChildren<SpriteRenderer>();
         allSprites.Add(GetComponent<SpriteRenderer>());
@@ -62,12 +57,25 @@ public class Enemy : MonoBehaviour
         return note_freq;
     }
 
+    private void ChooseNewPitch()
+    {
+        // Debug.Log("Difficulty: " + Settings.MusicalDifficulty);
+        // Debug.Log(Scale.GetDistributionAsString());
+        Vector2Int degreeAlteration = Scale.SampleNoteFromDistribution();
+        scale_degree = degreeAlteration.x;
+        alteration = degreeAlteration.y;
+        note_name = Scale.GetNoteName(scale_degree, alteration);
+        note_freq = Scale.GetNoteFrequency(scale_degree, alteration);
+        Debug.Log(scale_degree + " " + alteration + " " + note_name + " " + note_freq);
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (Time.time > next_time && !dying)
         {
             Vector2 target_position = player.transform.position;
+            if (choose_new_pitch) ChooseNewPitch();
             fire(target_position);
             next_time = Time.time + wait_in_sec;
         }
@@ -118,6 +126,7 @@ public class Enemy : MonoBehaviour
         if (hit_points > 1)
         {
             hit_points -= 1;
+            choose_new_pitch = true;
         }
         else
         {
