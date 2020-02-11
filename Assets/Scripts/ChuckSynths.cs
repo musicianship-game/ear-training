@@ -91,12 +91,33 @@ public static class ChuckSynths {
         .99 => r.gain;
         .4 => r.mix;
         500.0 => l.freq;
-        1 - power => l.gain;
+        1.0 - power => l.gain;
         e.keyOn();
         1.0 => i.next;
         10::ms => now;
         0.8 => i.next;
         e.keyOff();
+        1000::ms => now;";
+        return snippet;
+    }
+
+    public static string BG_Snare(int power)
+    {
+        // power is assumed to be an int from 1 to 9, inclusive
+        string snippet = @"
+        Noise n => ADSR e => LPF l => NRev r => ADSR E => dac;
+        e.set(3::ms, 10::ms, 0.5, 100::ms);
+        E.set(1::ms, 1::ms, 0.99, 200::ms);
+        .5 => r.gain;
+        .1 => r.mix;
+        5000.0 => l.freq;
+        " + 0.01f*power + @" => n.gain;
+        E.keyOn();
+        e.keyOn();
+        100::ms => now;
+        e.keyOff();
+        100::ms => now;
+        E.keyOff();
         1000::ms => now;";
         return snippet;
     }
