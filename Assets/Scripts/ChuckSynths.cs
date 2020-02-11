@@ -121,4 +121,26 @@ public static class ChuckSynths {
         1000::ms => now;";
         return snippet;
     }
+
+    public static string BG_Hi_Hat(int power)
+    {
+        // power is assumed to be an int from 1 to 9, inclusive
+        string snippet = @"
+        Noise n => ADSR e => HPF h => NRev r => ADSR E => dac;
+        e.set(2::ms, 10::ms, 0.5, 50::ms);
+        E.set(1::ms, 1::ms, 0.99, 200::ms);
+        .5 => r.gain;
+        .05 => r.mix;
+        " + 0.01f * power + @" => n.gain;
+        10.0 => h.Q;
+        4000.0 => h.freq;
+        E.keyOn();
+        e.keyOn();
+        40::ms => now;
+        e.keyOff();
+        100::ms => now;
+        E.keyOff();
+        1000::ms => now;";
+        return snippet;
+    }
 }
