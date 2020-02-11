@@ -115,7 +115,7 @@ public class Enemy : MonoBehaviour
 
     public void GetHit()
     {
-        Play(note_dur / 1.5f, true);
+        Play(note_dur / 3.0f, true);
         if (hit_points > 1)
         {
             hit_points -= 1;
@@ -166,7 +166,7 @@ public class Enemy : MonoBehaviour
                 parent.RunChuckCode(ChuckSynths.Violin(note_freq, dur));
             }
         }
-        else
+        else if (hit)
         {
             parent.RunChuckCode(ChuckSynths.BG_Plucked_String(note_freq, dur));
         }

@@ -70,9 +70,10 @@ public static class ChuckSynths {
         .02 => r.mix;
         0.1234 => m.pickupPosition;
         0.2 => m.sustain;
-        0.2 => m.stretch;
-        " + frequency + @" => m.freq;
-        Math.random2f( .6, .9 ) => m.pluck;
+        0.0 => m.stretch;
+        " + frequency + @" => float x;
+        -0.0614092 + 0.99378*x + 0.000270136*x*x => m.freq;
+        0.5 => m.pluck;
         " + 0.9f * duration + @"::second => now;
         0.0 => m.noteOff;
         " + 0.1f * duration + @"::second => now;
