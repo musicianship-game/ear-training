@@ -33,13 +33,34 @@ public class BackgroundMusicPlayer : MonoBehaviour {
 		if (t <= 0f)
 		{
 			int [,] notes = BackgroundMusic.GetNextEvent();
-			// TODO: Play the synths
-			int degree1 = notes[0, 0] - 1;
-			int alteration1 = notes[0, 1];
-			if (degree1 >= 0)
+			for (int inst = 0; inst < 4; inst++)
 			{
-				float frequency1 = Scale.GetNoteFrequency(degree1, alteration1) / 4f;
-				chuck.RunCode(ChuckSynths.BG_Plucked_String(frequency1));
+				int degree = notes[inst, 0] - 1;
+				int alteration = notes[inst, 1];
+				float frequency = 0f;
+				int power = 0;
+				if (degree >= 0)
+				{
+					switch(inst)
+					{
+						case 0:
+							frequency = Scale.GetNoteFrequency(degree, alteration) / 4f;
+							chuck.RunCode(ChuckSynths.BG_Plucked_String(frequency));
+							break;
+						case 1:
+							power = degree;
+							chuck.RunCode(ChuckSynths.BG_Bass(power));
+							break;
+						case 2:
+							power = degree;
+							chuck.RunCode(ChuckSynths.BG_Snare(power));
+							break;
+						case 3:
+							power = degree;
+							chuck.RunCode(ChuckSynths.BG_Hi_Hat(power));
+							break;
+					}
+				}
 			}
 			// Debug.Log(notes);
 			t = eventDelta;
