@@ -80,4 +80,24 @@ public static class ChuckSynths {
         3::second => now;";
         return snippet;
     }
+
+    public static string BG_Bass(int power)
+    {
+        // power is assumed to be an int from 1 to 9, inclusive
+        string snippet = @"
+        Impulse i => LPF l => NRev r => ADSR e => dac;
+        e.set(2::ms, 2::ms, 0.99, 200::ms);
+        " + Mathf.Pow( 0.9f , power*1.0f ) + @" => float power;
+        .99 => r.gain;
+        .4 => r.mix;
+        500.0 => l.freq;
+        1 - power => l.gain;
+        e.keyOn();
+        1.0 => i.next;
+        10::ms => now;
+        0.8 => i.next;
+        e.keyOff();
+        1000::ms => now;";
+        return snippet;
+    }
 }
