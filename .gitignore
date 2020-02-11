@@ -37,3 +37,5 @@ sysinfo.txt
 
 *.DS_Store
 *.ipynb_checkpoints/
+
+.vscode
