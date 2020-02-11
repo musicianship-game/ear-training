@@ -66,7 +66,7 @@ public static class ChuckSynths {
     {
         string snippet = @"
         StifKarp m => NRev r => dac;
-        .25 => r.gain;
+        .125 => r.gain;
         .02 => r.mix;
         0.1234 => m.pickupPosition;
         0.2 => m.sustain;
@@ -108,7 +108,7 @@ public static class ChuckSynths {
         Noise n => ADSR e => LPF l => NRev r => ADSR E => dac;
         e.set(3::ms, 10::ms, 0.5, 100::ms);
         E.set(1::ms, 1::ms, 0.99, 200::ms);
-        .5 => r.gain;
+        .25 => r.gain;
         .1 => r.mix;
         5000.0 => l.freq;
         " + 0.01f*power + @" => n.gain;
