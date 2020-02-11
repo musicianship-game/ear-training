@@ -66,7 +66,7 @@ public static class ChuckSynths {
     {
         string snippet = @"
         StifKarp m => NRev r => dac;
-        .125 => r.gain;
+        .0625 => r.gain;
         .02 => r.mix;
         0.1234 => m.pickupPosition;
         0.2 => m.sustain;
@@ -88,7 +88,7 @@ public static class ChuckSynths {
         Impulse i => LPF l => NRev r => ADSR e => dac;
         e.set(2::ms, 2::ms, 0.99, 200::ms);
         " + Mathf.Pow( 0.9f , power*1.0f ) + @" => float power;
-        .99 => r.gain;
+        6.0 => r.gain;
         .4 => r.mix;
         500.0 => l.freq;
         1.0 - power => l.gain;
