@@ -38,7 +38,7 @@ public class BackgroundMusicPlayer : MonoBehaviour {
 			int alteration1 = notes[0, 1];
 			if (degree1 >= 0)
 			{
-				float frequency1 = Scale.GetNoteFrequency(degree1, alteration1) / 2f;
+				float frequency1 = Scale.GetNoteFrequency(degree1, alteration1) / 4f;
 				chuck.RunCode(ChuckSynths.BG_Plucked_String(frequency1));
 			}
 			// Debug.Log(notes);
