@@ -167,11 +167,25 @@ public class Enemy : MonoBehaviour
     private void ShieldAnimation()
     {
         float_behavior.Y_sin_freq += 12f;
+        foreach (SpriteRenderer sprite in allSprites)
+        {
+            if (sprite.gameObject.name == "bubble")
+            {
+                sprite.enabled = true;
+            }
+        }
     }
 
     private void UnshieldAnimation()
     {
         float_behavior.Y_sin_freq -= 12f;
+        foreach (SpriteRenderer sprite in allSprites)
+        {
+            if (sprite.gameObject.name == "bubble")
+            {
+                sprite.enabled = false;
+            }
+        }
     }
 
     private void Die()
