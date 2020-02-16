@@ -109,6 +109,7 @@ public class Enemy : MonoBehaviour
             if (shielded_time >= shield_in_sec)
             {
                 shielded = false;
+                UnshieldAnimation();
             }
         }
         else
@@ -143,11 +144,12 @@ public class Enemy : MonoBehaviour
         if (hit_points > 1)
         {
             hit_points -= 1;
-            GetAngrier();
+            // GetAngrier();
             DropCurrentPitch();
             choose_new_pitch = true;
             shielded = true;
             shielded_time = 0.0f;
+            ShieldAnimation();
         }
         else
         {
@@ -160,6 +162,16 @@ public class Enemy : MonoBehaviour
     {
         // float_behavior.X_sin_freq *= 2.5f;
         float_behavior.Y_sin_freq += 6f;
+    }
+
+    private void ShieldAnimation()
+    {
+        float_behavior.Y_sin_freq += 12f;
+    }
+
+    private void UnshieldAnimation()
+    {
+        float_behavior.Y_sin_freq -= 12f;
     }
 
     private void Die()
