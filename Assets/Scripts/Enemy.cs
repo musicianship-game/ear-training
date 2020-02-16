@@ -26,12 +26,14 @@ public class Enemy : MonoBehaviour
     private float next_time = 0.0f; //also initial offset of firing cycle
     private EnemySpawnerController parent;
 
-    // Note stuff
+    // Note and instrument stuff
     private int scale_degree;
     private int alteration;
     private string note_name;
     private float note_freq;
     public float note_dur = 1.0f;
+    public GameObject[] instrument_choices = new GameObject[2];
+    private GameObject instrument_used;
 
     // Use this for initialization
     void Start()
@@ -39,6 +41,8 @@ public class Enemy : MonoBehaviour
         parent = transform.parent.gameObject.GetComponent<EnemySpawnerController>();
         ChooseNewPitch();
         choose_new_pitch = false;
+        instrument_used = instrument_choices[Random.Range(0,instrument_choices.Length)];
+        Instantiate(instrument_used, transform);
         particleSys = GetComponentsInChildren<ParticleSystem>();
         childSprites = GetComponentsInChildren<SpriteRenderer>();
         float_behavior = GetComponent<FloatBehavior>();
@@ -152,19 +156,7 @@ public class Enemy : MonoBehaviour
     {
         if (!hit)
         {
-            if (instrument_synth_name == "violin")
-            {
-                parent.RunChuckCode(ChuckSynths.Violin(note_freq, dur));
-            }
-            else if (instrument_synth_name == "trumpet")
-            {
-                parent.RunChuckCode(ChuckSynths.Trumpet(note_freq, dur));
-            }
-            else
-            {
-                Debug.Log("Instrument name not recognized. Default synth chosen.");
-                parent.RunChuckCode(ChuckSynths.Violin(note_freq, dur));
-            }
+            GetComponentInChildren<Instrument>().Play(note_freq, dur);
         }
         else if (hit)
         {

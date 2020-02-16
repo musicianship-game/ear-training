@@ -294,8 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 1242311520231824, guid: fedc69104feba463aa9b08bc69b40e2c, type: 2}
-  - {fileID: 1740273316150984, guid: 61254b032cf004f3fad4fdfa7c309447, type: 2}
+  - {fileID: 1980273689571116, guid: d4b4f19af40b74da999161b9876c2553, type: 2}
   playerRef: {fileID: 0}
   centsTolerance: 20
   all_enemies_dead: 0
