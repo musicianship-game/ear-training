@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public string instrument_synth_name;
+    //public string instrument_synth_name;
     public bool dying = false;
     private bool choose_new_pitch;
     private bool shielded = false;
@@ -20,7 +21,9 @@ public class Enemy : MonoBehaviour
     public ParticleSystem death_explosion;
     private FloatBehavior float_behavior;
 
+    public int max_hp = 3;
     public int hit_points = 3;
+    public Slider hp_slider;
 
     private int projectile_damage = 1;
     private float reloading_time = 0.0f; //also initial offset of firing cycle
@@ -41,6 +44,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         parent = transform.parent.gameObject.GetComponent<EnemySpawnerController>();
+        hp_slider.maxValue = max_hp;
+        hp_slider.value = hit_points;
         ChooseNewPitch();
         choose_new_pitch = false;
         instrument_used = instrument_choices[Random.Range(0,instrument_choices.Length)];
@@ -144,6 +149,7 @@ public class Enemy : MonoBehaviour
         if (hit_points > 1)
         {
             hit_points -= 1;
+            hp_slider.value = hit_points;
             // GetAngrier();
             DropCurrentPitch();
             choose_new_pitch = true;
