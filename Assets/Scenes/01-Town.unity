@@ -5905,6 +5905,11 @@ Prefab:
       propertyPath: chuckMainInstance
       value: 
       objectReference: {fileID: 1015509561}
+    - target: {fileID: 114137587122859370, guid: 0db0a60a223e68e4cb7cb90c14ccac26,
+        type: 2}
+      propertyPath: number_of_enemies
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0db0a60a223e68e4cb7cb90c14ccac26, type: 2}
   m_IsPrefabAsset: 0
