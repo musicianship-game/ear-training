@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     private Component[] childSprites;
     private List<SpriteRenderer> allSprites = new List<SpriteRenderer>();
     public float reload_in_sec = 5.0f;
-    public float shield_in_sec = 1.0f;
+    public float shield_in_sec = 2.0f;
     public float dying_in_sec = 1.5f;
     public float projectile_speed = 2.0f;
     public GameObject projectile_used = null;
@@ -134,6 +134,7 @@ public class Enemy : MonoBehaviour
 
     public void GetHit()
     {
+        if (shielded) return;
         Play(note_dur / 3.0f, true);
         if (hit_points > 1)
         {
