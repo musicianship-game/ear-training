@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
-    public float death_time = 1.5f;
     public string instrument_synth_name;
-    private float start_time;
     public bool dying = false;
     private bool choose_new_pitch;
+    private bool shielded = false;
     private Component[] particleSys;
     private Component[] childSprites;
     private List<SpriteRenderer> allSprites = new List<SpriteRenderer>();
-    public float wait_in_sec = 5.0f;
+    public float reload_in_sec = 5.0f;
+    public float shield_in_sec = 2.0f;
+    public float dying_in_sec = 1.5f;
     public float projectile_speed = 2.0f;
     public GameObject projectile_used = null;
     public PlayerController player;
@@ -23,7 +23,9 @@ public class Enemy : MonoBehaviour
     public int hit_points = 3;
 
     private int projectile_damage = 1;
-    private float next_time = 0.0f; //also initial offset of firing cycle
+    private float reloading_time = 0.0f; //also initial offset of firing cycle
+    private float shielded_time = 0.0f;
+    private float dying_time = 0.0f;
     private EnemySpawnerController parent;
 
     // Note and instrument stuff
@@ -51,7 +53,7 @@ public class Enemy : MonoBehaviour
         {
             allSprites.Add(sprite);
         }
-        next_time = Random.Range(0.0f,wait_in_sec);
+        reloading_time = Random.Range(0.0f, reload_in_sec);
     }
 
     public string GetNoteName()
@@ -76,31 +78,48 @@ public class Enemy : MonoBehaviour
         Debug.Log(scale_degree + " " + alteration + " " + note_name + " " + note_freq);
     }
 
+    private void DropCurrentPitch()
+    {
+        note_name = "";
+        note_freq = 0f;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > next_time && !dying)
-        {
-            Vector2 target_position = player.transform.position;
-            if (choose_new_pitch) ChooseNewPitch();
-            choose_new_pitch = false;
-            fire(target_position);
-            next_time = Time.time + wait_in_sec;
-        }
         if (dying)
         {
-            float x = (death_time - (Time.time - start_time)) / death_time;
-            if (x < 0)
+            dying_time += Time.deltaTime;
+            if (dying_time >= dying_in_sec)
             {
                 Destroy(gameObject);
             }
             else
             {
-                Color newColor = new Color(1, 1, 1, Mathf.SmoothStep(0.0f, 1.0f, x));
+                Color newColor = new Color(1, 1, 1, Mathf.SmoothStep(0.0f, 1.0f, dying_in_sec - dying_time));
                 foreach (SpriteRenderer sprite in allSprites)
                 {
                     sprite.color = newColor;
                 }
+            }
+        }
+        else if (shielded)
+        {
+            shielded_time += Time.deltaTime;
+            if (shielded_time >= shield_in_sec)
+            {
+                shielded = false;
+            }
+        }
+        else
+        {
+            reloading_time += Time.deltaTime;
+            if (reloading_time >= reload_in_sec) {
+                Vector2 target_position = player.transform.position;
+                if (choose_new_pitch) ChooseNewPitch();
+                choose_new_pitch = false;
+                fire(target_position);
+                reloading_time = 0.0f;
             }
         }
     }
@@ -119,12 +138,16 @@ public class Enemy : MonoBehaviour
 
     public void GetHit()
     {
+        if (shielded) return;
         Play(note_dur / 3.0f, true);
         if (hit_points > 1)
         {
             hit_points -= 1;
-            choose_new_pitch = true;
             GetAngrier();
+            DropCurrentPitch();
+            choose_new_pitch = true;
+            shielded = true;
+            shielded_time = 0.0f;
         }
         else
         {
@@ -142,7 +165,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         dying = true;
-        start_time = Time.time;
+        dying_time = 0f;
         float_behavior.X_sin_freq = 1f;
         float_behavior.Y_sin_freq = 1f;
         foreach (ParticleSystem part in particleSys)
