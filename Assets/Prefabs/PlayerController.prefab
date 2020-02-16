@@ -1121,7 +1121,7 @@ MonoBehaviour:
   score_counter: {fileID: 114074808049471170}
   mouth_LA: {fileID: 1560247007296434, guid: abd17838796264ef6926ae6f676f3379, type: 2}
   spawner: {fileID: 0}
-  projectile_speed: 3.5
+  projectile_speed: 7
   projectile_used: {fileID: 114833172192061680, guid: a37da9c3faa904a64a4a5fcd76d02c19,
     type: 2}
 --- !u!114 &114210316138614540
