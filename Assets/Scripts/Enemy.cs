@@ -160,6 +160,7 @@ public class Enemy : MonoBehaviour
         else
         {
             hit_points = 0;
+            hp_slider.value = hit_points;
             Die();
         }
     }
