@@ -295,7 +295,7 @@ Prefab:
     - target: {fileID: 114137587122859370, guid: 0db0a60a223e68e4cb7cb90c14ccac26,
         type: 2}
       propertyPath: number_of_enemies
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0db0a60a223e68e4cb7cb90c14ccac26, type: 2}
@@ -303,6 +303,11 @@ Prefab:
 --- !u!4 &965681434 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4169472651608668, guid: 0db0a60a223e68e4cb7cb90c14ccac26,
+    type: 2}
+  m_PrefabInternal: {fileID: 965681433}
+--- !u!1 &965681435 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1337696072326018, guid: 0db0a60a223e68e4cb7cb90c14ccac26,
     type: 2}
   m_PrefabInternal: {fileID: 965681433}
 --- !u!1001 &1028529762
@@ -1422,7 +1427,7 @@ Prefab:
         type: 2}
       propertyPath: spawner
       value: 
-      objectReference: {fileID: 1952578299}
+      objectReference: {fileID: 965681435}
     - target: {fileID: 4769634953651504, guid: 79a248a8683d65849824135c477e6abc, type: 2}
       propertyPath: m_LocalPosition.x
       value: -6.5
