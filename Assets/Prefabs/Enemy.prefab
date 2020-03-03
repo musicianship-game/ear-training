@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 4353101497385676}
   - component: {fileID: 212560989995281212}
   - component: {fileID: 58203992203437272}
+  - component: {fileID: 114141294670328418}
   m_Layer: 0
   m_Name: bubble
   m_TagString: Untagged
@@ -141,6 +142,7 @@ GameObject:
   - component: {fileID: 114267722112976716}
   - component: {fileID: 82289755894596802}
   - component: {fileID: 58051329298636448}
+  - component: {fileID: 95270864291289340}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -155,8 +157,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1980273689571116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.648095, y: -0.49077892, z: -0.05144121}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4741659061516160}
   - {fileID: 4353101497385676}
@@ -172,7 +174,7 @@ Transform:
   m_GameObject: {fileID: 1582590938838938}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 4273000774622136}
   m_RootOrder: 1
@@ -316,6 +318,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &95270864291289340
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1980273689571116}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 50faef7aa5a0d4241aef71165eea4c84, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114094326701080922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,6 +379,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114141294670328418
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1582590938838938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b008ae690c89c43dabe6f17d2b70f8cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  X_sin_freq: 0
+  X_floatStrength: 0
+  Y_sin_freq: 0
+  Y_floatStrength: 0
 --- !u!114 &114267722112976716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5123,7 +5158,7 @@ SpriteRenderer:
   m_SortingLayerID: -567134071
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300018, guid: 2336dd88329186146a93ed72d1a312ab, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1e354cf8b34e84de588e3534b41f7e56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5250,7 +5285,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.12}
+  m_AnchoredPosition: {x: 0, y: 0.2}
   m_SizeDelta: {x: 3, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224753061436930664
