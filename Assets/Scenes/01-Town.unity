@@ -5850,6 +5850,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3add4aadb6f110469dfdfa56399a4a3, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &940985622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1337696072326018, guid: 0db0a60a223e68e4cb7cb90c14ccac26,
+    type: 2}
+  m_PrefabInternal: {fileID: 1108225339}
 --- !u!114 &1015509561 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114308439407587394, guid: e7671350fc92a4143b3d6233c745c5f9,
@@ -6076,7 +6081,7 @@ Prefab:
         type: 2}
       propertyPath: spawner
       value: 
-      objectReference: {fileID: 517012708}
+      objectReference: {fileID: 940985622}
     - target: {fileID: 224295583378626298, guid: 79a248a8683d65849824135c477e6abc,
         type: 2}
       propertyPath: m_AnchorMax.x

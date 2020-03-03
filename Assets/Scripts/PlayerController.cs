@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
     public TextMeshProUGUI attack_symbol;
     public TextMeshProUGUI score_counter;
     public GameObject mouth_LA = null;
-    public EnemySpawnerController spawner = null;
+    public GameObject spawner = null;
     public float projectile_speed = 3.5f;
     public PlayerProjectile projectile_used = null;
     private GameObject mouth = null;
