@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
     //public string instrument_synth_name;
     public bool dying = false;
+    public bool targetable = true;
     private bool choose_new_pitch;
     private bool shielded = false;
     private Component[] particleSys;
@@ -94,6 +95,7 @@ public class Enemy : MonoBehaviour
     {
         if (dying)
         {
+            targetable = false;
             dying_time += Time.deltaTime;
             if (dying_time >= dying_in_sec)
             {
@@ -150,7 +152,6 @@ public class Enemy : MonoBehaviour
         {
             hit_points -= 1;
             hp_slider.value = hit_points;
-            // GetAngrier();
             DropCurrentPitch();
             choose_new_pitch = true;
             shielded = true;
@@ -163,12 +164,6 @@ public class Enemy : MonoBehaviour
             hp_slider.value = hit_points;
             Die();
         }
-    }
-
-    private void GetAngrier()
-    {
-        // float_behavior.X_sin_freq *= 2.5f;
-        float_behavior.Y_sin_freq += 6f;
     }
 
     private void ShieldAnimation()

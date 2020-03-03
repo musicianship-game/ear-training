@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour {
             List<Enemy> enemies = spawner.Resonate(note_freq);
             foreach(Enemy enemy in enemies)
             {
-                if (!enemy.dying)
+                if (enemy.targetable)
                 {
                     ShootTowards(enemy.gameObject);
                 }
