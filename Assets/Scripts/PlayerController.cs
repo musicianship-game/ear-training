@@ -179,12 +179,11 @@ public class PlayerController : MonoBehaviour {
             Debug.Log(note_name + ", " + note_freq);
             attack_symbol.SetText(note_name);
             sung_note_name.SetText(note_name);
-            List<Enemy> enemies = spawner.Resonate(note_freq);
-            foreach(Enemy enemy in enemies)
+            foreach(Transform child in spawner.transform)
             {
-                if (enemy.targetable)
+                if (child.GetComponent<ThisTarget>().Resonate(note_freq))
                 {
-                    ShootTowards(enemy.gameObject);
+                    ShootTowards(child.gameObject);
                 }
             }
             mouth = (GameObject)Instantiate(mouth_LA, PlayerSpriteHolder.transform);

@@ -7,7 +7,6 @@ public class EnemySpawnerController : MonoBehaviour {
     public GameObject[] enemyPrefabs = new GameObject[2];
     private List<Vector3> spawnPoints = new List<Vector3>();
     public PlayerController playerRef;
-	public float centsTolerance;
     public bool all_enemies_dead;
     public int number_of_enemies = 2;
 
@@ -43,21 +42,5 @@ public class EnemySpawnerController : MonoBehaviour {
     public void RunChuckCode(string code)
 	{
 		GetComponent<ChuckSubInstance>().RunCode(code);
-	}
-
-	public List<Enemy> Resonate(float playerFrequency)
-	{
-		List<Enemy> hits = new List<Enemy>();
-		foreach (Transform child in transform)
-		{
-			Enemy enemy = child.GetComponent<Enemy>();
-			float enemyFrequency = enemy.GetNoteFrequency();
-			float centsDifference = 1200 * Mathf.Log(enemyFrequency / playerFrequency, 2);
-			if (Mathf.Abs(centsDifference) < centsTolerance)
-			{
-				hits.Add(enemy);
-			}
-		}
-		return hits;
 	}
 }

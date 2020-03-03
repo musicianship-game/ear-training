@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     public PlayerController player;
     public ParticleSystem death_explosion;
     private FloatBehavior float_behavior;
+    private ThisTarget this_target;
 
     public int max_hp = 3;
     public int hit_points = 3;
@@ -60,6 +61,9 @@ public class Enemy : MonoBehaviour
             allSprites.Add(sprite);
         }
         reloading_time = Random.Range(0.0f, reload_in_sec);
+        this_target = GetComponent<ThisTarget>();
+        this_target.frequency = note_freq;
+        this_target.targetable = targetable;
     }
 
     public string GetNoteName()
@@ -130,6 +134,8 @@ public class Enemy : MonoBehaviour
                 reloading_time = 0.0f;
             }
         }
+        this_target.frequency = note_freq;
+        this_target.targetable = targetable;
     }
 
     void fire(Vector2 target_pos)
