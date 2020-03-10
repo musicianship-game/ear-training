@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using System.IO;
+using System.Linq;
 
 public class UIScaleSelector : MonoBehaviour {
 	private Dropdown notationDropdown;
 	private Dropdown scaleDropdown;
 	private Dropdown lessonplanDropdown;
+	private UILessonPlanSliders lessonplanSliders;
 	private Button acceptButton;
 	private Button cancelButton;
 	private string notationsDir;
@@ -24,19 +26,24 @@ public class UIScaleSelector : MonoBehaviour {
 		notationsDir = @"Assets/Scales";
 		lessonplanDir = @"Assets/LessonPlans";
 		csvFrequenciesFilename = @"fundamental_frequencies.csv";
-		// csvDistributionFilename = @"distribution.csv";
-
+		// Notation
 		notationDropdown = transform.Find("NotationsDropdown").GetComponent<Dropdown>();
 		notationDropdown.ClearOptions();
+		// Scale
 		scaleDropdown = transform.Find("ScalesDropdown").GetComponent<Dropdown>();
 		scaleDropdown.interactable = false;
 		scaleDropdown.ClearOptions();
+		// Lesson plan
 		lessonplanDropdown = transform.Find("LessonPlanDropdown").GetComponent<Dropdown>();
 		lessonplanDropdown.interactable = false;
 		lessonplanDropdown.ClearOptions();
+		lessonplanSliders = transform.Find("LessonPlanSliders").GetComponent<UILessonPlanSliders>();
+		// Accept button
 		acceptButton = transform.Find("AcceptButton").GetComponent<Button>();
 		acceptButton.interactable = false;
+		// Cancel button
 		cancelButton = transform.Find("CancelButton").GetComponent<Button>();
+		// Listeners
 		notationDropdown.onValueChanged.AddListener(NotationChanged);
 		scaleDropdown.onValueChanged.AddListener(ScaleChanged);
 		lessonplanDropdown.onValueChanged.AddListener(LessonPlanChanged);
@@ -57,17 +64,19 @@ public class UIScaleSelector : MonoBehaviour {
 		root = new DirectoryInfo(lessonplanDir);
 		lessonplanInfos = root.GetFiles("*.csv");
 		List<string> lessonplanNames = new List<string>();
+		lessonplanNames.Add("None");
 		foreach (FileInfo file in lessonplanInfos) lessonplanNames.Add(file.Name);
 		lessonplanDropdown.ClearOptions();
 		lessonplanDropdown.AddOptions(lessonplanNames);
 	}
 
 	public void NotationChanged(int value) {
-		scaleDropdown.ClearOptions();
 		bool notationSelected = (value != 0);
-		acceptButton.interactable = false;
+		scaleDropdown.ClearOptions();
 		scaleDropdown.interactable = notationSelected;
+		lessonplanDropdown.value = 0;
 		lessonplanDropdown.interactable = false;
+		acceptButton.interactable = false;
 		if (notationSelected)
 		{
 			DirectoryInfo notationRoot = notationDirInfos[value - 1];
@@ -81,13 +90,20 @@ public class UIScaleSelector : MonoBehaviour {
 	}
 
 	public void ScaleChanged(int value) {
-		bool scaleSelected = value != 0;
+		bool scaleSelected = (value != 0);
 		lessonplanDropdown.interactable = scaleSelected;
-        acceptButton.interactable = scaleSelected;
 	}
 
 	public void LessonPlanChanged(int value) {
-
+		bool lessonplanSelected = (value != 0);
+		if (lessonplanSelected) {
+			string lessonplanFile = lessonplanInfos[value - 1].FullName;
+			ParsedCSV lessonplanCSV = ReadCSV(lessonplanFile);
+			Scale.LessonPlanNames = lessonplanCSV.names;
+			Scale.Distribution = lessonplanCSV.values;
+			lessonplanSliders.Activate();
+			acceptButton.interactable = true;
+		}
 	}
 
 	public class ParsedCSV
@@ -136,18 +152,28 @@ public class UIScaleSelector : MonoBehaviour {
 		return csv;
 	}
 
+	private bool IsValidDistribution()
+	{
+		float p = 0f;
+		for (int i = 0; i < lessonplanSliders.distribution.Count; i++)
+		{
+			p += lessonplanSliders.distribution[i];
+		}
+		return (p > 0.00001f);
+	}
+
 	public void AcceptChanges() {
-		// Read the CSV
+		// If the sliders end up making an invalid distribution, don't store any changes
+		if (!IsValidDistribution()) return;
+		// Read CSV
 		string scaleDir = scaleDirInfos[scaleDropdown.value - 1].FullName;
 		string csvFrequenciesPath = Path.Combine(scaleDir, csvFrequenciesFilename);
 		ParsedCSV frequencyCSV = ReadCSV(csvFrequenciesPath);
-		string lessonplanFile = lessonplanInfos[lessonplanDropdown.value].FullName;
-		ParsedCSV lessonplanCSV = ReadCSV(lessonplanFile);
 		Scale.NoteNames = frequencyCSV.names;
 		Scale.Frequencies = frequencyCSV.values;
 		Scale.ScaleDegrees = frequencyCSV.itemsPerLine;
 		Scale.Alterations = frequencyCSV.linePairs;
-		Scale.Distribution = lessonplanCSV.values;
+		Scale.Distribution = lessonplanSliders.distribution;
 		Scale.UpdateDistribution(Scale.Distribution);
 		gameObject.SetActive(false);
 	}

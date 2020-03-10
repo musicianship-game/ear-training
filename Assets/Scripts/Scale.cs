@@ -9,6 +9,7 @@ public static class Scale {
 
     public static List<string> NoteNames { get; set; }
     public static List<float> Frequencies { get; set; }
+    public static List<string> LessonPlanNames { get; set; }
     public static List<float> Distribution { get; set; }
     public static List<float> NormalizedDistribution { get; set; }
     public static List<float> ScaledDistribution { get; set; }
@@ -32,6 +33,14 @@ public static class Scale {
             293.66f, 329.63f, 369.99f, 392.00f, 440.00f, 493.88f, 554.37f,
             233.08f, 261.63f, 293.66f, 311.13f, 349.23f, 392.00f, 440.00f,
             246.94f, 277.18f, 311.13f, 329.63f, 369.99f, 415.30f, 466.16f
+        };
+        LessonPlanNames = new List<string>()
+        {
+            "I", "II", "III", "IV", "V", "VI", "VII",
+            "♯I", "♯II", "♯III", "♯IV", "♯V", "♯VI", "♯VII",
+            "𝄪I", "𝄪II", "𝄪III", "𝄪IV", "𝄪V", "𝄪VI", "𝄪VII",
+            "𝄫I", "𝄫II", "𝄫III", "𝄫IV", "𝄫V", "𝄫VI", "𝄫VII",
+            "♭I", "♭II", "♭III", "♭IV", "♭V", "♭VI", "♭VII",
         };
         Distribution = new List<float>()
         {
