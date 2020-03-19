@@ -23,7 +23,7 @@ public class UILessonPlanSliders : MonoBehaviour {
 			TextMeshProUGUI label = slider.transform.GetComponentInChildren<TextMeshProUGUI>();
 			slider.value = Scale.Distribution[i];
 			slider.gameObject.GetComponent<UISlider>().index = i;
-			label.text = Scale.LessonPlanNames[i];
+			label.text = Scale.NoteNames[i];
 			distribution.Add(slider.value);
 			slider.onValueChanged.AddListener(delegate {
 				UpdateDistribution(slider.value, slider);
@@ -35,6 +35,6 @@ public class UILessonPlanSliders : MonoBehaviour {
 	{
 		int index = slider.gameObject.GetComponent<UISlider>().index;
 		Debug.Log(index + ", " + value);
-		// distribution[index] = value;
+		distribution[index] = value;
 	}
 }

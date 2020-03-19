@@ -18,6 +18,11 @@ public static class Scale {
 
     static Scale()
     {
+        ResetToDefault();
+    }
+
+    public static void ResetToDefault()
+    {
         NoteNames = new List<string>()
         {
             "C", "D", "E", "F", "G", "A", "B",
