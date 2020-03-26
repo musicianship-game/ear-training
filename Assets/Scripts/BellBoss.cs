@@ -13,9 +13,6 @@ public class BellBoss : MonoBehaviour {
 
 	void Awake ()
 	{
-        // there is an important assumption for the intialization:
-        // at first, all children of spawner are spawn point markers
-        // then we delete these, and all new children will be spawned enemies
         foreach (Transform spawnPoint in transform)
         {
             spawnPoints.Add(spawnPoint.position);
