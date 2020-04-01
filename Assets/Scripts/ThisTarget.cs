@@ -20,6 +20,12 @@ public class ThisTarget : MonoBehaviour {
 
     public bool Resonate(float player_note_freq) {
         float centsDifference = 1200 * Mathf.Log(frequency / player_note_freq, 2);
-        return (targetable && Mathf.Abs(centsDifference) < centsTolerance);
+        bool success = (Mathf.Abs(centsDifference) < centsTolerance);
+        Bell bell = GetComponent<Bell>();
+        if (bell != null)
+        {
+            bell.ResonatorUpdate(success);
+        }
+        return (targetable && success);
     }
 }
