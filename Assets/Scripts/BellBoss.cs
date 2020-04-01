@@ -10,12 +10,15 @@ public class BellBoss : MonoBehaviour {
     public bool all_enemies_dead;
     public int number_of_enemies = 2;
 
-    const bool ATTACK = true;
+    const bool OFFENSE = true;
     const bool DEFENSE = false;
+    private bool mode;
     Stack<string> phases;
+    List<Note> enemies;
+    private int enemyPointer = -1;
     private string currentPhase = "";
 
-    public class Minion
+    public class Note
     {
         public int scaleDegree;
         public int alteration;
@@ -46,8 +49,9 @@ public class BellBoss : MonoBehaviour {
         phases.Push("3");
         phases.Push("2");
         phases.Push("1");
-        phases.Push("intro");
+        // phases.Push("intro");
         currentPhase = phases.Pop();
+        SetPhase(currentPhase);
 	}
 
     private void Update()
@@ -68,15 +72,15 @@ public class BellBoss : MonoBehaviour {
 
     }
 
-    private void SetStage(string stageName)
+    private void SetPhase(string phaseName)
     {
-        switch(stageName)
+        switch(phaseName)
         {
             case "intro":
                 //something
                 break;
             case "1":
-                // something
+
                 break;
             case "2":
                 // something
