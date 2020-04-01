@@ -90,16 +90,16 @@ public class BellBoss : MonoBehaviour {
     // Signals
     public void AttackConcludedSignal(GameObject x)
     {
-
+        // Called when a BellEnemy has concluded its attack routine
     }
 
     public void BellHitSignal(GameObject x)
     {
-
+        // Called when a BellEnemy was hit by the enemy
     }
 
     public void PlayerMissedSignal(GameObject x)
     {
-
+        // Called when a Player attempted to attack a BellEnemy but failed (wrong note)
     }
 }
