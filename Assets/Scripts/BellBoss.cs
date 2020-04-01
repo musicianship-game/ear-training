@@ -7,12 +7,26 @@ public class BellBoss : MonoBehaviour {
     public GameObject[] enemyPrefabs = new GameObject[2];
     private List<Vector3> spawnPoints = new List<Vector3>();
     public PlayerController playerRef;
-	public float centsTolerance;
     public bool all_enemies_dead;
     public int number_of_enemies = 2;
 
+    const bool ATTACK = true;
+    const bool DEFENSE = false;
+    Stack<string> phases;
+    private string currentPhase = "";
+
+    public class Minion
+    {
+        public int scaleDegree;
+        public int alteration;
+        public GameObject obj;
+    }
+
 	void Awake ()
 	{
+        // there is an important assumption for the intialization:
+        // at first, all children of spawner are spawn point markers
+        // then we delete these, and all new children will be spawned enemies
         foreach (Transform spawnPoint in transform)
         {
             spawnPoints.Add(spawnPoint.position);
@@ -27,6 +41,13 @@ public class BellBoss : MonoBehaviour {
             newEnemy.GetComponent<Enemy>().player = playerRef;
         }
         all_enemies_dead = false;
+
+        phases = new Stack<string>();
+        phases.Push("3");
+        phases.Push("2");
+        phases.Push("1");
+        phases.Push("intro");
+        currentPhase = phases.Pop();
 	}
 
     private void Update()
@@ -42,19 +63,43 @@ public class BellBoss : MonoBehaviour {
 		GetComponent<ChuckSubInstance>().RunCode(code);
 	}
 
-	public List<Enemy> Resonate(float playerFrequency)
-	{
-		List<Enemy> hits = new List<Enemy>();
-		foreach (Transform child in transform)
-		{
-			Enemy enemy = child.GetComponent<Enemy>();
-			float enemyFrequency = enemy.GetNoteFrequency();
-			float centsDifference = 1200 * Mathf.Log(enemyFrequency / playerFrequency, 2);
-			if (Mathf.Abs(centsDifference) < centsTolerance)
-			{
-				hits.Add(enemy);
-			}
-		}
-		return hits;
-	}
+    private void InstantiateEnemies()
+    {
+
+    }
+
+    private void SetStage(string stageName)
+    {
+        switch(stageName)
+        {
+            case "intro":
+                //something
+                break;
+            case "1":
+                // something
+                break;
+            case "2":
+                // something
+                break;
+            case "3":
+                // something
+                break;
+        }
+    }
+
+    // Signals
+    public void AttackConcludedSignal(GameObject x)
+    {
+
+    }
+
+    public void BellHitSignal(GameObject x)
+    {
+
+    }
+
+    public void PlayerMissedSignal(GameObject x)
+    {
+
+    }
 }
