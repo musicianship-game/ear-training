@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BellBoss : MonoBehaviour {
+    // public PlayerController playerRef;
 
-    public GameObject[] enemyPrefabs = new GameObject[2];
-    private List<Vector3> spawnPoints = new List<Vector3>();
-    public PlayerController playerRef;
-    public bool all_enemies_dead;
-    public int number_of_enemies = 2;
+    public Bell enemyPrefab;
 
     const bool OFFENSE = true;
     const bool DEFENSE = false;
     private bool mode;
+    private bool shouldAttack;
     Stack<string> phases;
     List<Note> enemies;
     private int enemyPointer = -1;
@@ -22,43 +20,65 @@ public class BellBoss : MonoBehaviour {
     {
         public int scaleDegree;
         public int alteration;
-        public GameObject obj;
+        public Bell bell;
+        public Note(int sd, int alt)
+        {
+            scaleDegree = sd;
+            alteration = alt;
+        }
     }
 
 	void Awake ()
 	{
-        // there is an important assumption for the intialization:
-        // at first, all children of spawner are spawn point markers
-        // then we delete these, and all new children will be spawned enemies
-        foreach (Transform spawnPoint in transform)
-        {
-            spawnPoints.Add(spawnPoint.position);
-            Destroy(spawnPoint.gameObject);
-        }
-        for (int i = 0; i < number_of_enemies; i++)
-        {
-            int j = Random.Range(0, spawnPoints.Count);
-            Vector3 uniqueSpawnPoint = spawnPoints[j];
-            spawnPoints.RemoveAt(j);
-            GameObject newEnemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], uniqueSpawnPoint, transform.rotation, transform);
-            newEnemy.GetComponent<Enemy>().player = playerRef;
-        }
-        all_enemies_dead = false;
-
         phases = new Stack<string>();
+        phases.Push("end");
         phases.Push("3");
         phases.Push("2");
         phases.Push("1");
         // phases.Push("intro");
         currentPhase = phases.Pop();
         SetPhase(currentPhase);
+        mode = OFFENSE;
+        shouldAttack = true;
 	}
 
     private void Update()
     {
-        if (transform.childCount == 0)
+        if (mode == OFFENSE)
         {
-            all_enemies_dead = true;
+            UpdateOffense();
+        }
+        else if (mode == DEFENSE)
+        {
+            UpdateDefense();
+        }
+    }
+
+    private void UpdateOffense()
+    {
+        if (enemyPointer >= enemies.Count)
+        {
+            mode = DEFENSE;
+            enemyPointer = 0;
+        }
+        else if (shouldAttack)
+        {
+            enemies[enemyPointer].bell.Attack();
+            enemyPointer++;
+            shouldAttack = false;
+        }
+    }
+
+    private void UpdateDefense()
+    {
+        if (enemyPointer >= enemies.Count)
+        {
+            currentPhase = phases.Pop();
+            if (currentPhase == "end")
+            {
+                // DIE
+            }
+
         }
     }
 
@@ -66,11 +86,6 @@ public class BellBoss : MonoBehaviour {
 	{
 		GetComponent<ChuckSubInstance>().RunCode(code);
 	}
-
-    private void InstantiateEnemies()
-    {
-
-    }
 
     private void SetPhase(string phaseName)
     {
@@ -80,7 +95,12 @@ public class BellBoss : MonoBehaviour {
                 //something
                 break;
             case "1":
-
+                enemies.Clear();
+                enemies.Add(new Note(5, 0));
+                enemies.Add(new Note(2, 0));
+                enemies.Add(new Note(1, 0));
+                InstantiateEnemies();
+                enemyPointer = 0;
                 break;
             case "2":
                 // something
@@ -91,10 +111,24 @@ public class BellBoss : MonoBehaviour {
         }
     }
 
+    private void InstantiateEnemies()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            enemies[i].bell = Instantiate(
+                enemyPrefab,
+                new Vector3(i * 3.0f, 0, 0),
+                Quaternion.identity,
+                transform
+            );
+        }
+    }
+
     // Signals
     public void AttackConcludedSignal(GameObject x)
     {
         // Called when a BellEnemy has concluded its attack routine
+        shouldAttack = true;
     }
 
     public void BellHitSignal(GameObject x)
