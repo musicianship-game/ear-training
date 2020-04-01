@@ -24,9 +24,14 @@ public class Instrument : MonoBehaviour {
         if (instrument_name == "trumpet")
         {
             grand_parent.RunChuckCode(ChuckSynths.Trumpet(freq, dur));
-        } else if (instrument_name == "violin")
+        }
+        else if (instrument_name == "violin")
         {
             grand_parent.RunChuckCode(ChuckSynths.Violin(freq, dur));
+        }
+        else if (instrument_name == "bell")
+        {
+            grand_parent.RunChuckCode(ChuckSynths.Bell(freq, dur));
         }
     }
 }

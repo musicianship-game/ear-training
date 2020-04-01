@@ -143,4 +143,34 @@ public static class ChuckSynths {
         1000::ms => now;";
         return snippet;
     }
+
+    public static string Bell(float frequency, float duration = 4.0f)
+    {
+        string snippet = 
+        frequency + @" => float freq1;
+        ModalBar mb => Gain g => dac;
+        7 => mb.preset;
+        freq1 => mb.freq;
+        .5012 => mb.strikePosition;
+        0.8 => mb.stickHardness;
+        0.6 => g.gain;
+        0.99 => mb.strike;
+        ModalBar mb1 => Gain g1 => dac;
+        1 => mb1.preset;
+        freq1 => mb1.freq;
+        .498 => mb1.strikePosition;
+        0.8 => mb1.stickHardness;
+        0.7 => g1.gain;
+        0.99 => mb1.strike;
+        ModalBar mb2 => Gain g2 => dac;
+        4 => mb2.preset;
+        freq1 => mb2.freq;
+        .498 => mb2.strikePosition;
+        0.8 => mb2.stickHardness;
+        0.6 => g2.gain;
+        0.99 => mb2.strike;
+        " + duration + @"::second => now;
+        ";
+        return snippet;
+    }
 }

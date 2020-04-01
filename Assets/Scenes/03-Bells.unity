@@ -309,11 +309,6 @@ Prefab:
       propertyPath: m_Name
       value: bell
       objectReference: {fileID: 0}
-    - target: {fileID: 114022351479621414, guid: 628b4da5aa91143fdb459844d36e670b,
-        type: 2}
-      propertyPath: strength
-      value: 11.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 628b4da5aa91143fdb459844d36e670b, type: 2}
   m_IsPrefabAsset: 0

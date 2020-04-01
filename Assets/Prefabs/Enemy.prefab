@@ -501,6 +501,7 @@ MonoBehaviour:
   instrument_choices:
   - {fileID: 1368069220398266, guid: fe7fda8fd16ff43cdb6c2015cb4d108f, type: 2}
   - {fileID: 1040968819485390, guid: 470170e70443141bd95e6780aa4e99c2, type: 2}
+  - {fileID: 1005116401463684, guid: 6bcf0c5004f094e6792c947a144515ec, type: 2}
 --- !u!114 &114951243604995358
 MonoBehaviour:
   m_ObjectHideFlags: 1
