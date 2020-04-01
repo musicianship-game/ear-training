@@ -15,6 +15,8 @@ public class BellBoss : MonoBehaviour {
     List<Note> enemies;
     private int enemyPointer = -1;
     private string currentPhase = "";
+    float timer = 0f;
+    const float timeout = 2f;
 
     public class Note
     {
@@ -80,8 +82,23 @@ public class BellBoss : MonoBehaviour {
             }
             else
             {
-
+                SetPhase(currentPhase);
+                mode = OFFENSE;
+                shouldAttack = true;
             }
+        }
+        else if (timer >= timeout)
+        {
+            foreach (Note note in enemies)
+            {
+                // note.bell.gameObject.targetable = false;
+            }
+            mode = OFFENSE;
+            shouldAttack = true;
+        }
+        else
+        {
+
         }
     }
 
