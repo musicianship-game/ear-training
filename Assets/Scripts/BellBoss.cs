@@ -78,7 +78,10 @@ public class BellBoss : MonoBehaviour {
             {
                 // DIE
             }
+            else
+            {
 
+            }
         }
     }
 
