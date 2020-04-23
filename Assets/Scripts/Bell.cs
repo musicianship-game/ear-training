@@ -35,7 +35,7 @@ public class Bell : MonoBehaviour {
         }
     }
 
-    void Attack()
+    public void Attack()
     {
         attack_start = Time.time;
         attacking = true;
