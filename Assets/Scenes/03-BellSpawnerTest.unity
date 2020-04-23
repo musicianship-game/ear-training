@@ -536,6 +536,11 @@ Prefab:
       propertyPath: chuckMainInstance
       value: 
       objectReference: {fileID: 468287377}
+    - target: {fileID: 114196724317412180, guid: 79a248a8683d65849824135c477e6abc,
+        type: 2}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 693477073}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79a248a8683d65849824135c477e6abc, type: 2}
   m_IsPrefabAsset: 0

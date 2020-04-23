@@ -67,6 +67,7 @@ public class BellBoss : MonoBehaviour {
         {
             Debug.Log("BellBoss: Done attacking. I'm just gonna chill a bit...");
             mode = DEFENSE;
+            shouldMakeVulnerable = true;
             enemyPointer = 0;
             timer = 0f;
         }
