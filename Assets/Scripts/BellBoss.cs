@@ -65,9 +65,10 @@ public class BellBoss : MonoBehaviour {
     {
         if (enemyPointer >= enemies.Count)
         {
-            Debug.Log("BellBoss: Done attacking. Defense mode now.");
+            Debug.Log("BellBoss: Done attacking. I'm just gonna chill a bit...");
             mode = DEFENSE;
             enemyPointer = 0;
+            timer = 0f;
         }
         else if (shouldAttack)
         {
@@ -95,7 +96,7 @@ public class BellBoss : MonoBehaviour {
         }
         else if (timer >= timeout)
         {
-            Debug.Log("Timeout! Attacking you again! Bahaha!");
+            Debug.Log("BellBoss: Timeout! I'ma attack you again! Bahaha!");
             SetOffenseMode();
         }
         else if (shouldMakeVulnerable)
