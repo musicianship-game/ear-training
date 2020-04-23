@@ -74,7 +74,7 @@ public class Bell : MonoBehaviour {
         int N = Mathf.FloorToInt(attack_dur / attack_rate);
         float angle_diff = attack_angle_spread / (N * 2);
         int n = Mathf.FloorToInt((Time.time - atk_strt) / attack_rate);
-        float spawn_angle = n * angle_diff;
+        float spawn_angle = n * angle_diff - 90.0f;
         if (n == atk_seq_n)
         {
             return;
@@ -82,14 +82,24 @@ public class Bell : MonoBehaviour {
         else
         {
             atk_seq_n = n;
-
-            Vector2 my_pos = new Vector2(transform.position.x, transform.position.y);
-            Quaternion rotation = Quaternion.Euler(0, 0, spawn_angle);
-            GameObject the_projectile = (GameObject)Instantiate(projectile_used, my_pos, rotation);
-            Vector2 direction = new Vector2(Mathf.Cos(spawn_angle * Mathf.PI / 180.0f), Mathf.Sin(spawn_angle * Mathf.PI / 180.0f));
-            the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
-            the_projectile.GetComponent<Projectile>().damage = projectile_damage;
+            FireProjectile(spawn_angle, false);
+            if (n != 0)
+            {
+                FireProjectile(spawn_angle, true);
+            }
         }
 
+    }
+
+    void FireProjectile(float spawn_angle , bool mirror)
+    {
+        int m = 1;
+        if (mirror) { m = -1; }
+        Vector2 my_pos = new Vector2(transform.position.x, transform.position.y);
+        Vector2 direction = new Vector2(m * Mathf.Cos(spawn_angle * Mathf.PI / 180.0f), Mathf.Sin(spawn_angle * Mathf.PI / 180.0f));
+        Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f);
+        GameObject the_projectile = (GameObject)Instantiate(projectile_used, my_pos, rotation);
+        the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
+        the_projectile.GetComponent<Projectile>().damage = projectile_damage;
     }
 }

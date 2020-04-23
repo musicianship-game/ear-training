@@ -218,6 +218,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  frequency: 0
+  targetable: 0
+  attack_dur: 1.5
+  attack_start: 0
+  attack_rate: 0.2
+  projectile_speed: 2
+  projectile_used: {fileID: 1618161610838518, guid: 286dde5a594264afd8381c4be21b8108,
+    type: 2}
+  projectile_damage: 1
 --- !u!212 &212147270690642816
 SpriteRenderer:
   m_ObjectHideFlags: 1
