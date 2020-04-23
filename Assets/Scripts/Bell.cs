@@ -7,12 +7,21 @@ public class Bell : MonoBehaviour {
     public PlayerController player;
     public float frequency = 0;
     public bool targetable = false;
-    public float attack_dur = 1.5f;
+
+    public float attack_dur = 1.51f;
     public float attack_start;
+    public float attack_rate = 0.2f;
+    public float projectile_speed = 2.0f;
+    public GameObject projectile_used = null;
+    public int projectile_damage = 1;
+
+    private int atk_seq_n = -1;
+    private bool attacking = false;
 
     private BellBoss bell_boss;
     private ThisTarget this_target;
-    private bool attacking = false;
+    
+
 
     // Use this for initialization
     void Start () {
@@ -32,6 +41,10 @@ public class Bell : MonoBehaviour {
                 attacking = false;
                 bell_boss.AttackConcludedSignal(this.gameObject);
             }
+            else
+            {
+                AttackSequence01(attack_start);
+            }
         }
     }
 
@@ -39,6 +52,8 @@ public class Bell : MonoBehaviour {
     {
         attack_start = Time.time;
         attacking = true;
+        atk_seq_n = -1;
+        // play the sound of attacking here
     }
 
     public void ResonatorUpdate(bool b)
@@ -51,5 +66,30 @@ public class Bell : MonoBehaviour {
         {
             bell_boss.PlayerMissedSignal(this.gameObject);
         }
+    }
+
+    private void AttackSequence01(float atk_strt)
+    {
+        int attack_angle_spread = 120;
+        int N = Mathf.FloorToInt(attack_dur / attack_rate);
+        float angle_diff = attack_angle_spread / (N * 2);
+        int n = Mathf.FloorToInt((Time.time - atk_strt) / attack_rate);
+        float spawn_angle = n * angle_diff;
+        if (n == atk_seq_n)
+        {
+            return;
+        }
+        else
+        {
+            atk_seq_n = n;
+
+            Vector2 my_pos = new Vector2(transform.position.x, transform.position.y);
+            Quaternion rotation = Quaternion.Euler(0, 0, spawn_angle);
+            GameObject the_projectile = (GameObject)Instantiate(projectile_used, my_pos, rotation);
+            Vector2 direction = new Vector2(Mathf.Cos(spawn_angle * Mathf.PI / 180.0f), Mathf.Sin(spawn_angle * Mathf.PI / 180.0f));
+            the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
+            the_projectile.GetComponent<Projectile>().damage = projectile_damage;
+        }
+
     }
 }
