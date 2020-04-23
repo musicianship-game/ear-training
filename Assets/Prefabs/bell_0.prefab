@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 114533710335674004}
   - component: {fileID: 114463679014778100}
   - component: {fileID: 114557409410115582}
+  - component: {fileID: 114963900327759608}
   m_Layer: 0
   m_Name: bell_0
   m_TagString: Untagged
@@ -227,6 +228,18 @@ MonoBehaviour:
   projectile_used: {fileID: 1618161610838518, guid: 286dde5a594264afd8381c4be21b8108,
     type: 2}
   projectile_damage: 1
+--- !u!114 &114963900327759608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1825263123310408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b105f3e13c4d4e72acfb2de33c50b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instrument_name: bell
 --- !u!212 &212147270690642816
 SpriteRenderer:
   m_ObjectHideFlags: 1

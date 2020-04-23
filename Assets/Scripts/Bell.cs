@@ -53,7 +53,7 @@ public class Bell : MonoBehaviour {
         attack_start = Time.time;
         attacking = true;
         atk_seq_n = -1;
-        // play the sound of attacking here
+        bell_boss.RunChuckCode(ChuckSynths.Bell(frequency, attack_dur));
     }
 
     public void ResonatorUpdate(bool b)
