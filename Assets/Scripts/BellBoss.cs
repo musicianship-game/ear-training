@@ -153,6 +153,11 @@ public class BellBoss : MonoBehaviour {
         enemyPointer = 0;
     }
 
+    private void SetDefenseMode()
+    {
+        // Called when setting to defense mode
+    }
+
     private void InstantiateEnemies()
     {
         for (int i = 0; i < enemies.Count; i++)
