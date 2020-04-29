@@ -173,4 +173,24 @@ public static class ChuckSynths {
         ";
         return snippet;
     }
+
+    public static string Flute(float frequency, float duration = 1.0f)
+    {
+        string snippet = @"
+        Flute flute => JCRev r => dac;
+        .75 => r.gain;
+        .02 => r.mix;
+        0.05 => flute.noiseGain;
+        Math.random2f( 0, 9 ) => flute.vibratoFreq;
+        Math.random2f( 0.01, 0.08 ) => flute.vibratoGain;
+        0.7 => flute.pressure;
+        0.9 => flute.gain;
+        " + frequency + @" => flute.freq;
+        0.2 => flute.noteOn;
+        " + 0.9f * duration + @"::second => now;
+        0.1 => flute.noteOff;
+        " + 0.2f * duration + @"::second => now;
+        3::second => now;";
+        return snippet;
+    }
 }

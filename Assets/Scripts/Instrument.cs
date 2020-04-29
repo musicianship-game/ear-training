@@ -33,5 +33,9 @@ public class Instrument : MonoBehaviour {
         {
             grand_parent.RunChuckCode(ChuckSynths.Bell(freq, dur));
         }
+        else if (instrument_name == "flute")
+        {
+            grand_parent.RunChuckCode(ChuckSynths.Flute(freq, dur));
+        }
     }
 }

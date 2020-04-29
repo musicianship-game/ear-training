@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public float dying_in_sec = 1.5f;
     public float projectile_speed = 2.0f;
     public GameObject projectile_used = null;
+    public int projectile_damage = 1;
     public PlayerController player;
     public ParticleSystem death_explosion;
     private FloatBehavior float_behavior;
@@ -27,7 +28,6 @@ public class Enemy : MonoBehaviour
     public int hit_points = 3;
     public Slider hp_slider;
 
-    private int projectile_damage = 1;
     private float reloading_time = 0.0f; //also initial offset of firing cycle
     private float shielded_time = 0.0f;
     private float dying_time = 0.0f;

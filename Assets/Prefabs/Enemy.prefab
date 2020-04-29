@@ -491,6 +491,7 @@ MonoBehaviour:
   projectile_speed: 2
   projectile_used: {fileID: 1618161610838518, guid: 286dde5a594264afd8381c4be21b8108,
     type: 2}
+  projectile_damage: 1
   player: {fileID: 0}
   death_explosion: {fileID: 198432991341627448, guid: a53d55ef207454558ae84745e74b3cf5,
     type: 2}
@@ -502,6 +503,7 @@ MonoBehaviour:
   - {fileID: 1368069220398266, guid: fe7fda8fd16ff43cdb6c2015cb4d108f, type: 2}
   - {fileID: 1040968819485390, guid: 470170e70443141bd95e6780aa4e99c2, type: 2}
   - {fileID: 1005116401463684, guid: 6bcf0c5004f094e6792c947a144515ec, type: 2}
+  - {fileID: 1681180394894690, guid: 56a6d50c71bef46bc816420f22502546, type: 2}
 --- !u!114 &114951243604995358
 MonoBehaviour:
   m_ObjectHideFlags: 1
