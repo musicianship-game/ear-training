@@ -6,10 +6,8 @@ public class BellBoss : MonoBehaviour {
     // public PlayerController playerRef;
 
     public Bell enemyPrefab;
-
-    const bool OFFENSE = true;
-    const bool DEFENSE = false;
-    private bool mode;
+    enum Mode { Offense, Defense, Transitioning, Dying};
+    Mode mode;
     private bool shouldAttack;
     private bool shouldMakeVulnerable;
     Stack<string> phases;
@@ -74,14 +72,14 @@ public class BellBoss : MonoBehaviour {
         {
             note.bell.SetTargetable(false);
         }
-        mode = OFFENSE;
+        mode = Mode.Offense;
         shouldAttack = true;
         enemyPointer = 0;
     }
 
     private void SetDefenseMode()
     {
-        mode = DEFENSE;
+        mode = Mode.Defense;
         shouldMakeVulnerable = true;
         enemyPointer = 0;
         timer = 0f;
@@ -89,13 +87,17 @@ public class BellBoss : MonoBehaviour {
 
     private void Update()
     {
-        if (mode == OFFENSE)
+        if (mode == Mode.Offense)
         {
             UpdateOffense();
         }
-        else if (mode == DEFENSE)
+        else if (mode == Mode.Defense)
         {
             UpdateDefense();
+        }
+        else if (mode == Mode.Dying)
+        {
+            Debug.Log("Aahh!!");
         }
     }
 
@@ -173,15 +175,10 @@ public class BellBoss : MonoBehaviour {
                 // something
                 break;
             case "end":
-                Debug.Log("BellBoss: Oh no!!! I am DEAD!");
+                Debug.Log("BellBoss: Oh no!!! I am DYING!");
+                mode = Mode.Dying;
                 break;
         }
-    }
-
-    private void NextBellTargetable()
-    {
-        enemyPointer++;
-        shouldMakeVulnerable = true;
     }
 
     // Signals
