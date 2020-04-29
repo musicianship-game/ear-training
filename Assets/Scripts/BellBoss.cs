@@ -33,6 +33,28 @@ public class BellBoss : MonoBehaviour {
         }
     }
 
+    private void InstantiateEnemies()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            enemies[i].bell = Instantiate(
+                enemyPrefab,
+                new Vector3(i * 3.0f, 0, 0),
+                Quaternion.identity,
+                transform
+            );
+            enemies[i].bell.SetFrequency(enemies[i].frequency);
+        }
+    }
+
+    private void ClearBells()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            Destroy(enemies[i].bell.gameObject);
+        }
+    }
+
 	void Awake ()
 	{
         enemies = new List<Note>();
@@ -43,11 +65,27 @@ public class BellBoss : MonoBehaviour {
         phases.Push("1");
         // phases.Push("intro");
         currentPhase = phases.Pop();
-        SetPhase(currentPhase);
+        SetPhase(currentPhase);        
+	}
+
+    private void SetOffenseMode()
+    {
+        foreach (Note note in enemies)
+        {
+            note.bell.SetTargetable(false);
+        }
         mode = OFFENSE;
         shouldAttack = true;
-        shouldMakeVulnerable = false;
-	}
+        enemyPointer = 0;
+    }
+
+    private void SetDefenseMode()
+    {
+        mode = DEFENSE;
+        shouldMakeVulnerable = true;
+        enemyPointer = 0;
+        timer = 0f;
+    }
 
     private void Update()
     {
@@ -66,10 +104,7 @@ public class BellBoss : MonoBehaviour {
         if (enemyPointer >= enemies.Count)
         {
             Debug.Log("BellBoss: Done attacking. I'm just gonna chill a bit...");
-            mode = DEFENSE;
-            shouldMakeVulnerable = true;
-            enemyPointer = 0;
-            timer = 0f;
+            SetDefenseMode();
         }
         else if (shouldAttack)
         {
@@ -82,18 +117,10 @@ public class BellBoss : MonoBehaviour {
     private void UpdateDefense()
     {
         if (enemyPointer >= enemies.Count)
-        {
+        {            
             currentPhase = phases.Pop();
-            if (currentPhase == "end")
-            {
-                // DIE
-            }
-            else
-            {
-                SetPhase(currentPhase);
-                mode = OFFENSE;
-                shouldAttack = true;
-            }
+            Debug.Log("Transitioning to phase " + currentPhase);
+            SetPhase(currentPhase);
         }
         else if (timer >= timeout)
         {
@@ -103,9 +130,8 @@ public class BellBoss : MonoBehaviour {
         else if (shouldMakeVulnerable)
         {
             Debug.Log("Bell " + enemyPointer + " is vulnerable!");
-            enemies[enemyPointer].bell.targetable = true;
-            shouldMakeVulnerable = false;
-            timer = 0f;
+            enemies[enemyPointer].bell.SetTargetable(true);
+            shouldMakeVulnerable = false;            
         }
         else {
             timer += Time.deltaTime;
@@ -127,49 +153,35 @@ public class BellBoss : MonoBehaviour {
                 break;
             case "1":
                 enemies.Clear();
+                enemies.Add(new Note(4, 0));
+                enemies.Add(new Note(1, 0));
+                enemies.Add(new Note(0, 0));
+                InstantiateEnemies();
+                SetOffenseMode();
+                break;
+            case "2":
+                ClearBells();
+                enemies.Clear();
                 enemies.Add(new Note(5, 0));
                 enemies.Add(new Note(2, 0));
                 enemies.Add(new Note(1, 0));
+                enemies.Add(new Note(0, 0));
                 InstantiateEnemies();
-                enemyPointer = 0;
-                break;
-            case "2":
-                // something
+                SetOffenseMode();
                 break;
             case "3":
                 // something
                 break;
+            case "end":
+                Debug.Log("BellBoss: Oh no!!! I am DEAD!");
+                break;
         }
     }
 
-    private void SetOffenseMode()
+    private void NextBellTargetable()
     {
-        foreach (Note note in enemies)
-        {
-            note.bell.targetable = false;
-        }
-        mode = OFFENSE;
-        shouldAttack = true;
-        enemyPointer = 0;
-    }
-
-    private void SetDefenseMode()
-    {
-        // Called when setting to defense mode
-    }
-
-    private void InstantiateEnemies()
-    {
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            enemies[i].bell = Instantiate(
-                enemyPrefab,
-                new Vector3(i * 3.0f, 0, 0),
-                Quaternion.identity,
-                transform
-            );
-            enemies[i].bell.frequency = enemies[i].frequency;
-        }
+        enemyPointer++;
+        shouldMakeVulnerable = true;
     }
 
     // Signals
@@ -183,6 +195,7 @@ public class BellBoss : MonoBehaviour {
     public void BellHitSignal(GameObject x)
     {
         // Called when a BellEnemy was hit by the enemy
+        enemies[enemyPointer].bell.SetTargetable(false);
         enemyPointer++;
         shouldMakeVulnerable = true;
     }

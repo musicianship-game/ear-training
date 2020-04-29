@@ -22,7 +22,7 @@ public class ThisTarget : MonoBehaviour {
         float centsDifference = 1200 * Mathf.Log(frequency / player_note_freq, 2);
         bool success = (Mathf.Abs(centsDifference) < centsTolerance);
         Bell bell = GetComponent<Bell>();
-        if (bell != null)
+        if (bell != null && targetable)
         {
             bell.ResonatorUpdate(success);
         }

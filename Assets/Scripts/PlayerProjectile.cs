@@ -10,10 +10,10 @@ public class PlayerProjectile : MonoBehaviour {
 
     private void Update()
     {
-        if (target!=null && target.GetComponent<Enemy>().dying)
-        {
-            target = null;
-        }
+        //if (target!=null && target.GetComponent<Enemy>().dying)
+        //{
+        //    target = null;
+        //}
         if (target!=null)
         {
             Vector2 my_pos = new Vector2(transform.position.x, transform.position.y);

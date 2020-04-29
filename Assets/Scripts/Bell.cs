@@ -19,15 +19,27 @@ public class Bell : MonoBehaviour {
     private bool attacking = false;
 
     private BellBoss bell_boss;
-    private ThisTarget this_target;
+    private ThisTarget this_target;    
     
 
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         bell_boss = GetComponentInParent<BellBoss>();
         this_target = GetComponent<ThisTarget>();
         this_target.frequency = frequency;
+        this_target.targetable = targetable;
+    }
+
+    public void SetFrequency(float freq)
+    {
+        frequency = freq;
+        this_target.frequency = frequency;
+    }
+
+    public void SetTargetable(bool targ)
+    {
+        targetable = targ;
         this_target.targetable = targetable;
     }
 	
