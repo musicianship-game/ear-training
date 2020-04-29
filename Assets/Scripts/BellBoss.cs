@@ -35,9 +35,10 @@ public class BellBoss : MonoBehaviour {
     {
         for (int i = 0; i < enemies.Count; i++)
         {
+            int width = Screen.width;
             enemies[i].bell = Instantiate(
                 enemyPrefab,
-                new Vector3(i * 3.0f, 0, 0),
+                new Vector3(transform.position.x + i * 3.0f, 0, 0),
                 Quaternion.identity,
                 transform
             );
@@ -155,7 +156,7 @@ public class BellBoss : MonoBehaviour {
                 break;
             case "1":
                 enemies.Clear();
-                enemies.Add(new Note(4, 0));
+                enemies.Add(new Note(2, 0));
                 enemies.Add(new Note(1, 0));
                 enemies.Add(new Note(0, 0));
                 InstantiateEnemies();
@@ -164,7 +165,7 @@ public class BellBoss : MonoBehaviour {
             case "2":
                 ClearBells();
                 enemies.Clear();
-                enemies.Add(new Note(5, 0));
+                enemies.Add(new Note(3, 0));
                 enemies.Add(new Note(2, 0));
                 enemies.Add(new Note(1, 0));
                 enemies.Add(new Note(0, 0));
@@ -172,7 +173,16 @@ public class BellBoss : MonoBehaviour {
                 SetOffenseMode();
                 break;
             case "3":
-                // something
+                ClearBells();
+                enemies.Clear();
+                enemies.Add(new Note(4, 0));
+                enemies.Add(new Note(5, 0));
+                enemies.Add(new Note(3, 0));
+                enemies.Add(new Note(2, 0));
+                enemies.Add(new Note(1, 0));
+                enemies.Add(new Note(0, 0));
+                InstantiateEnemies();
+                SetOffenseMode();
                 break;
             case "end":
                 Debug.Log("BellBoss: Oh no!!! I am DYING!");
