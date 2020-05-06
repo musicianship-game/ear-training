@@ -33,18 +33,25 @@ public class BellBoss : MonoBehaviour {
 
     private void InstantiateEnemies()
     {
+        GameObject background = GameObject.Find("Background");
+        RectTransform rt = (RectTransform)background.transform;              
+        float width = rt.rect.width / 20f; // No idea why that "20f" works. 
+        // It doesn't match the pixelsperunit or localscale or other things I tried
+        float x0 = -width / 2f;
+        float offset = width / enemies.Count;
+        float padding = offset / 2f;
         for (int i = 0; i < enemies.Count; i++)
         {
-            int width = Screen.width;
+            //Debug.Log("Background width " + width);
             enemies[i].bell = Instantiate(
                 enemyPrefab,
-                new Vector3(transform.position.x + i * 3.0f, 0, 0),
+                new Vector3(x0 + padding + (i * offset), 0, 0),
                 Quaternion.identity,
                 transform
             );
             enemies[i].bell.SetFrequency(enemies[i].frequency);
         }
-    }
+    }    
 
     private void ClearBells()
     {
