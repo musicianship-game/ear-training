@@ -7,6 +7,7 @@ public static class Scale {
     private const int DEFAULT_ALTERATIONS = 5;
     private const int DEFAULT_SCALEDEGREES = 7;
 
+    public static string Name { get; set; }
     public static List<string> NoteNames { get; set; }
     public static List<float> Frequencies { get; set; }
     public static List<string> LessonPlanNames { get; set; }

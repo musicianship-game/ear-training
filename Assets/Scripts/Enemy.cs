@@ -200,6 +200,7 @@ public class Enemy : MonoBehaviour
     {
         dying = true;
         dying_time = 0f;
+        PlayerCloud.enemies_defeated++;
         float_behavior.X_sin_freq = 1f;
         float_behavior.Y_sin_freq = 1f;
         foreach (ParticleSystem part in particleSys)

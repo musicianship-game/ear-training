@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour {
     public void Sing(string note_name, float note_freq)
     {
         if (!singing)
-        {
+        {            
             singing = true;
             sing_start = Time.time;
             sung_pos_orig = sung_note_name.transform.localPosition;
@@ -179,13 +179,20 @@ public class PlayerController : MonoBehaviour {
             Debug.Log(note_name + ", " + note_freq);
             attack_symbol.SetText(note_name);
             sung_note_name.SetText(note_name);
+            int enemies_shot = 0;
+            PlayerCloud.shots_fired++;
             foreach(Transform child in spawner.transform)
             {
                 if (child.GetComponent<ThisTarget>().Resonate(note_freq))
                 {
+                    enemies_shot++;
                     ShootTowards(child.gameObject);
                 }
             }
+            // The player misspelled when a sung note did not result in shooting someone
+            if (enemies_shot == 0) PlayerCloud.misspellings++;
+            Debug.Log("Shots fired = " + PlayerCloud.shots_fired);
+            Debug.Log("Misspellings = " + PlayerCloud.misspellings);
             mouth = (GameObject)Instantiate(mouth_LA, PlayerSpriteHolder.transform);
             chuck.RunCode(ChuckSynths.Voice(note_freq, sing_time));
         }
