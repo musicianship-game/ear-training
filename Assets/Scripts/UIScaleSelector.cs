@@ -16,6 +16,7 @@ public class UIScaleSelector : MonoBehaviour {
 	private string notationsDir;
 	private string lessonplanDir;
 	private string csvFrequenciesFilename;
+    private string scaleName;
 	// private string csvDistributionFilename;
 
 	private DirectoryInfo[] notationDirInfos;
@@ -32,6 +33,7 @@ public class UIScaleSelector : MonoBehaviour {
 		// Scale
 		scaleDropdown = transform.Find("ScalesDropdown").GetComponent<Dropdown>();
 		scaleDropdown.interactable = false;
+        scaleName = "";
 		scaleDropdown.ClearOptions();
 		// Lesson plan
 		lessonplanDropdown = transform.Find("LessonPlanDropdown").GetComponent<Dropdown>();
@@ -94,6 +96,7 @@ public class UIScaleSelector : MonoBehaviour {
 		if (scaleSelected) {
 			// Read CSV
 			string scaleDir = scaleDirInfos[value - 1].FullName;
+            scaleName = scaleDirInfos[value - 1].Name;
 			string csvFrequenciesPath = Path.Combine(scaleDir, csvFrequenciesFilename);
 			ParsedCSV frequencyCSV = ReadCSV(csvFrequenciesPath);
 			Scale.NoteNames = frequencyCSV.names;
@@ -175,8 +178,9 @@ public class UIScaleSelector : MonoBehaviour {
 	public void AcceptChanges() {
 		// If the sliders end up making an invalid distribution, don't store any changes
 		if (!IsValidDistribution()) return;
+        Scale.Name = scaleName;
 		Scale.Distribution = lessonplanSliders.distribution;
-		Scale.UpdateDistribution(Scale.Distribution);
+		Scale.UpdateDistribution(Scale.Distribution);     
 		gameObject.SetActive(false);
 	}
 
