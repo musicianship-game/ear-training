@@ -14,6 +14,7 @@ public class Bell : MonoBehaviour {
     public float projectile_speed = 2.0f;
     public GameObject projectile_used = null;
     public int projectile_damage = 1;
+    GameObject bubble;
 
     private int atk_seq_n = -1;
     private bool attacking = false;
@@ -29,6 +30,7 @@ public class Bell : MonoBehaviour {
         this_target = GetComponent<ThisTarget>();
         this_target.frequency = frequency;
         this_target.targetable = targetable;
+        bubble = transform.Find("bubble").gameObject;
     }
 
     public void SetFrequency(float freq)
@@ -113,5 +115,11 @@ public class Bell : MonoBehaviour {
         GameObject the_projectile = (GameObject)Instantiate(projectile_used, my_pos, rotation);
         the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
         the_projectile.GetComponent<Projectile>().damage = projectile_damage;
+    }
+
+    public void HasShield(bool value)
+    {
+        SpriteRenderer sr = bubble.GetComponent<SpriteRenderer>();
+        sr.enabled = value;
     }
 }

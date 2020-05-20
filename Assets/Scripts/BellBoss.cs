@@ -79,6 +79,7 @@ public class BellBoss : MonoBehaviour {
         foreach (Note note in enemies)
         {
             note.bell.SetTargetable(false);
+            note.bell.HasShield(true);
         }
         mode = Mode.Offense;
         shouldAttack = true;
@@ -141,6 +142,7 @@ public class BellBoss : MonoBehaviour {
         {
             Debug.Log("Bell " + enemyPointer + " is vulnerable!");
             enemies[enemyPointer].bell.SetTargetable(true);
+            enemies[enemyPointer].bell.HasShield(false);
             shouldMakeVulnerable = false;            
         }
         else {
@@ -210,6 +212,7 @@ public class BellBoss : MonoBehaviour {
     {
         // Called when a BellEnemy was hit by the enemy
         enemies[enemyPointer].bell.SetTargetable(false);
+        //enemies[enemyPointer].bell.HasShield(true);
         enemyPointer++;
         shouldMakeVulnerable = true;
     }
