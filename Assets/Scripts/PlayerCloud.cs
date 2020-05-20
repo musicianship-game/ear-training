@@ -10,6 +10,7 @@ public static class PlayerCloud {
     public static int shots_fired = 0;
     public static int misspellings = 0;
     public static int enemies_defeated = 0;
+    public static float menu_time = 0f;
 
     public static float GetAccuracy()
     {
