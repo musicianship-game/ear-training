@@ -212,7 +212,7 @@ public class BellBoss : MonoBehaviour {
     {
         // Called when a BellEnemy was hit by the enemy
         enemies[enemyPointer].bell.SetTargetable(false);
-        //enemies[enemyPointer].bell.HasShield(true);
+        enemies[enemyPointer].bell.HasShield(true);
         enemyPointer++;
         shouldMakeVulnerable = true;
     }
