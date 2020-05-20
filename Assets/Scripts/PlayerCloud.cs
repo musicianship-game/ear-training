@@ -11,8 +11,8 @@ public static class PlayerCloud {
     public static int misspellings = 0;
     public static int enemies_defeated = 0;
 
-    public static float get_accuracy()
+    public static float GetAccuracy()
     {
-        return (float)misspellings / (float)shots_fired;
+        return 1f - ((float)misspellings / (float)shots_fired);
     }
 }

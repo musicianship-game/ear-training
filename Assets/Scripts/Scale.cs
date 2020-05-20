@@ -24,6 +24,7 @@ public static class Scale {
 
     public static void ResetToDefault()
     {
+        Name = "C Major";
         NoteNames = new List<string>()
         {
             "C", "D", "E", "F", "G", "A", "B",
