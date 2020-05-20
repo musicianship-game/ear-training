@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour {
     {
         int new_health = PlayerCloud.life + diff;
         if (new_health < 0) {
-            new_health = 0;
+            SceneManager.LoadScene(8);
         } else if (new_health > PlayerCloud.life_max) {
             new_health = PlayerCloud.life_max;
         }
