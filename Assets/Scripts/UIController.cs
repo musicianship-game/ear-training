@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour {
     public Button playButton;
     public Button scaleSelectorButton;
     public Button settingsButton;
+    public Button HowToPlayButton;
     public Button quitButton;
     public UIScaleSelector scaleSelectorPanel;
     public UISettingsController settingsPanel;
@@ -21,9 +22,15 @@ public class UIController : MonoBehaviour {
         scaleSelectorButton.onClick.AddListener(ScaleSelection);
         quitButton.onClick.AddListener(Quit);
         settingsButton.onClick.AddListener(LoadSettings);
+        HowToPlayButton.onClick.AddListener(HowToPlay);
     }
 
     void Play()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    void HowToPlay()
     {
         SceneManager.LoadScene(1);
     }
