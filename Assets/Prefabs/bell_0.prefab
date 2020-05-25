@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4638303093003650}
   - component: {fileID: 212039671619358760}
   - component: {fileID: 58034979850513024}
-  - component: {fileID: 114715714365777948}
   m_Layer: 0
   m_Name: bubble
   m_TagString: Untagged
@@ -178,7 +177,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1013518263900794}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 4536402135511366}
@@ -251,10 +250,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b008ae690c89c43dabe6f17d2b70f8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  X_sin_freq: 0.3
-  X_floatStrength: 0.05
-  Y_sin_freq: 1.2
+  originalX: 0
+  originalY: 0
+  X_sin_freq: 0.9
+  X_floatStrength: 0.1
+  Y_sin_freq: 1.1
   Y_floatStrength: 0.1
+  ramp_up_time: 10
 --- !u!114 &114533710335674004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -283,28 +285,15 @@ MonoBehaviour:
   player: {fileID: 0}
   frequency: 0
   targetable: 0
-  attack_dur: 1.5
-  attack_start: 0
-  attack_rate: 0.2
+  spawn_dur: 1
+  attack_dur: 0.7
+  attack_rate: 0.3
   projectile_speed: 2
+  attack_angle_spread: 120
+  angle_rand: 5
   projectile_used: {fileID: 1618161610838518, guid: 286dde5a594264afd8381c4be21b8108,
     type: 2}
   projectile_damage: 1
---- !u!114 &114715714365777948
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1013518263900794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b008ae690c89c43dabe6f17d2b70f8cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  X_sin_freq: 0
-  X_floatStrength: 0
-  Y_sin_freq: 0
-  Y_floatStrength: 0
 --- !u!212 &212039671619358760
 SpriteRenderer:
   m_ObjectHideFlags: 1

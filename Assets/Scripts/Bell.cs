@@ -7,11 +7,19 @@ public class Bell : MonoBehaviour {
     public PlayerController player;
     public float frequency = 0;
     public bool targetable = false;
+    public float spawn_dur = 1.0f;
+    private bool spawning = true;
+    private float spawn_start;
+    private bool spawn_reverse;
+    private Vector3 spawn_a;
+    private Vector3 spawn_b;
 
-    public float attack_dur = 1.51f;
-    public float attack_start;
-    public float attack_rate = 0.2f;
+    public float attack_dur = 0.7f;
+    private float attack_start;
+    public float attack_rate = 0.3f;
     public float projectile_speed = 2.0f;
+    public int attack_angle_spread = 120;
+    public float angle_rand = 5.0f;
     public GameObject projectile_used = null;
     public int projectile_damage = 1;
     GameObject bubble;
@@ -31,6 +39,7 @@ public class Bell : MonoBehaviour {
         this_target.frequency = frequency;
         this_target.targetable = targetable;
         bubble = transform.Find("bubble").gameObject;
+        Spawn(false);
     }
 
     public void SetFrequency(float freq)
@@ -50,15 +59,11 @@ public class Bell : MonoBehaviour {
         this_target.targetable = targetable;
         if (attacking)
         {
-            if (Time.time >= attack_start + attack_dur)
-            {
-                attacking = false;
-                bell_boss.AttackConcludedSignal(this.gameObject);
-            }
-            else
-            {
-                AttackSequence01(attack_start);
-            }
+            AttackSequence01(attack_start);
+        }
+        if (spawning)
+        {
+            SpawnSequence(spawn_start);
         }
     }
 
@@ -84,11 +89,16 @@ public class Bell : MonoBehaviour {
 
     private void AttackSequence01(float atk_strt)
     {
-        int attack_angle_spread = 120;
+        if (Time.time >= atk_strt + attack_dur)
+        {
+            attacking = false;
+            bell_boss.AttackConcludedSignal(this.gameObject);
+            return;
+        }
         int N = Mathf.FloorToInt(attack_dur / attack_rate);
         float angle_diff = attack_angle_spread / (N * 2);
         int n = Mathf.FloorToInt((Time.time - atk_strt) / attack_rate);
-        float spawn_angle = n * angle_diff - 90.0f;
+        float spawn_angle = n * angle_diff + Random.Range(-angle_rand, angle_rand) - 90.0f;
         if (n == atk_seq_n)
         {
             return;
@@ -121,5 +131,48 @@ public class Bell : MonoBehaviour {
     {
         SpriteRenderer sr = bubble.GetComponent<SpriteRenderer>();
         sr.enabled = value;
+    }
+
+    private void SpawnSequence(float spwn_strt)
+    {
+        float s = (Time.time - spwn_strt) / spawn_dur;
+        if (s > 1.0f)
+        {
+            spawning = false;
+            if (!spawn_reverse) { transform.position = spawn_b; }
+            else { transform.position = spawn_a; }
+            UpdateFloatBehavior();
+            return;
+        }
+        s = 1.0f - Mathf.Pow(1.0f - s, 3.0f); // some smoothing
+        if (!spawn_reverse)
+        {
+            transform.position = Vector3.Lerp(spawn_a, spawn_b, s);
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(spawn_b, spawn_a, s);
+        }
+    }
+
+    private void UpdateFloatBehavior()
+    {
+        FloatBehavior f_b = GetComponent<FloatBehavior>();
+        if (f_b != null)
+        {
+            f_b.enabled = !spawning;
+        }
+    }
+
+    public void Spawn(bool reverse = false)
+    {
+        spawning = true;
+        spawn_reverse = reverse;
+        spawn_start = Time.time;
+        spawn_b = transform.position; // this is the target on-screen position, where this object was originally spawned (or is if reversed)
+        Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        transform.position += new Vector3 (0, (screenBounds[1]/transform.lossyScale[1])/2.0f, 0);
+        spawn_a = transform.position; // this is the off-screen position where the animation will start (or end, if reversed)
+        UpdateFloatBehavior();
     }
 }
