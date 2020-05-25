@@ -39,11 +39,20 @@ public class PlayerProjectile : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
+    {        
         if (target != null && collision.gameObject == target)
-        {
+        {            
             PlayerCloud.score += 1;
-            target.GetComponent<Enemy>().GetHit();
+            Enemy enemy = target.GetComponent<Enemy>();
+            Bell bell = target.GetComponent<Bell>();
+            if (enemy != null)
+            {
+                target.GetComponent<Enemy>().GetHit();
+            }
+            else if (bell != null)
+            {
+                bell.ResonatorUpdate(true);
+            }
             Explode();
         }
     }
