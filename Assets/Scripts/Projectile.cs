@@ -7,6 +7,11 @@ public class Projectile : MonoBehaviour {
     public int damage;
     public GameObject explosion_anim;
 
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
+
     public void Explode()
     {
         Instantiate(explosion_anim , transform.position , Quaternion.identity);
