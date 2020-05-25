@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BellBoss : MonoBehaviour {
     // public PlayerController playerRef;
@@ -107,6 +108,7 @@ public class BellBoss : MonoBehaviour {
         else if (mode == Mode.Dying)
         {
             Debug.Log("Aahh!!");
+            SceneManager.LoadScene(8);
         }
     }
 
