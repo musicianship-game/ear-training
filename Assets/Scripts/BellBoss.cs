@@ -12,23 +12,19 @@ public class BellBoss : MonoBehaviour {
     private bool shouldAttack;
     private bool shouldMakeVulnerable;
     Stack<string> phases;
-    List<Note> enemies;
+    List<BellEnemy> enemies;
     private int enemyPointer = -1;
     private string currentPhase = "";
     float timer = 0f;
     const float timeout = 10f;
 
-    public class Note
+    public class BellEnemy
     {
-        public int scaleDegree;
-        public int alteration;
-        public float frequency;
-        public Bell bell;
-        public Note(int sd, int alt)
+        public readonly MelodicSequences.Note note;
+        public Bell bell;        
+        public BellEnemy(MelodicSequences.Note n)
         {
-            scaleDegree = sd;
-            alteration = alt;
-            frequency = Scale.GetNoteFrequency(sd, alt);
+            note = n;
         }
     }
 
@@ -50,7 +46,7 @@ public class BellBoss : MonoBehaviour {
                 Quaternion.identity,
                 transform
             );
-            enemies[i].bell.SetFrequency(enemies[i].frequency);
+            enemies[i].bell.SetFrequency(enemies[i].note.frequency);
         }
     }    
 
@@ -64,7 +60,7 @@ public class BellBoss : MonoBehaviour {
 
 	void Awake ()
 	{
-        enemies = new List<Note>();
+        enemies = new List<BellEnemy>();
         phases = new Stack<string>();
         phases.Push("end");
         phases.Push("3");
@@ -77,10 +73,10 @@ public class BellBoss : MonoBehaviour {
 
     private void SetOffenseMode()
     {
-        foreach (Note note in enemies)
+        foreach (BellEnemy enemy in enemies)
         {
-            note.bell.SetTargetable(false);
-            note.bell.HasShield(true);
+            enemy.bell.SetTargetable(false);
+            enemy.bell.HasShield(true);
         }
         mode = Mode.Offense;
         shouldAttack = true;
@@ -160,38 +156,40 @@ public class BellBoss : MonoBehaviour {
     private void SetPhase(string phaseName)
     {
         Debug.Log("BellBoss: Phase" + phaseName);
-        switch(phaseName)
+        MelodicSequences.MelodicSequence seq = MelodicSequences.GetRandomSequence();
+        int seqSize = seq.sequence.Count;
+        switch (phaseName)
         {
             case "intro":
                 //something
                 break;
             case "1":
-                enemies.Clear();
-                enemies.Add(new Note(2, 0));
-                enemies.Add(new Note(1, 0));
-                enemies.Add(new Note(0, 0));
+                enemies.Clear();                
+                enemies.Add(new BellEnemy(seq.sequence[seqSize - 3]));
+                enemies.Add(new BellEnemy(seq.sequence[seqSize - 2]));
+                enemies.Add(new BellEnemy(seq.sequence[seqSize - 1]));
                 InstantiateEnemies();
                 SetOffenseMode();
                 break;
             case "2":
                 ClearBells();
                 enemies.Clear();
-                enemies.Add(new Note(3, 0));
-                enemies.Add(new Note(2, 0));
-                enemies.Add(new Note(1, 0));
-                enemies.Add(new Note(0, 0));
+                enemies.Add(new BellEnemy(seq.sequence[seqSize - 4]));
+                enemies.Add(new BellEnemy(seq.sequence[seqSize - 3]));
+                enemies.Add(new BellEnemy(seq.sequence[seqSize - 2]));
+                enemies.Add(new BellEnemy(seq.sequence[seqSize - 1]));
                 InstantiateEnemies();
                 SetOffenseMode();
                 break;
             case "3":
                 ClearBells();
                 enemies.Clear();
-                enemies.Add(new Note(4, 0));
-                enemies.Add(new Note(5, 0));
-                enemies.Add(new Note(3, 0));
-                enemies.Add(new Note(2, 0));
-                enemies.Add(new Note(1, 0));
-                enemies.Add(new Note(0, 0));
+                enemies.Add(new BellEnemy(seq.sequence[seqSize - 6]));
+                enemies.Add(new BellEnemy(seq.sequence[seqSize - 5]));
+                enemies.Add(new BellEnemy(seq.sequence[seqSize - 4]));
+                enemies.Add(new BellEnemy(seq.sequence[seqSize - 3]));
+                enemies.Add(new BellEnemy(seq.sequence[seqSize - 2]));
+                enemies.Add(new BellEnemy(seq.sequence[seqSize - 1]));
                 InstantiateEnemies();
                 SetOffenseMode();
                 break;
