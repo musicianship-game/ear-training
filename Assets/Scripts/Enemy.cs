@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     public ParticleSystem death_explosion;
     private FloatBehavior float_behavior;
     private ThisTarget this_target;
+    public GameObject note_spray;
 
     public int max_hp = 3;
     public int hit_points = 3;
@@ -215,6 +216,7 @@ public class Enemy : MonoBehaviour
         if (!hit)
         {
             GetComponentInChildren<Instrument>().Play(note_freq, dur);
+            Instantiate(note_spray, transform);
         }
         else if (hit)
         {

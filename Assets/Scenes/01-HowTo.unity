@@ -614,7 +614,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'How to play:'
+  m_text: 'How to Play:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f67d6d710d830433faccc87db3c786fa, type: 2}
   m_sharedMaterial: {fileID: 21546025766591764, guid: f67d6d710d830433faccc87db3c786fa,
@@ -1194,7 +1194,7 @@ GameObject:
   - component: {fileID: 1482326376}
   - component: {fileID: 1482326375}
   m_Layer: 5
-  m_Name: TextMeshPro Text (1)
+  m_Name: DoReMi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
