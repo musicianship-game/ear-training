@@ -12,5 +12,4 @@ public class Projectile : MonoBehaviour {
         Instantiate(explosion_anim , transform.position , Quaternion.identity);
         Destroy(gameObject);
     }
-
 }
