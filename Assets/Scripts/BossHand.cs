@@ -12,6 +12,7 @@ public class BossHand : MonoBehaviour {
     private float start_time;
     private SpriteRenderer sprend;
     private ParticleSystem partsys;
+    private bool bells_started = false;
 
 	// Use this for initialization
 	void Awake () {
@@ -34,6 +35,11 @@ public class BossHand : MonoBehaviour {
         else if (Time.time < start_time + fade_dur + swoosh_dur)
         {
             if (partsys != null && !partsys.isPlaying) { partsys.Play(); }
+            if (bells_started == false)
+            {
+                GetComponentInParent<BossFace>().StartTheBells();
+                bells_started = true;
+            }
             sprend.color = new Color(sprend.color.r, sprend.color.g, sprend.color.b, 1);
             float k = (Time.time - start_time - fade_dur) / swoosh_dur;
             if (move_right)
@@ -55,6 +61,7 @@ public class BossHand : MonoBehaviour {
         else
         {
             sprend.color *= new Color(1, 1, 1, 0);
+            bells_started = false;
         }
     }
 

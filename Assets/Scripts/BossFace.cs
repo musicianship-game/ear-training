@@ -78,7 +78,11 @@ public class BossFace : MonoBehaviour {
         else {
             rend.color *= new Color(1, 1, 1, 0);
             appearing = false;
-            if (bell_boss != null) { bell_boss.BooEndSignal(); }
         }
+    }
+
+    public void StartTheBells()
+    {
+        if (bell_boss != null) { bell_boss.BooEndSignal(); }
     }
 }
