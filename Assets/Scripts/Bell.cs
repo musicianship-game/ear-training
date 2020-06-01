@@ -142,7 +142,7 @@ public class Bell : MonoBehaviour {
         {
             spawning = false;
             if (!spawn_reverse) { transform.position = spawn_b; }
-            else { transform.position = spawn_a; }
+            else { Destroy(this); }
             UpdateFloatBehavior();
             return;
         }
@@ -173,7 +173,7 @@ public class Bell : MonoBehaviour {
         spawn_start = Time.time;
         spawn_b = transform.position; // this is the target on-screen position, where this object was originally spawned (or is if reversed)
         Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-        transform.position += new Vector3 (0, (screenBounds[1]/transform.lossyScale[1])/2.0f, 0);
+        transform.position += new Vector3 (0, screenBounds[1], 0);
         spawn_a = transform.position; // this is the off-screen position where the animation will start (or end, if reversed)
         UpdateFloatBehavior();
     }
