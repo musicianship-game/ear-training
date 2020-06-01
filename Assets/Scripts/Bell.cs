@@ -13,6 +13,7 @@ public class Bell : MonoBehaviour {
     private bool spawn_reverse;
     private Vector3 spawn_a;
     private Vector3 spawn_b;
+    private bool kill_me = false;
 
     public float attack_dur = 0.7f;
     private float attack_start;
@@ -58,6 +59,10 @@ public class Bell : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         this_target.targetable = targetable;
+        if (kill_me)
+        {
+            Destroy(this.gameObject);
+        }
         if (attacking)
         {
             AttackSequence01(attack_start);
@@ -141,18 +146,26 @@ public class Bell : MonoBehaviour {
         if (s > 1.0f)
         {
             spawning = false;
-            if (!spawn_reverse) { transform.position = spawn_b; }
-            else { Destroy(this); }
+            if (!spawn_reverse)
+            {
+                transform.position = spawn_b;
+            }
+            else
+            {
+                kill_me = true;
+                return;
+            }
             UpdateFloatBehavior();
             return;
         }
-        s = 1.0f - Mathf.Pow(1.0f - s, 3.0f); // some smoothing
         if (!spawn_reverse)
         {
+            s = 1.0f - Mathf.Pow(1.0f - s, 3.0f); // some smoothing
             transform.position = Vector3.Lerp(spawn_a, spawn_b, s);
         }
         else
         {
+            s = Mathf.Pow(s, 3.0f); // some smoothing
             transform.position = Vector3.Lerp(spawn_b, spawn_a, s);
         }
     }
