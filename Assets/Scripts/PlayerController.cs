@@ -183,8 +183,9 @@ public class PlayerController : MonoBehaviour {
             PlayerCloud.shots_fired++;
             foreach(Transform child in spawner.transform)
             {
-                if (child.name == "boss_face") continue;
-                if (child.GetComponent<ThisTarget>().Resonate(note_freq))
+                ThisTarget targ = child.GetComponent<ThisTarget>();
+                if (targ == null) continue;
+                if (targ.Resonate(note_freq))
                 {
                     enemies_shot++;
                     ShootTowards(child.gameObject);
