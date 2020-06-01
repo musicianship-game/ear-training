@@ -13,6 +13,7 @@ public class BossFace : MonoBehaviour {
     private float fade_dur = 1.0f;
     private int disco_lvl = 0;
     private float disco_frq = 4.11f;
+    private BellBoss bell_boss;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class BossFace : MonoBehaviour {
         rend = GetComponent<SpriteRenderer>();
         orig_color = rend.color * 1.0f;
         rend.color *= new Color(1, 1, 1, 0);
+        bell_boss = GetComponentInParent<BellBoss>();
 	}
 	
 	// Update is called once per frame
@@ -27,10 +29,6 @@ public class BossFace : MonoBehaviour {
 		if (appearing)
         {
             Appear();
-        }
-        if (disco_lvl == 0)
-        {
-            Boo();
         }
     }
 
@@ -79,6 +77,7 @@ public class BossFace : MonoBehaviour {
         else {
             rend.color *= new Color(1, 1, 1, 0);
             appearing = false;
+            if (bell_boss != null) { bell_boss.BooEndSignal(); }
         }
     }
 }

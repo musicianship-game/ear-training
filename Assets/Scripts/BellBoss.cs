@@ -222,4 +222,9 @@ public class BellBoss : MonoBehaviour {
         // Called when a Player attempted to attack a BellEnemy but failed (wrong note)
         SetOffenseMode();
     }
+
+    public void BooEndSignal()
+    {
+        // to do...
+    }
 }
