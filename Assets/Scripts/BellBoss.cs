@@ -33,13 +33,12 @@ public class BellBoss : MonoBehaviour {
 
     private void InstantiateEnemies()
     {
-        GameObject background = GameObject.Find("Background");
-        RectTransform rt = background.GetComponent<RectTransform>();
-        float width = rt.rect.width / 20f; // No idea why that "20f" works. 
-        // It doesn't match the pixelsperunit or localscale or other things I tried
+        Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        float width = screenBounds.x * 2f;
         float x0 = -width / 2f;
         float offset = width / enemies.Count;
         float padding = offset / 2f;
+        
         for (int i = 0; i < enemies.Count; i++)
         {
             //Debug.Log("Background width " + width);
