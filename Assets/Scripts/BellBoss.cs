@@ -10,6 +10,7 @@ public class BellBoss : MonoBehaviour {
     enum Mode {Intro, Offense, Defense, Transition, Dying };
     Mode mode;
     BossFace bossFace;
+    bool endTransition;
     private bool shouldAttack;
     private bool shouldMakeVulnerable;
     Stack<string> phases;
@@ -60,10 +61,11 @@ public class BellBoss : MonoBehaviour {
     }
 
 	void Awake ()
-	{
+	{      
         bossFace = transform.Find("boss_face").gameObject.GetComponent<BossFace>();
         enemies = new List<BellEnemy>();
         phases = new Stack<string>();
+        endTransition = false;
         phases.Push("end");
         phases.Push("3");
         phases.Push("transition");
@@ -78,7 +80,7 @@ public class BellBoss : MonoBehaviour {
     private void SetIntroMode()
     {
         mode = Mode.Intro;
-        timer = 0f;
+        endTransition = false;
         bossFace.Boo();
     }
 
@@ -105,7 +107,7 @@ public class BellBoss : MonoBehaviour {
     private void SetTransitionMode()
     {
         mode = Mode.Transition;
-        timer = 0f;
+        endTransition = false;
         bossFace.Boo();
     }
 
@@ -136,8 +138,7 @@ public class BellBoss : MonoBehaviour {
 
     private void UpdateIntro()
     {
-        timer += Time.deltaTime;
-        if (timer > 3f)
+        if (endTransition)
         {
             currentPhase = phases.Pop();
             Debug.Log("Transitioning to phase " + currentPhase);
@@ -182,13 +183,12 @@ public class BellBoss : MonoBehaviour {
         }
         else {
             timer += Time.deltaTime;
-        }
+        }      
     }
 
     private void UpdateTransition()
-    {
-        timer += Time.deltaTime;
-        if (timer > 2f)
+    {        
+        if (endTransition)
         {
             currentPhase = phases.Pop();
             Debug.Log("Transitioning to phase " + currentPhase);
@@ -278,6 +278,6 @@ public class BellBoss : MonoBehaviour {
 
     public void BooEndSignal()
     {
-        // to do...
+        endTransition = true;
     }
 }
