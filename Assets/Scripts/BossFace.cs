@@ -28,6 +28,10 @@ public class BossFace : MonoBehaviour {
         {
             Appear();
         }
+        if (disco_lvl == 0)
+        {
+            Boo();
+        }
     }
 
     public void Boo()
