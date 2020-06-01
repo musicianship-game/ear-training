@@ -86,6 +86,7 @@ public class BossFace : MonoBehaviour {
     {
         hands_in_place++;
         if (hands_in_place == hands.Length){
+            hands_in_place = 0;
             if (bell_boss != null)
             {
                 bell_boss.BooEndSignal();
