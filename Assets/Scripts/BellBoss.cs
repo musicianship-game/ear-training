@@ -56,7 +56,8 @@ public class BellBoss : MonoBehaviour {
     {
         for (int i = 0; i < enemies.Count; i++)
         {
-            Destroy(enemies[i].bell.gameObject);
+            enemies[i].bell.Spawn(true);
+            //Destroy(enemies[i].bell.gameObject);
         }
     }
 
