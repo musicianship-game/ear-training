@@ -7,7 +7,7 @@ public class BellBoss : MonoBehaviour {
     // public PlayerController playerRef;
 
     public Bell enemyPrefab;
-    enum Mode {Offense, Defense, Transitioning, Dying};
+    enum Mode {Intro, Offense, Defense, Transition, Dying };
     Mode mode;
     BossFace bossFace;
     private bool shouldAttack;
@@ -64,14 +64,23 @@ public class BellBoss : MonoBehaviour {
         bossFace = transform.Find("boss_face").gameObject.GetComponent<BossFace>();
         enemies = new List<BellEnemy>();
         phases = new Stack<string>();
-        phases.Push("end");
+        phases.Push("end"); phases.Push("transition");
         phases.Push("3");
+        phases.Push("transition");
         phases.Push("2");
+        phases.Push("transition");
         phases.Push("1");
         phases.Push("intro");
         currentPhase = phases.Pop();
         SetPhase(currentPhase);        
-	}
+	}    
+
+    private void SetIntroMode()
+    {
+        mode = Mode.Intro;
+        timer = 0f;
+        bossFace.Boo();
+    }
 
     private void SetOffenseMode()
     {
@@ -93,9 +102,19 @@ public class BellBoss : MonoBehaviour {
         timer = 0f;
     }
 
+    private void SetTransitionMode()
+    {
+        mode = Mode.Transition;
+        timer = 0f;
+    }
+
     private void Update()
     {
-        if (mode == Mode.Offense)
+        if (mode == Mode.Intro)
+        {
+            UpdateIntro();
+        }
+        else if (mode == Mode.Offense)
         {
             UpdateOffense();
         }
@@ -103,10 +122,25 @@ public class BellBoss : MonoBehaviour {
         {
             UpdateDefense();
         }
+        else if (mode == Mode.Transition)
+        {
+            UpdateTransition();
+        }
         else if (mode == Mode.Dying)
         {
             Debug.Log("Aahh!!");
             SceneManager.LoadScene(8);
+        }     
+    }
+
+    private void UpdateIntro()
+    {
+        timer += Time.deltaTime;
+        if (timer > 5f)
+        {
+            currentPhase = phases.Pop();
+            Debug.Log("Transitioning to phase " + currentPhase);
+            SetPhase(currentPhase);
         }
     }
 
@@ -150,6 +184,17 @@ public class BellBoss : MonoBehaviour {
         }
     }
 
+    private void UpdateTransition()
+    {
+        timer += Time.deltaTime;
+        if (timer > 5f)
+        {
+            currentPhase = phases.Pop();
+            Debug.Log("Transitioning to phase " + currentPhase);
+            SetPhase(currentPhase);
+        }
+    }
+
     public void RunChuckCode(string code)
 	{
 		GetComponent<ChuckSubInstance>().RunCode(code);
@@ -162,8 +207,8 @@ public class BellBoss : MonoBehaviour {
         int seqSize = seq.sequence.Count;
         switch (phaseName)
         {
-            case "intro":
-                bossFace.Boo();
+            case "intro":                
+                SetIntroMode();
                 break;
             case "1":                
                 enemies.Clear();                
@@ -194,6 +239,11 @@ public class BellBoss : MonoBehaviour {
                 enemies.Add(new BellEnemy(seq.sequence[seqSize - 1]));
                 InstantiateEnemies();
                 SetOffenseMode();
+                break;
+            case "transition":
+                ClearBells();
+                enemies.Clear();
+                SetTransitionMode();
                 break;
             case "end":
                 Debug.Log("BellBoss: Oh no!!! I am DYING!");
