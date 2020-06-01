@@ -64,7 +64,7 @@ public class BellBoss : MonoBehaviour {
         bossFace = transform.Find("boss_face").gameObject.GetComponent<BossFace>();
         enemies = new List<BellEnemy>();
         phases = new Stack<string>();
-        phases.Push("end"); phases.Push("transition");
+        phases.Push("end");
         phases.Push("3");
         phases.Push("transition");
         phases.Push("2");
@@ -106,6 +106,7 @@ public class BellBoss : MonoBehaviour {
     {
         mode = Mode.Transition;
         timer = 0f;
+        bossFace.Boo();
     }
 
     private void Update()
@@ -136,7 +137,7 @@ public class BellBoss : MonoBehaviour {
     private void UpdateIntro()
     {
         timer += Time.deltaTime;
-        if (timer > 5f)
+        if (timer > 3f)
         {
             currentPhase = phases.Pop();
             Debug.Log("Transitioning to phase " + currentPhase);
@@ -187,7 +188,7 @@ public class BellBoss : MonoBehaviour {
     private void UpdateTransition()
     {
         timer += Time.deltaTime;
-        if (timer > 5f)
+        if (timer > 2f)
         {
             currentPhase = phases.Pop();
             Debug.Log("Transitioning to phase " + currentPhase);
