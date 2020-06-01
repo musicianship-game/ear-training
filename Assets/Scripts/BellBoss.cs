@@ -62,8 +62,7 @@ public class BellBoss : MonoBehaviour {
     }
 
 	void Awake ()
-	{      
-        bossFace = transform.Find("boss_face").gameObject.GetComponent<BossFace>();
+	{              
         enemies = new List<BellEnemy>();
         phases = new Stack<string>();
         endTransition = false;
@@ -74,9 +73,14 @@ public class BellBoss : MonoBehaviour {
         phases.Push("transition");
         phases.Push("1");
         phases.Push("intro");
-        currentPhase = phases.Pop();
-        SetPhase(currentPhase);        
-	}    
+        currentPhase = phases.Pop();               
+	}
+
+    private void Start()
+    {
+        bossFace = transform.Find("boss_face").gameObject.GetComponent<BossFace>();
+        SetPhase(currentPhase);
+    }
 
     private void SetIntroMode()
     {
