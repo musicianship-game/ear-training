@@ -11,6 +11,7 @@ public class BellBoss : MonoBehaviour {
     Mode mode;
     BossFace bossFace;
     bool endTransition;
+    bool shouldTransition;
     private bool shouldAttack;
     private bool shouldMakeVulnerable;
     Stack<string> phases;
@@ -33,7 +34,7 @@ public class BellBoss : MonoBehaviour {
     private void InstantiateEnemies()
     {
         GameObject background = GameObject.Find("Background");
-        RectTransform rt = (RectTransform)background.transform;     
+        RectTransform rt = background.GetComponent<RectTransform>();
         float width = rt.rect.width / 20f; // No idea why that "20f" works. 
         // It doesn't match the pixelsperunit or localscale or other things I tried
         float x0 = -width / 2f;
@@ -62,7 +63,7 @@ public class BellBoss : MonoBehaviour {
     }
 
 	void Awake ()
-	{              
+	{        
         enemies = new List<BellEnemy>();
         phases = new Stack<string>();
         endTransition = false;
@@ -73,8 +74,8 @@ public class BellBoss : MonoBehaviour {
         phases.Push("transition");
         phases.Push("1");
         phases.Push("intro");
-        currentPhase = phases.Pop();               
-	}
+        currentPhase = phases.Pop();        
+    }
 
     private void Start()
     {
@@ -86,7 +87,7 @@ public class BellBoss : MonoBehaviour {
     {
         mode = Mode.Intro;
         endTransition = false;
-        bossFace.Boo();
+        shouldTransition = true;        
     }
 
     private void SetOffenseMode()
@@ -114,7 +115,7 @@ public class BellBoss : MonoBehaviour {
     {
         mode = Mode.Transition;
         endTransition = false;
-        bossFace.Boo();
+        shouldTransition = true;        
     }
 
     private void Update()
@@ -144,6 +145,11 @@ public class BellBoss : MonoBehaviour {
 
     private void UpdateIntro()
     {
+        if (shouldTransition)
+        {
+            shouldTransition = false;
+            bossFace.Boo();
+        }
         if (endTransition)
         {
             currentPhase = phases.Pop();
@@ -198,7 +204,12 @@ public class BellBoss : MonoBehaviour {
     }
 
     private void UpdateTransition()
-    {        
+    {
+        if (shouldTransition)
+        {
+            shouldTransition = false;
+            bossFace.Boo();
+        }
         if (endTransition)
         {
             currentPhase = phases.Pop();

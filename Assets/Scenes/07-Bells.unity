@@ -175,8 +175,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &83904554
-Transform:
+--- !u!224 &83904554
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -187,8 +187,13 @@ Transform:
   m_Children:
   - {fileID: 488729585}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 10.24, y: 7.2}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &468287377 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114308439407587394, guid: e7671350fc92a4143b3d6233c745c5f9,
@@ -507,7 +512,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4769634953651504, guid: 79a248a8683d65849824135c477e6abc, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114662720140454298, guid: 79a248a8683d65849824135c477e6abc,
         type: 2}
