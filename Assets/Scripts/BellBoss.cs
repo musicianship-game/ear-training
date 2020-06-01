@@ -7,8 +7,9 @@ public class BellBoss : MonoBehaviour {
     // public PlayerController playerRef;
 
     public Bell enemyPrefab;
-    enum Mode { Offense, Defense, Transitioning, Dying};
+    enum Mode {Offense, Defense, Transitioning, Dying};
     Mode mode;
+    BossFace bossFace;
     private bool shouldAttack;
     private bool shouldMakeVulnerable;
     Stack<string> phases;
@@ -60,13 +61,14 @@ public class BellBoss : MonoBehaviour {
 
 	void Awake ()
 	{
+        bossFace = transform.Find("boss_face").gameObject.GetComponent<BossFace>();
         enemies = new List<BellEnemy>();
         phases = new Stack<string>();
         phases.Push("end");
         phases.Push("3");
         phases.Push("2");
         phases.Push("1");
-        // phases.Push("intro");
+        phases.Push("intro");
         currentPhase = phases.Pop();
         SetPhase(currentPhase);        
 	}
@@ -161,9 +163,9 @@ public class BellBoss : MonoBehaviour {
         switch (phaseName)
         {
             case "intro":
-                //something
+                bossFace.Boo();
                 break;
-            case "1":
+            case "1":                
                 enemies.Clear();                
                 enemies.Add(new BellEnemy(seq.sequence[seqSize - 3]));
                 enemies.Add(new BellEnemy(seq.sequence[seqSize - 2]));

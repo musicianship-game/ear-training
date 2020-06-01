@@ -16,7 +16,7 @@ public class BossFace : MonoBehaviour {
     private BellBoss bell_boss;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         hands = GetComponentsInChildren<BossHand>();
         rend = GetComponent<SpriteRenderer>();
         orig_color = rend.color * 1.0f;
