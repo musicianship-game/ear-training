@@ -18,15 +18,19 @@ public class BossFace : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        hands = GetComponentsInChildren<BossHand>();
         rend = GetComponent<SpriteRenderer>();
         orig_color = rend.color * 1.0f;
         rend.color *= new Color(1, 1, 1, 0);
-        bell_boss = GetComponentInParent<BellBoss>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void Start()
+    {
+        hands = GetComponentsInChildren<BossHand>();
+        bell_boss = GetComponentInParent<BellBoss>();
+    }
+
+    // Update is called once per frame
+    void Update () {
 		if (appearing)
         {
             Appear();
@@ -39,7 +43,7 @@ public class BossFace : MonoBehaviour {
         start_time = Time.time;
         disco_lvl += 1;
         disco_frq *= disco_lvl;
-        // Debug.Log("I have " + hands.Length + " hands!");
+        Debug.Log("I have " + hands.Length + " hands!");
         foreach (BossHand hand in hands)
         {
             hand.HandWave();

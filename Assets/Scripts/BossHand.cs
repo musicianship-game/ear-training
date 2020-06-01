@@ -20,6 +20,10 @@ public class BossHand : MonoBehaviour {
         start_time = -1.0f - (2.0f * fade_dur) - swoosh_dur; // to make it start 'dead'
         sprend = GetComponent<SpriteRenderer>();
         sprend.color *= new Color(1, 1, 1, 0);
+    }
+
+    private void Start()
+    {
         partsys = GetComponentInChildren<ParticleSystem>();
         Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
         swoosh_size = screenBounds[0] * 0.3f;
