@@ -14,6 +14,7 @@ public class BossFace : MonoBehaviour {
     private int disco_lvl = 0;
     private float disco_frq = 4.11f;
     private BellBoss bell_boss;
+    private int hands_in_place = 0;
 
 	// Use this for initialization
 	void Awake () {
@@ -83,6 +84,12 @@ public class BossFace : MonoBehaviour {
 
     public void StartTheBells()
     {
-        if (bell_boss != null) { bell_boss.BooEndSignal(); }
+        hands_in_place++;
+        if (hands_in_place == hands.Length){
+            if (bell_boss != null)
+            {
+                bell_boss.BooEndSignal();
+            }
+        }
     }
 }
