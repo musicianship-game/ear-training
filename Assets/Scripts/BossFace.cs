@@ -38,6 +38,7 @@ public class BossFace : MonoBehaviour {
         start_time = Time.time;
         disco_lvl += 1;
         disco_frq *= disco_lvl;
+        // Debug.Log("I have " + hands.Length + " hands!");
         foreach (BossHand hand in hands)
         {
             hand.HandWave();

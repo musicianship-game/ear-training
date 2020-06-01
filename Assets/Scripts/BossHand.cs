@@ -14,14 +14,14 @@ public class BossHand : MonoBehaviour {
     private ParticleSystem partsys;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         start_position = transform.position;
         start_time = -1.0f - (2.0f * fade_dur) - swoosh_dur; // to make it start 'dead'
         sprend = GetComponent<SpriteRenderer>();
         sprend.color *= new Color(1, 1, 1, 0);
         partsys = GetComponentInChildren<ParticleSystem>();
         Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-        swoosh_size = screenBounds[0] * 0.9f;
+        swoosh_size = screenBounds[0] * 0.3f;
     }
 
     // Update is called once per frame
