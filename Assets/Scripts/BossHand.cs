@@ -26,7 +26,7 @@ public class BossHand : MonoBehaviour {
     {
         partsys = GetComponentInChildren<ParticleSystem>();
         Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-        swoosh_size = screenBounds[0] * 0.3f;
+        swoosh_size = screenBounds[0] * 0.9f;
     }
 
     // Update is called once per frame
