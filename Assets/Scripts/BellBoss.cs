@@ -33,7 +33,7 @@ public class BellBoss : MonoBehaviour {
     private void InstantiateEnemies()
     {
         GameObject background = GameObject.Find("Background");
-        RectTransform rt = (RectTransform)background.transform;              
+        RectTransform rt = (RectTransform)background.transform;     
         float width = rt.rect.width / 20f; // No idea why that "20f" works. 
         // It doesn't match the pixelsperunit or localscale or other things I tried
         float x0 = -width / 2f;
@@ -95,6 +95,7 @@ public class BellBoss : MonoBehaviour {
         mode = Mode.Offense;
         shouldAttack = true;
         enemyPointer = 0;
+        timer = 0f;
     }
 
     private void SetDefenseMode()
@@ -149,16 +150,21 @@ public class BellBoss : MonoBehaviour {
 
     private void UpdateOffense()
     {
-        if (enemyPointer >= enemies.Count)
-        {
-            Debug.Log("BellBoss: Done attacking. I'm just gonna chill a bit...");
-            SetDefenseMode();
-        }
-        else if (shouldAttack)
-        {
-            Debug.Log("Attacking with bell " + enemyPointer);
-            enemies[enemyPointer].bell.Attack();
-            shouldAttack = false;
+        // Leave room for bells to fininsh their spawn animation
+        timer += Time.deltaTime;
+        if (timer > enemyPrefab.spawn_dur)
+        { 
+            if (enemyPointer >= enemies.Count)
+            {
+                Debug.Log("BellBoss: Done attacking. I'm just gonna chill a bit...");
+                SetDefenseMode();
+            }
+            else if (shouldAttack)
+            {
+                Debug.Log("Attacking with bell " + enemyPointer);
+                enemies[enemyPointer].bell.Attack();
+                shouldAttack = false;
+            }
         }
     }
 
@@ -213,7 +219,7 @@ public class BellBoss : MonoBehaviour {
                 SetIntroMode();
                 break;
             case "1":                
-                enemies.Clear();                
+                enemies.Clear();               
                 enemies.Add(new BellEnemy(seq.sequence[seqSize - 3]));
                 enemies.Add(new BellEnemy(seq.sequence[seqSize - 2]));
                 enemies.Add(new BellEnemy(seq.sequence[seqSize - 1]));
