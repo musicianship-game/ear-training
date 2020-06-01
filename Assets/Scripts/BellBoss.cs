@@ -150,7 +150,7 @@ public class BellBoss : MonoBehaviour {
 
     private void UpdateOffense()
     {
-        // Leave room for bells to fininsh their spawn animation
+        // Leave room for bells to finish their spawn animation
         timer += Time.deltaTime;
         if (timer > enemyPrefab.spawn_dur)
         { 

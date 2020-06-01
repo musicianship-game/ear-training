@@ -17,7 +17,7 @@ public class UIGameOver : MonoBehaviour {
         float duration = Time.time - PlayerCloud.menu_time;
         int minutes = Mathf.FloorToInt(duration / 60f);
         int seconds = (int)duration % 60;
-        return "" + minutes + ":" + seconds;
+        return "" + minutes.ToString("00") + ":" + seconds.ToString("00");
     }
 
 	// Use this for initialization
