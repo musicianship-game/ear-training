@@ -294,6 +294,7 @@ MonoBehaviour:
   projectile_used: {fileID: 1618161610838518, guid: 286dde5a594264afd8381c4be21b8108,
     type: 2}
   projectile_damage: 1
+  note_spray: {fileID: 1643210245149440, guid: 5968895f237074182ac991558bbc12fb, type: 2}
 --- !u!212 &212039671619358760
 SpriteRenderer:
   m_ObjectHideFlags: 1

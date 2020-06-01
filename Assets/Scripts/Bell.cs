@@ -23,6 +23,7 @@ public class Bell : MonoBehaviour {
     public GameObject projectile_used = null;
     public int projectile_damage = 1;
     GameObject bubble;
+    public GameObject note_spray;
 
     private int atk_seq_n = -1;
     private bool attacking = false;
@@ -73,6 +74,7 @@ public class Bell : MonoBehaviour {
         attacking = true;
         atk_seq_n = -1;
         bell_boss.RunChuckCode(ChuckSynths.Bell(frequency, attack_dur));
+        Instantiate(note_spray, transform);
     }
 
     public void ResonatorUpdate(bool b)
