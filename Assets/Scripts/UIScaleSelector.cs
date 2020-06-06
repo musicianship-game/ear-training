@@ -24,8 +24,9 @@ public class UIScaleSelector : MonoBehaviour {
 	private FileInfo[] lessonplanInfos;
 
 	private void Awake() {
-		notationsDir = @"Assets/Scales";
-		lessonplanDir = @"Assets/LessonPlans";
+        string streamingAssets = Application.streamingAssetsPath;
+		notationsDir = Path.Combine(streamingAssets, "Scales");
+		lessonplanDir = Path.Combine(streamingAssets, "LessonPlans");
 		csvFrequenciesFilename = @"fundamental_frequencies.csv";
 		// Notation
 		notationDropdown = transform.Find("NotationsDropdown").GetComponent<Dropdown>();
