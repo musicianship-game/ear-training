@@ -4,9 +4,9 @@ using System.Collections;
 
 public class TwistBehavior : MonoBehaviour
 {
-    public float freq = 0.5f;
-    static float slow_freq = 0.5f;
-    static float fast_freq = 1.1f;
+    private float freq = 0.5f;
+    public float slow_freq = 0.5f;
+    public float fast_freq = 1.1f;
     public bool fast = false;
     public float strength = 11.1f;
     private float phase;
