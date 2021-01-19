@@ -19,12 +19,12 @@ public class BellBoss : MonoBehaviour {
     private int enemyPointer = -1;
     private string currentPhase = "";
     float timer = 0f;
-    const float timeout = 10f;
+    float timeout = 10f;
 
     public class BellEnemy
     {
         public readonly MelodicSequences.Note note;
-        public Bell bell;        
+        public Bell bell;
         public BellEnemy(MelodicSequences.Note n)
         {
             note = n;
@@ -81,7 +81,7 @@ public class BellBoss : MonoBehaviour {
         bossFace = transform.Find("boss_face").gameObject.GetComponent<BossFace>();
         SetPhase(currentPhase);
     }
-
+    
     private void SetIntroMode()
     {
         mode = Mode.Intro;
@@ -100,6 +100,7 @@ public class BellBoss : MonoBehaviour {
         shouldAttack = true;
         enemyPointer = 0;
         timer = 0f;
+        timeout = 3f * enemies.Count;
     }
 
     private void SetDefenseMode()
