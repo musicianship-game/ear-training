@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 212413214844465802}
   - component: {fileID: 114022351479621414}
   m_Layer: 0
-  m_Name: bell_0
+  m_Name: bell_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -237,7 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07695ab26d04455bb2c57f009df29bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freq: 1.7
+  freq: 0.5
+  fast: 0
   strength: 11.1
 --- !u!114 &114463679014778100
 MonoBehaviour:

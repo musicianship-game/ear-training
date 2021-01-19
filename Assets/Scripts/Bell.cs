@@ -24,6 +24,7 @@ public class Bell : MonoBehaviour {
     public GameObject projectile_used = null;
     public int projectile_damage = 1;
     GameObject bubble;
+    GameObject bell1;
     public GameObject note_spray;
 
     private int atk_seq_n = -1;
@@ -41,6 +42,7 @@ public class Bell : MonoBehaviour {
         this_target.frequency = frequency;
         this_target.targetable = targetable;
         bubble = transform.Find("bubble").gameObject;
+        bell1 = transform.Find("bell_1").gameObject;
         Spawn(false);
     }
 
@@ -138,6 +140,12 @@ public class Bell : MonoBehaviour {
     {
         SpriteRenderer sr = bubble.GetComponent<SpriteRenderer>();
         sr.enabled = value;
+    }
+
+    public void FastTwist(bool value)
+    {
+        TwistBehavior t_b = bubble.GetComponent<TwistBehavior>();
+        t_b.fast = value;
     }
 
     private void SpawnSequence(float spwn_strt)
