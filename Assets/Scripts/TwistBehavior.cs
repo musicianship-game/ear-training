@@ -6,7 +6,7 @@ public class TwistBehavior : MonoBehaviour
 {
     private float freq = 0.5f;
     public float slow_freq = 0.5f;
-    public float fast_freq = 1.1f;
+    public float fast_freq = 3.0f;
     public bool fast = false;
     public float strength = 11.1f;
     private float phase;

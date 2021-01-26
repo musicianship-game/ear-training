@@ -144,7 +144,7 @@ public class Bell : MonoBehaviour {
 
     public void FastTwist(bool value)
     {
-        TwistBehavior t_b = bubble.GetComponent<TwistBehavior>();
+        TwistBehavior t_b = bell1.GetComponent<TwistBehavior>();
         t_b.fast = value;
     }
 

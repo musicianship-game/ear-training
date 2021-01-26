@@ -95,6 +95,7 @@ public class BellBoss : MonoBehaviour {
         {
             enemy.bell.SetTargetable(false);
             enemy.bell.HasShield(true);
+            enemy.bell.FastTwist(false);
         }
         mode = Mode.Offense;
         shouldAttack = true;
@@ -287,7 +288,7 @@ public class BellBoss : MonoBehaviour {
     {
         // Called when a BellEnemy was hit by the enemy
         enemies[enemyPointer].bell.SetTargetable(false);
-        enemies[enemyPointer].bell.HasShield(true);
+        enemies[enemyPointer].bell.FastTwist(true);
         enemyPointer++;
         shouldMakeVulnerable = true;
     }
