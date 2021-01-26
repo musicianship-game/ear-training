@@ -212,6 +212,13 @@ public class PlayerController : MonoBehaviour {
         the_projectile.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f);
         the_projectile.GetComponent<Rigidbody2D>().velocity = direction * projectile_speed;
         the_projectile.Target(target);
-        the_projectile.speed = projectile_speed;
+        // Slightly faster projectiles in the boss stage
+        if (spawner.name == "BellSpawner") {
+            the_projectile.speed = 1.7f * projectile_speed;
+        }
+        else {
+            the_projectile.speed = projectile_speed;
+        }
+        Debug.Log("Shooting the " + spawner.name);
     }
 }
