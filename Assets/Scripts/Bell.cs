@@ -89,6 +89,7 @@ public class Bell : MonoBehaviour {
         if (b)
         {
             bell_boss.BellHitSignal(this.gameObject);
+            bell_boss.RunChuckCode(ChuckSynths.BG_Plucked_String(frequency, attack_dur));
         }
         else if (!b)
         {
