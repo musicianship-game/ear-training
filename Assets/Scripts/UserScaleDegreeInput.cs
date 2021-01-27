@@ -10,6 +10,8 @@ public class UserScaleDegreeInput : MonoBehaviour {
 	private int alteration;
 	private int scaleDegree;
 
+    public bool isPaused;
+
 	private PlayerController playerController;
 
 	private void Start()
@@ -22,6 +24,18 @@ public class UserScaleDegreeInput : MonoBehaviour {
 
 	private void Update()
     {
+        // Pause the game
+        if (!isPaused && Input.GetButtonDown("Pause"))
+        {
+            isPaused = true;
+            Time.timeScale = 0;
+        }
+        else if (isPaused && Input.GetButtonDown("Pause"))
+        {
+            isPaused = false;
+            Time.timeScale = 1;
+        }
+
 		// Get the inputs
         if (Input.GetButtonDown("AlterationUp")) alterationUp = 1;
 		else if (Input.GetButtonUp("AlterationUp")) alterationUp = 0;
