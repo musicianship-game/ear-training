@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     private Vector2 sung_pos_orig;
     public float sung_name_dist = 2.0f;
     public TextMeshProUGUI sung_note_name;
+    public TextMeshProUGUI speech_bubble_text;
     public Slider health_slider;
     public TextMeshProUGUI attack_symbol;
     public TextMeshProUGUI score_counter;
