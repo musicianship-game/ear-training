@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UserScaleDegreeInput : MonoBehaviour {
+    public PauseMenu pauseMenu;
 	private int alterationUp;
 	private int alterationDown;
 	private int alterationMultiplier;
 
 	private int alteration;
 	private int scaleDegree;
-
-    public bool isPaused;
 
 	private PlayerController playerController;
 
@@ -25,15 +24,13 @@ public class UserScaleDegreeInput : MonoBehaviour {
 	private void Update()
     {
         // Pause the game
-        if (!isPaused && Input.GetButtonDown("Pause"))
+        if (!pauseMenu.isPaused && Input.GetButtonDown("Pause"))
         {
-            isPaused = true;
-            Time.timeScale = 0;
+            pauseMenu.PauseGame();
         }
-        else if (isPaused && Input.GetButtonDown("Pause"))
+        else if (pauseMenu.isPaused && Input.GetButtonDown("Pause"))
         {
-            isPaused = false;
-            Time.timeScale = 1;
+            pauseMenu.ResumeGame();
         }
 
 		// Get the inputs
