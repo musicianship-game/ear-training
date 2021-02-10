@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour {
     private Vector2 sung_pos_orig;
     public float sung_name_dist = 2.0f;
     public TextMeshProUGUI sung_note_name;
-    public TextMeshProUGUI speech_bubble_text;
+    public GameObject speech_bubble_panel;
+    private TextMeshProUGUI speech_bubble_text;
     public Slider health_slider;
     public TextMeshProUGUI attack_symbol;
     public TextMeshProUGUI score_counter;
@@ -44,6 +45,8 @@ public class PlayerController : MonoBehaviour {
         speed = 3.5f;
         isAtGoalZone = false;
         chuck = GetComponent<ChuckSubInstance>();
+        speech_bubble_text = speech_bubble_panel.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        speech_bubble_panel.SetActive(false);
     }
 
     void Update()
@@ -221,5 +224,24 @@ public class PlayerController : MonoBehaviour {
             the_projectile.speed = projectile_speed;
         }
         Debug.Log("Shooting the " + spawner.name);
+    }
+
+    private void HideTextBubble()
+    {
+        speech_bubble_panel.SetActive(false);
+    }
+
+    public void SaySomething(string message, float time)
+    {
+        speech_bubble_text.SetText(message);
+        speech_bubble_panel.SetActive(true);
+        Invoke("HideTextBubble", time);
+    }
+
+    public void AllEnemiesDefeated()
+    {
+        int randomMessage = Random.Range(0, PlayerCloud.Messages.Count); 
+        string msg = PlayerCloud.Messages[randomMessage];
+        SaySomething(msg, 3f);
     }
 }

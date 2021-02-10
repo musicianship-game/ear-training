@@ -11,6 +11,19 @@ public static class PlayerCloud {
     public static int misspellings = 0;
     public static int enemies_defeated = 0;
     public static float menu_time = 0f;
+    public static List<string> Messages { get; set; }
+
+    static PlayerCloud()
+    {
+        Messages = new List<string>()
+        {
+            "The spirits calm down after\nI sing 3 notes to them",
+            "I wonder what is behind that gate",
+            "I guess these spirits only\nwant someone to sing to them",
+            "I hear some loud bells coming up from the basement",
+            "The sound of the bells is pretty strong now"
+        };
+    }
 
     public static void Restart()
     {

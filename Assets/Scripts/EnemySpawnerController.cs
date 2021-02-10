@@ -33,9 +33,10 @@ public class EnemySpawnerController : MonoBehaviour {
 
     private void Update()
     {
-        if (transform.childCount == 0)
+        if (transform.childCount == 0 && !all_enemies_dead)
         {
             all_enemies_dead = true;
+            playerRef.AllEnemiesDefeated();
         }
     }
 
