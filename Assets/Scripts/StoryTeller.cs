@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class StoryTeller : MonoBehaviour {
 
@@ -24,7 +25,11 @@ public class StoryTeller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.time > end_time)
+        if (Input.anyKeyDown)
+        {
+            SceneManager.LoadScene("01-Menu");
+        }
+        if (Time.time > end_time)
         {
             color.a = 0.0f;
         }
