@@ -28,12 +28,12 @@ public class UIController : MonoBehaviour {
     void Play()
     {
         PlayerCloud.menu_time = Time.time;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
     void HowToPlay()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     void Quit()

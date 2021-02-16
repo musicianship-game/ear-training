@@ -140,7 +140,7 @@ public class BellBoss : MonoBehaviour {
         else if (mode == Mode.Dying)
         {
             Debug.Log("Aahh!!");
-            SceneManager.LoadScene(8);
+            SceneManager.LoadScene(9);
         }     
     }
 

@@ -27,7 +27,7 @@ public class StoryTeller : MonoBehaviour {
 	void Update () {
         if (Input.anyKeyDown)
         {
-            SceneManager.LoadScene("01-Menu");
+            SceneManager.LoadScene(1);
         }
         if (Time.time > end_time)
         {
