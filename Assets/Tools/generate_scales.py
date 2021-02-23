@@ -11,6 +11,40 @@ and a reference frequency of A4 == 440.0Hz.
 
 import os
 
+
+def correct_german_spellings(spelling):
+    """Correcting the exceptions in German spellings.
+
+    Aeseses -> Aseses
+    Eeseses -> Eseses
+    Heseses -> Beses
+    Aeses -> Ases
+    Eeses -> Eses
+    Heses -> Bes
+    Hes -> B
+    Aes -> As
+    Ees -> Es
+    ----------
+    H♭♭♭ -> B𝄫
+    H𝄫 -> B♭
+    H♭ -> B
+    """
+    ret = spelling.replace("Aeseses", "Aseses")
+    ret = ret.replace("Eeseses", "Eseses")
+    ret = ret.replace("Heseses", "Beses")
+    ret = ret.replace("Aeses", "Ases")
+    ret = ret.replace("Eeses", "Eses")
+    ret = ret.replace("Heses", "Bes")
+    ret = ret.replace("Hes", "B")
+    ret = ret.replace("Aes", "As")
+    ret = ret.replace("Ees", "Es")
+    # The former are for keys, these deal with note spellings
+    ret = ret.replace("H♭♭♭", "B𝄫")
+    ret = ret.replace("H𝄫", "B♭")
+    ret = ret.replace("H♭", "B")
+    return ret
+
+
 if __name__ == '__main__':
     a4 = 440.0
     major_scale_semitones_to_a4 = [-9, -7, -5, -4, -2, 0, 2]
@@ -80,7 +114,7 @@ if __name__ == '__main__':
         'German': {
             'notes': ['C', 'D', 'E', 'F', 'G', 'A', 'H'],
             'modes': ['Dur', 'Moll'],
-            'scale_alterations': ['', 'es', 'is', 'eses', 'isis'],
+            'scale_alterations': ['', 'is', 'isis', 'isisis', 'eseses', "eses", "es"],
             'note_alterations': ['', '♯', '𝄪', '♯♯♯', '♭♭♭', '𝄫', '♭'],
         },
         'Spanish': {
@@ -115,6 +149,8 @@ if __name__ == '__main__':
                 scale_note = d['notes'][note]
                 alteration_name = d['scale_alterations'][alteration]
                 scale_name = '{}{} {}'.format(scale_note, alteration_name, mode)
+                if notation == "German":
+                    scale_name = correct_german_spellings(scale_name)
                 scale_semitones_to_a4 = [s + chromatic_increase for s in base_semitones_to_a4]
                 note_alterations = scale_alterations[scale_id]
                 note_indexes = [n % 7 for n in range(note, note + 7)]
@@ -130,6 +166,8 @@ if __name__ == '__main__':
                             note_alteration = note_alterations[note_idx] + alt
                             note_alteration_name = d['note_alterations'][note_alteration]
                             note_name = '{}{}'.format(note_name, note_alteration_name)
+                            if notation == "German":
+                                note_name = correct_german_spellings(note_name)
                             # print('{}, '.format(note_name), end='')
                             if idx < len(note_indexes) - 1:
                                 csv.write('{}, '.format(note_name))
