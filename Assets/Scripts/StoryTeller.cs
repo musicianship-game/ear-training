@@ -6,21 +6,26 @@ using UnityEngine.SceneManagement;
 
 public class StoryTeller : MonoBehaviour {
 
-    public SpriteRenderer sunset_pic;
     public TextMeshProUGUI title_text;
     public TextMeshProUGUI scene_text;
-    public float fade_time = 10.0f;
+    private Color scene_text_color;
+    private float scene_text_end_time = 0.0f;
     private float start_time;
-    private float end_time;
-    private Color color;
+    public SpriteRenderer sunset_pic;
+    public float sky_fade_time = 20.0f;
+    private float sky_end_time;
+    private Color sky_color;
 
     // Use this for initialization
     void Start () {
         start_time = Time.time;
-        end_time = start_time + fade_time;
-        color = sunset_pic.color;
-        color.a = 1.0f;
-        sunset_pic.color = color;
+        sky_end_time = start_time + sky_fade_time;
+        sky_color = sunset_pic.color;
+        sky_color.a = 1.0f;
+        sunset_pic.color = sky_color;
+        scene_text_color = scene_text.color;
+        scene_text_color.a = 0.0f;
+        scene_text.color = scene_text_color;
 	}
 	
 	// Update is called once per frame
@@ -29,14 +34,28 @@ public class StoryTeller : MonoBehaviour {
         {
             SceneManager.LoadScene(1);
         }
-        if (Time.time > end_time)
+        if (Time.time > sky_end_time)
         {
-            color.a = 0.0f;
+            sky_color.a = 0.0f;
+            sunset_pic.color = sky_color;
         }
         else
         {
-            color.a = (end_time - Time.time) / fade_time;
-            sunset_pic.color = color;
+            sky_color.a = (sky_end_time - Time.time) / sky_fade_time;
+            sunset_pic.color = sky_color;
         }
+        if (Time.time > sky_end_time)
+        {
+            scene_text_color.a = 0.0f;
+            scene_text.color = scene_text_color;
+        }
+    }
+
+    public void WriteSceneText(string text, float duration)
+    {
+        scene_text.text = text;
+        scene_text_color.a = 1.0f;
+        scene_text.color = scene_text_color;
+        scene_text_end_time = Time.time + duration;
     }
 }
