@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 public class StoryTeller : MonoBehaviour {
 
     public TextMeshProUGUI title_text;
+    private float title_fade_end;
+    public float title_fade_duration = 3.0f;
+    private Color title_color;
+    private bool title_fade = false;
     public TextMeshProUGUI scene_text;
     private Color scene_text_color;
     private float scene_text_end_time = 0.0f;
@@ -26,6 +30,9 @@ public class StoryTeller : MonoBehaviour {
         scene_text_color = scene_text.color;
         scene_text_color.a = 0.0f;
         scene_text.color = scene_text_color;
+        title_color = title_text.color;
+        title_color.a = 0.0f;
+        title_text.color = title_color;
 	}
 	
 	// Update is called once per frame
@@ -44,10 +51,20 @@ public class StoryTeller : MonoBehaviour {
             sky_color.a = (sky_end_time - Time.time) / sky_fade_time;
             sunset_pic.color = sky_color;
         }
-        if (Time.time > sky_end_time)
+        if (Time.time > scene_text_end_time)
         {
             scene_text_color.a = 0.0f;
             scene_text.color = scene_text_color;
+        }
+        if (title_fade && Time.time < title_fade_end)
+        {
+            title_color.a = 1.0f - (title_fade_end - Time.time) / title_fade_duration;
+            title_text.color = title_color;
+        }
+        else if (title_fade && Time.time >= title_fade_end)
+        {
+            title_color.a = 1.0f;
+            title_text.color = title_color;
         }
     }
 
@@ -57,5 +74,11 @@ public class StoryTeller : MonoBehaviour {
         scene_text_color.a = 1.0f;
         scene_text.color = scene_text_color;
         scene_text_end_time = Time.time + duration;
+    }
+
+    public void FadeInTitle()
+    {
+        title_fade = true;
+        title_fade_end = Time.time + title_fade_duration;
     }
 }
