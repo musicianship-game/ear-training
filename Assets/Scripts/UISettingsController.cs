@@ -21,10 +21,8 @@ public class UISettingsController : MonoBehaviour {
 	}
 
 	private void AcceptChanges() {
-		float gameDifficulty = gameDifficultySlider.value;
-		float musicalDifficulty = musicalDifficultySlider.value;
-		Settings.GameDifficulty = gameDifficulty;
-		Settings.MusicalDifficulty = musicalDifficulty;
+		Settings.GameDifficulty = gameDifficultySlider.value;
+		Settings.MusicalDifficulty = musicalDifficultySlider.value;
 		gameObject.SetActive(false);
 	}
 
