@@ -18,7 +18,9 @@ public class Bell : MonoBehaviour {
     public float attack_dur = 0.7f;
     private float attack_start;
     public float attack_rate = 0.3f;
-    public float projectile_speed = 2.0f;
+    private float projectile_speed = 2.0f;
+    public float proj_speed_hard = 5.0f;
+    public float proj_speed_easy = 1.5f;
     public int attack_angle_spread = 120;
     public float angle_rand = 5.0f;
     public GameObject projectile_used = null;
@@ -43,6 +45,7 @@ public class Bell : MonoBehaviour {
         this_target.targetable = targetable;
         bubble = transform.Find("bubble").gameObject;
         bell1 = transform.Find("bell_1").gameObject;
+        ApplyDifficulty();
         Spawn(false);
     }
 
@@ -198,5 +201,12 @@ public class Bell : MonoBehaviour {
         transform.position += new Vector3 (0, screenBounds[1], 0);
         spawn_a = transform.position; // this is the off-screen position where the animation will start (or end, if reversed)
         UpdateFloatBehavior();
+    }
+
+    public void ApplyDifficulty()
+    {
+        float max_diff_speed = proj_speed_easy - proj_speed_hard;
+        float diff_speed = max_diff_speed * Settings.GameDifficulty;
+        projectile_speed = proj_speed_easy - diff_speed;
     }
 }
