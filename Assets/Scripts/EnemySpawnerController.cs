@@ -8,7 +8,9 @@ public class EnemySpawnerController : MonoBehaviour {
     private List<Vector3> spawnPoints = new List<Vector3>();
     public PlayerController playerRef;
     public bool all_enemies_dead;
-    public int number_of_enemies = 2;
+    private int number_of_enemies = 3;
+    public int max_enemies_count = 4;
+    public int min_enemies_count = 2;
 
 	void Awake ()
 	{
@@ -20,6 +22,7 @@ public class EnemySpawnerController : MonoBehaviour {
             spawnPoints.Add(spawnPoint.position);
             Destroy(spawnPoint.gameObject);
         }
+        ApplyDifficulty();
         for (int i = 0; i < number_of_enemies; i++)
         {
             int j = Random.Range(0, spawnPoints.Count);
@@ -44,4 +47,18 @@ public class EnemySpawnerController : MonoBehaviour {
 	{
 		GetComponent<ChuckSubInstance>().RunCode(code);
 	}
+
+    private void ApplyDifficulty()
+    {
+        int range_num = max_enemies_count - min_enemies_count;
+        float bin_size = 1.0f / (range_num + 1.0f);
+        for (int i = range_num; i >= 0; i--)
+        {
+            if (Settings.GameDifficulty >= i * bin_size)
+            {
+                number_of_enemies = min_enemies_count + i;
+                break;
+            }
+        }
+    }
 }

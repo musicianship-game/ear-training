@@ -13,10 +13,14 @@ public class Enemy : MonoBehaviour
     private Component[] particleSys;
     private Component[] childSprites;
     private List<SpriteRenderer> allSprites = new List<SpriteRenderer>();
-    public float reload_in_sec = 5.0f;
+    private float reload_in_sec = 5.0f;
+    private float projectile_speed = 2.0f;
+    public float reload_hard = 4.0f;
+    public float reload_easy = 6.0f;
+    public float proj_speed_hard = 5.0f;
+    public float proj_speed_easy = 1.5f;
     public float shield_in_sec = 2.0f;
     public float dying_in_sec = 1.5f;
-    public float projectile_speed = 2.0f;
     public GameObject projectile_used = null;
     public int projectile_damage = 1;
     public PlayerController player;
@@ -51,6 +55,7 @@ public class Enemy : MonoBehaviour
         hp_slider.value = hit_points;
         ChooseNewPitch();
         choose_new_pitch = false;
+        ApplyDifficulty();
         instrument_used = instrument_choices[Random.Range(0,instrument_choices.Length)];
         Instantiate(instrument_used, transform);
         particleSys = GetComponentsInChildren<ParticleSystem>();
@@ -222,5 +227,15 @@ public class Enemy : MonoBehaviour
         {
             parent.RunChuckCode(ChuckSynths.BG_Plucked_String(note_freq, dur));
         }
+    }
+
+    public void ApplyDifficulty()
+    {
+        float max_diff_reload = reload_easy - reload_hard;
+        float diff_reload = max_diff_reload * Settings.GameDifficulty;
+        reload_in_sec = reload_easy - diff_reload;
+        float max_diff_speed = proj_speed_easy - proj_speed_hard;
+        float diff_speed = max_diff_speed * Settings.GameDifficulty;
+        projectile_speed = proj_speed_easy - diff_speed;
     }
 }

@@ -751,6 +751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title_text: {fileID: 1461980184}
+  title_fade_duration: 3
   scene_text: {fileID: 1207211218}
   sunset_pic: {fileID: 1898535996}
   sky_fade_time: 20

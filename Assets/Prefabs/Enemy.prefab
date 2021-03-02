@@ -405,10 +405,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b008ae690c89c43dabe6f17d2b70f8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalX: 0
+  originalY: 0
   X_sin_freq: 0
   X_floatStrength: 0
   Y_sin_freq: 0
   Y_floatStrength: 0
+  ramp_up_time: 10
 --- !u!114 &114267722112976716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -420,10 +423,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b008ae690c89c43dabe6f17d2b70f8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalX: 0
+  originalY: 0
   X_sin_freq: 1.13
   X_floatStrength: 0.2
   Y_sin_freq: 1
   Y_floatStrength: 0.15
+  ramp_up_time: 10
 --- !u!114 &114292837137950090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -485,10 +491,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dying: 0
   targetable: 1
-  reload_in_sec: 5
+  reload_in_sec: 4
   shield_in_sec: 2
   dying_in_sec: 1.5
-  projectile_speed: 2
+  projectile_speed: 5
   projectile_used: {fileID: 1618161610838518, guid: 286dde5a594264afd8381c4be21b8108,
     type: 2}
   projectile_damage: 1
