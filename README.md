@@ -11,3 +11,15 @@ The first official release of Do-Re-Myth (v0.1) is available for:
 - [Windows 10](https://github.com/musicianship-game/ear-training/releases/download/v0.1/DoReMyth_v0.1_Win10.zip)
 - [macOS](https://github.com/musicianship-game/ear-training/releases/download/v0.1/DoReMyth_v0.1_macOS.zip)
 
+## Development
+
+Requirements:
+
+- Unity `2018.2.11f1`
+- Chunity (Original release, May 25 2018)
+
+The game has been built with this Unity version because it was the version supporting Chunity.
+
+Best results will be obtained if using that version to open the project.
+
+A newer version of Chunity is available now (`1.0.2`) and it may be possible to update the Unity version with it. We haven't tried this so let us know if it works.
