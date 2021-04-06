@@ -24,10 +24,10 @@ EditorBuildSettings:
     path: Assets/Scenes/05-Hall.unity
     guid: 1e447707f91234df7891327b4c1473ed
   - enabled: 1
-    path: Assets/Scenes/07-Stage.unity
+    path: Assets/Scenes/06-Stage.unity
     guid: b709f0ea46b5d4473be9a2c1b997f4ad
   - enabled: 1
-    path: Assets/Scenes/06-Backstage.unity
+    path: Assets/Scenes/07-Backstage.unity
     guid: 5825a41b34a454308991690ffadc9d20
   - enabled: 1
     path: Assets/Scenes/08-Bells.unity
