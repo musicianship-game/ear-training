@@ -7,7 +7,7 @@ public static class Settings {
     public static float MusicalDifficulty { get; set; }
 
     static Settings() {
-        GameDifficulty = 0.25f;
-        MusicalDifficulty = 0.10f;
+        GameDifficulty = 0.5f;
+        MusicalDifficulty = 0.5f;
     }
 }
