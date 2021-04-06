@@ -51,14 +51,6 @@ public class EnemySpawnerController : MonoBehaviour {
     private void ApplyDifficulty()
     {
         int range_num = max_enemies_count - min_enemies_count;
-        float bin_size = 1.0f / (range_num + 1.0f);
-        for (int i = range_num; i >= 0; i--)
-        {
-            if (Settings.GameDifficulty >= i * bin_size)
-            {
-                number_of_enemies = min_enemies_count + i;
-                break;
-            }
-        }
+        number_of_enemies = min_enemies_count + Mathf.FloorToInt(Settings.GameDifficulty * range_num);
     }
 }
