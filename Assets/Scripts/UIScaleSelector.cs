@@ -59,7 +59,7 @@ public class UIScaleSelector : MonoBehaviour {
 		DirectoryInfo root = new DirectoryInfo(notationsDir);
         notationDirInfos = root.GetDirectories();
         List<string> notationNames = new List<string>();
-		notationNames.Add("None");
+		notationNames.Add("");
 		foreach (DirectoryInfo dir in notationDirInfos) notationNames.Add(dir.Name);
 		notationDropdown.ClearOptions();
 		notationDropdown.AddOptions(notationNames);
@@ -67,7 +67,7 @@ public class UIScaleSelector : MonoBehaviour {
 		root = new DirectoryInfo(lessonplanDir);
 		lessonplanInfos = root.GetFiles("*.csv");
 		List<string> lessonplanNames = new List<string>();
-		lessonplanNames.Add("None");
+		lessonplanNames.Add("");
 		foreach (FileInfo file in lessonplanInfos) lessonplanNames.Add(file.Name);
 		lessonplanDropdown.ClearOptions();
 		lessonplanDropdown.AddOptions(lessonplanNames);
@@ -85,7 +85,7 @@ public class UIScaleSelector : MonoBehaviour {
 			DirectoryInfo notationRoot = notationDirInfos[value - 1];
 			scaleDirInfos = notationRoot.GetDirectories();
 			List<string> scaleNames = new List<string>();
-			scaleNames.Add("None");
+			scaleNames.Add("");
 			foreach (DirectoryInfo dir in scaleDirInfos) scaleNames.Add(dir.Name);
 			scaleDropdown.AddOptions(scaleNames);
 			scaleDropdown.value = 0;
