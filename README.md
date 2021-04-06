@@ -12,7 +12,7 @@ The first official release of Do-Re-Myth (v0.1) is available for:
 - [macOS](https://github.com/musicianship-game/ear-training/releases/download/v0.1/DoReMyth_v0.1_macOS.zip)
 
 
-## Running the game
+## macOS warnings
 
 If you are running the compiled versions we provide for Win10 or macOS, please take into account that macOS might require you to grant access to the binary before running it.
 
