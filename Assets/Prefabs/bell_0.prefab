@@ -290,7 +290,8 @@ MonoBehaviour:
   spawn_dur: 1
   attack_dur: 0.7
   attack_rate: 0.3
-  projectile_speed: 2
+  proj_speed_hard: 5
+  proj_speed_easy: 1.5
   attack_angle_spread: 120
   angle_rand: 5
   projectile_used: {fileID: 1618161610838518, guid: 286dde5a594264afd8381c4be21b8108,

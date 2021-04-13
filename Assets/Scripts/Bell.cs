@@ -17,7 +17,9 @@ public class Bell : MonoBehaviour {
 
     public float attack_dur = 0.7f;
     private float attack_start;
-    public float attack_rate = 0.3f;
+    public float attack_rate = 0.3f; // time between fireballs
+    private int min_num_atk = 2; // fireballs per side plus middle one
+    private int max_num_atk = 4; // as above
     private float projectile_speed = 2.0f;
     public float proj_speed_hard = 5.0f;
     public float proj_speed_easy = 1.5f;
@@ -208,5 +210,7 @@ public class Bell : MonoBehaviour {
         float max_diff_speed = proj_speed_easy - proj_speed_hard;
         float diff_speed = max_diff_speed * Settings.GameDifficulty;
         projectile_speed = proj_speed_easy - diff_speed;
+        int num_atk = min_num_atk + Mathf.FloorToInt((max_num_atk - min_num_atk) * Settings.GameDifficulty);
+        attack_rate = attack_dur / num_atk;
     }
 }
