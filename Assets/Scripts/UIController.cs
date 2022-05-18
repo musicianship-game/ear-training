@@ -28,6 +28,7 @@ public class UIController : MonoBehaviour {
     void Play()
     {
         PlayerCloud.menu_time = Time.time;
+        PlayerCloud.life = PlayerCloud.life_max;
         SceneManager.LoadScene(3);
     }
 
