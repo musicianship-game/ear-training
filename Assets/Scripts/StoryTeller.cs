@@ -33,6 +33,8 @@ public class StoryTeller : MonoBehaviour {
         title_color = title_text.color;
         title_color.a = 0.0f;
         title_text.color = title_color;
+        FadeInTitle();
+        WriteSceneText("Once upon a time..", 5.0f);
 	}
 	
 	// Update is called once per frame

@@ -174,6 +174,13 @@ public class Enemy : MonoBehaviour
         {
             hit_points = 0;
             hp_slider.value = hit_points;
+            foreach (Image img in hp_slider.GetComponentsInChildren<Image>())
+            {
+                if (img.name == "Fill")
+                {
+                    Destroy(img); 
+                }
+            }
             Die();
         }
     }
