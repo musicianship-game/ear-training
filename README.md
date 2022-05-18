@@ -9,8 +9,8 @@ It is a collaborative project between Yuval Adler and Néstor Nápoles López an
 
 The first official release of Do-Re-Myth (v0.1) is available for:
 
-- [Windows 10](https://github.com/musicianship-game/ear-training/releases/download/v0.1/DoReMyth_v0.1_Win10.zip)
-- [macOS](https://github.com/musicianship-game/ear-training/releases/download/v0.1/DoReMyth_v0.1_macOS.zip)
+- [Windows 10](https://github.com/musicianship-game/ear-training/releases/download/v0.2/DoReMyth_v0.2_Win10.zip)
+- [macOS](https://github.com/musicianship-game/ear-training/releases/download/v0.2/DoReMyth_v0.2_macOS.zip)
 
 
 ## macOS warnings
