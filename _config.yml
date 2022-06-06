@@ -1,3 +1,7 @@
 theme: jekyll-theme-cayman
 include:
   - README.md
+github:
+  zip_url: https://github.com/musicianship-game/ear-training/archive/refs/tags/v0.2.zip
+  win10: https://github.com/musicianship-game/ear-training/releases/download/v0.2/DoReMyth_v0.2_Win10.zip
+  macos: https://github.com/musicianship-game/ear-training/releases/download/v0.2/DoReMyth_v0.2_macOS.zip
