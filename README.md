@@ -1,7 +1,5 @@
 # Do-Re-Myth
 
-<video src="https://ccrma.stanford.edu/~adler/Do-Re-Myth_demo_2022_01.mp4" width=180 />
-
 ![image](https://user-images.githubusercontent.com/47051205/114589983-337eca80-9c56-11eb-803f-b069769094c5.png)
 
 Do-Re-Myth is an (experimental) Open Source Game-Based Ear Training Software.
