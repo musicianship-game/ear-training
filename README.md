@@ -1,6 +1,6 @@
 # Do-Re-Myth
 
-[![Do-Re-Myth](https://media.giphy.com/media/ljoQrZHGoNl496oQRc/giphy.gif)](https://ccrma.stanford.edu/~adler/Do-Re-Myth_demo_2022_01.mp4)
+[![Do-Re-Myth](https://media.giphy.com/media/ljoQrZHGoNl496oQRc/giphy.gif)](https://ccrma.stanford.edu/~adler/Do-Re-Myth_demo_2022_01c.mp4)
 
 ![image](https://user-images.githubusercontent.com/47051205/114589983-337eca80-9c56-11eb-803f-b069769094c5.png)
 
