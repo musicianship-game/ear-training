@@ -148,26 +148,26 @@ public static class ChuckSynths {
     {
         string snippet = 
         frequency + @" => float freq1;
-        ModalBar mb => Gain g => dac;
-        7 => mb.preset;
-        freq1 => mb.freq;
-        .5012 => mb.strikePosition;
-        0.8 => mb.stickHardness;
-        0.6 => g.gain;
-        0.99 => mb.strike;
+        ModalBar mb0 => Gain g0 => dac;
+        7 => mb0.preset;
+        freq1 => mb0.freq;
+        .5012 => mb0.strikePosition;
+        0.5 => mb0.stickHardness;
+        0.5 => g0.gain;
+        0.99 => mb0.strike;
         ModalBar mb1 => Gain g1 => dac;
         1 => mb1.preset;
         freq1 => mb1.freq;
         .498 => mb1.strikePosition;
         0.8 => mb1.stickHardness;
-        0.7 => g1.gain;
+        0.8 => g1.gain;
         0.99 => mb1.strike;
         ModalBar mb2 => Gain g2 => dac;
         4 => mb2.preset;
         freq1 => mb2.freq;
         .498 => mb2.strikePosition;
-        0.8 => mb2.stickHardness;
-        0.6 => g2.gain;
+        0.5 => mb2.stickHardness;
+        0.5 => g2.gain;
         0.99 => mb2.strike;
         " + duration + @"::second => now;
         ";

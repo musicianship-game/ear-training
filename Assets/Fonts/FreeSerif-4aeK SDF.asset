@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -14,7 +15,147 @@ MonoBehaviour:
   hashCode: -1529890184
   material: {fileID: 21003008431552414}
   materialHashCode: -2034332685
-  fontAssetType: 1
+  m_Version: 1.1.0
+  m_SourceFontFileGUID: dd0a12bf810a9774cb8cd516d6675015
+  m_SourceFontFile_EditorRef: {fileID: 0}
+  m_SourceFontFile: {fileID: 0}
+  m_AtlasPopulationMode: 0
+  m_FaceInfo:
+    m_FaceIndex: 0
+    m_FamilyName: FreeSerif
+    m_StyleName: 
+    m_PointSize: 61
+    m_Scale: 1
+    m_LineHeight: 78.6875
+    m_AscentLine: 54.875
+    m_CapLine: 0
+    m_MeanLine: 0
+    m_Baseline: 0
+    m_DescentLine: -18.3125
+    m_SuperscriptOffset: 54.875
+    m_SuperscriptSize: 0.5
+    m_SubscriptOffset: -9.150001
+    m_SubscriptSize: 0.5
+    m_UnderlineOffset: -9.150001
+    m_UnderlineThickness: 3.05
+    m_StrikethroughOffset: 13.295455
+    m_StrikethroughThickness: 3.05
+    m_TabWidth: 152.5
+  m_GlyphTable:
+  - m_Index: 1
+    m_Metrics:
+      m_Width: 16.625
+      m_Height: 56.4375
+      m_HorizontalBearingX: 3.375
+      m_HorizontalBearingY: 50.1875
+      m_HorizontalAdvance: 22.625
+    m_GlyphRect:
+      m_X: 34
+      m_Y: 77
+      m_Width: 17
+      m_Height: 56
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 2
+    m_Metrics:
+      m_Width: 16.3125
+      m_Height: 58.875
+      m_HorizontalBearingX: 3.375
+      m_HorizontalBearingY: 40.625
+      m_HorizontalAdvance: 23
+    m_GlyphRect:
+      m_X: 6
+      m_Y: 76
+      m_Width: 16
+      m_Height: 59
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 3
+    m_Metrics:
+      m_Width: 19.1875
+      m_Height: 58.1875
+      m_HorizontalBearingX: 3
+      m_HorizontalBearingY: 39.9375
+      m_HorizontalAdvance: 24.5
+    m_GlyphRect:
+      m_X: 6
+      m_Y: 7
+      m_Width: 19
+      m_Height: 58
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 4
+    m_Metrics:
+      m_Width: 22.9375
+      m_Height: 22.75
+      m_HorizontalBearingX: 2.25
+      m_HorizontalBearingY: 22.375
+      m_HorizontalAdvance: 27.4375
+    m_GlyphRect:
+      m_X: 37
+      m_Y: 6
+      m_Width: 23
+      m_Height: 23
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 5
+    m_Metrics:
+      m_Width: 30.6875
+      m_Height: 56.4375
+      m_HorizontalBearingX: 3.375
+      m_HorizontalBearingY: 50.1875
+      m_HorizontalAdvance: 36.6875
+    m_GlyphRect:
+      m_X: 6
+      m_Y: 147
+      m_Width: 31
+      m_Height: 56
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 0
+    m_Metrics:
+      m_Width: 0
+      m_Height: 0
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 0
+      m_HorizontalAdvance: 10.975
+    m_GlyphRect:
+      m_X: 0
+      m_Y: 0
+      m_Width: 0
+      m_Height: 0
+    m_Scale: 1
+    m_AtlasIndex: 0
+  m_CharacterTable:
+  - m_ElementType: 1
+    m_Unicode: 9837
+    m_GlyphIndex: 1
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 9838
+    m_GlyphIndex: 2
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 9839
+    m_GlyphIndex: 3
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 119082
+    m_GlyphIndex: 4
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 119083
+    m_GlyphIndex: 5
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 32
+    m_GlyphIndex: 0
+    m_Scale: 1
+  m_AtlasTextures:
+  - {fileID: 28925737474593962}
+  m_AtlasTextureIndex: 0
+  m_UsedGlyphRects: []
+  m_FreeGlyphRects: []
   m_fontInfo:
     Name: FreeSerif
     PointSize: 61
@@ -38,6 +179,10 @@ MonoBehaviour:
     AtlasWidth: 512
     AtlasHeight: 512
   atlas: {fileID: 28925737474593962}
+  m_AtlasWidth: 512
+  m_AtlasHeight: 512
+  m_AtlasPadding: 5
+  m_AtlasRenderMode: 16422
   m_glyphInfoList:
   - id: 9837
     x: 34
@@ -84,23 +229,12 @@ MonoBehaviour:
     yOffset: 50.1875
     xAdvance: 36.6875
     scale: 1
-  m_kerningInfo:
+  m_KerningTable:
     kerningPairs: []
-  m_kerningPair:
-    m_FirstGlyph: 0
-    m_FirstGlyphAdjustments:
-      xPlacement: 0
-      yPlacement: 0
-      xAdvance: 0
-      yAdvance: 0
-    m_SecondGlyph: 0
-    m_SecondGlyphAdjustments:
-      xPlacement: 0
-      yPlacement: 0
-      xAdvance: 0
-      yAdvance: 0
-    xOffset: 0
+  m_FontFeatureTable:
+    m_GlyphPairAdjustmentRecords: []
   fallbackFontAssets: []
+  m_FallbackFontAssetTable: []
   m_CreationSettings:
     sourceFontFileName: 
     sourceFontFileGUID: dd0a12bf810a9774cb8cd516d6675015
@@ -118,6 +252,27 @@ MonoBehaviour:
     fontStyleModifier: 1
     renderMode: 6
     includeFontFeatures: 0
+  m_FontWeightTable:
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
   fontWeights:
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}
@@ -150,7 +305,8 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: FreeSerif-4aeK SDF Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_ShaderKeywords: UNDERLAY_ON
@@ -248,7 +404,8 @@ Material:
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: FreeSerif-4aeK SDF Atlas
   m_ImageContentsHash:
     serializedVersion: 2
