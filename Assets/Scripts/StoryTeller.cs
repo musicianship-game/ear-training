@@ -14,7 +14,6 @@ public class StoryTeller : MonoBehaviour {
     private float text_duration;
     private Color title_color;
     private bool title_fade = false;
-    private bool text_fade = false;
     public TextMeshProUGUI scene_text;
     private Color scene_text_color;
     private float start_time;
@@ -113,25 +112,20 @@ public class StoryTeller : MonoBehaviour {
         }
         if (current_scene_text != null && !current_scene_text.IsActive(Time.time))
         {
-            text_fade = false;
             current_scene_text = null;
             Debug.Log("Killing a text!");
         }
 
         // Other text stuff
-        if (text_fade)
+        if (Time.time < text_fade_end)
         {
-            if (Time.time < text_fade_end)
-            {
-                scene_text_color.a = TextFadeFunc();
-                scene_text.color = scene_text_color;
-            }
-            else
-            {
-                scene_text_color.a = 0.0f;
-                scene_text.color = scene_text_color;
-                text_fade = false;
-            }
+            scene_text_color.a = TextFadeFunc();
+            scene_text.color = scene_text_color;
+        }
+        else
+        {
+            scene_text_color.a = 0.0f;
+            scene_text.color = scene_text_color;
         }
     }
 
@@ -145,7 +139,6 @@ public class StoryTeller : MonoBehaviour {
     
     public void WriteSceneText(string text, float duration)
     {
-        text_fade = true;
         scene_text.text = text;
         scene_text_color.a = 0.0f;
         scene_text.color = scene_text_color;
