@@ -8,7 +8,7 @@ public class StoryTeller : MonoBehaviour {
 
     public TextMeshProUGUI title_text;
     private float title_fade_end;
-    private float text_start_time;
+    private float title_start_time;
     private float text_fade_end;
     public float title_fade_duration = 3.0f;
     private float text_duration;
@@ -23,6 +23,8 @@ public class StoryTeller : MonoBehaviour {
     private Color sky_color;
     private SceneText current_scene_text = null;
     private Queue<SceneText> texts;
+    private bool initialization_complete = false;
+    private float title_stay_dur;
 
     public class SceneText
     {
@@ -65,12 +67,14 @@ public class StoryTeller : MonoBehaviour {
         title_color = title_text.color;
         title_color.a = 0.0f;
         title_text.color = title_color;
-        FadeInTitle();
         texts = new Queue<SceneText>();
         texts.Enqueue(new SceneText(1.0f, 5.0f, "When night falls..."));
         texts.Enqueue(new SceneText(6.0f, 11.0f, "...ghosts begin to haunt the village."));
         texts.Enqueue(new SceneText(12.0f, 16.0f, "They can be freed from this place..."));
         texts.Enqueue(new SceneText(17.0f, 20.0f, "...through Music!"));
+        title_start_time = 21.0f;
+        title_stay_dur = 5.0f;
+        initialization_complete = true;
     }
 	
 	// Update is called once per frame
@@ -101,7 +105,6 @@ public class StoryTeller : MonoBehaviour {
             {
                 title_color.a = 1.0f;
                 title_text.color = title_color;
-                title_fade = false;
             }
         }
 
@@ -126,6 +129,16 @@ public class StoryTeller : MonoBehaviour {
         {
             scene_text_color.a = 0.0f;
             scene_text.color = scene_text_color;
+        }
+
+        if (initialization_complete && !title_fade && Time.time >= title_start_time + start_time)
+        {
+            FadeInTitle();
+        }
+
+        if (initialization_complete && title_fade && Time.time > title_fade_end + title_stay_dur)
+        {
+            SceneManager.LoadScene(1);
         }
     }
 
