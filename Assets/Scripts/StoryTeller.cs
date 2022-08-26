@@ -40,16 +40,16 @@ public class StoryTeller : MonoBehaviour {
         }
         public bool IsActive(float current_time)
         {
-            return true ? HasStarted(current_time) && !HasEnded(current_time) : false;
+            return HasStarted(current_time) && !HasEnded(current_time) ? true : false;
         }
         public bool HasStarted(float current_time)
         {
-            return true ? current_time >= start_time : false;
+            return current_time >= start_time ? true : false;
         }
 
         public bool HasEnded(float current_time)
         {
-            return true ? current_time > end_time : false;
+            return current_time > end_time ? true : false;
         }
     }
 
